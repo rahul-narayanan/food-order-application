@@ -35,4 +35,7 @@ const AppInit = () => {
     )
 }
 
-ReactDOM.render(<AppInit />, document.body);
+const el = document.createElement("div");
+document.body.appendChild(el);
+
+ReactDOM.render(<AppInit />, el);
