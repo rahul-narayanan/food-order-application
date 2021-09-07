@@ -27,6 +27,7 @@ const Header = () => {
 }
 
 export const OrderTable = () => {
+    const goToPlaceOrder = useSelector((state) => state?.goToPlaceOrder || false);
     const items = useSelector((state) => state?.selectedItems || {});
     const dispatch = useDispatch();
 
@@ -38,7 +39,7 @@ export const OrderTable = () => {
         dispatch({type: INCREASE_ITEM_COUNT, itemId})
     }, []);
 
-    if (!Object.keys(items).length) return null;
+    if (goToPlaceOrder || !Object.keys(items).length) return null;
 
     return (
         <div id="item_list" className="item_list active">

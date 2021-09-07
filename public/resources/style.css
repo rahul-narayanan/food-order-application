@@ -360,7 +360,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 999999;
+    z-index: 9998;
     min-height: 72px;
 }
 
@@ -1025,10 +1025,6 @@ header .navbar .dropdown-menu .dropdown-item:active {
     font-weight: 600;
 }
 
-.order_list ul li .btn_container {
-    /*     padding: 0 15px;*/
-}
-
 .order_list ul li .btn_container button.btn {
     background: var(--bg-color);
     border-radius: 4px;
@@ -1115,10 +1111,6 @@ select.form-control {
     box-shadow: none !important;
     color: var(--text-dark);
     font-weight: 600;
-}
-
-.pagination .page-item.disabled .page-link {
-    /*     opacity: .5;*/
 }
 
 .receipt_model {
@@ -3196,11 +3188,8 @@ iframe {
 }
 
 .amount_to_Pay {
-    display: none;
-}
-
-.amount_to_Pay.active {
-    display: block;
+    overflow: auto;
+    height: calc(100% - 200px);
 }
 
 .amount_to_Pay form .form-group .form-check label {

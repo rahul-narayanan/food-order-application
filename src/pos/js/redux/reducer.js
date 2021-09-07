@@ -1,8 +1,19 @@
 import {
     ADD_ITEM_ACTION, CHANGE_CATEGORY_ACTION,
     CLEAR_SELECTED_ITEMS,
-    DECREASE_ITEM_COUNT, INCREASE_ITEM_COUNT, UPDATE_SEARCH_KEY
+    DECREASE_ITEM_COUNT, GO_BACK_FROM_PLACE_ORDER,
+    GO_TO_PLACE_ORDER, INCREASE_ITEM_COUNT, ORDER_PLACED, UPDATE_SEARCH_KEY
 } from "./actions"
+
+const initialState = {
+    selectedCategoryIndex: 0,
+    selectedItems: {},
+    subTotal: "",
+    tax: "",
+    total: "",
+    searchKey: "",
+    goToPlaceOrder: false
+};
 
 const computeSubTotal = (items) => {
     return Object.keys(items).map(key => items[key])
@@ -21,8 +32,8 @@ const getStateVariables = (items) => {
     }
 }
 
-export const reducer = (state = {}, action) => {
-    switch(action.type) {
+const reducer = (state = {}, action) => {
+    switch (action.type) {
         case CHANGE_CATEGORY_ACTION: return {
             ...state,
             selectedCategoryIndex: action.index
@@ -30,13 +41,13 @@ export const reducer = (state = {}, action) => {
 
         case ADD_ITEM_ACTION: {
             const { item } = action;
-            const selectedItems = {...state.selectedItems};
+            const selectedItems = { ...state.selectedItems };
             if (selectedItems[item.id]) {
                 selectedItems[item.id].quantity += 1;
             } else {
                 selectedItems[item.id] = {
                     ...item,
-                    quantity : 1
+                    quantity: 1
                 }
             }
 
@@ -89,9 +100,35 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 searchKey: action.searchKey
             }
-        default: 
+        
+        case GO_TO_PLACE_ORDER: {
+            return {
+                ...state,
+                goToPlaceOrder: true
+            }
+        }
+            
+        case GO_BACK_FROM_PLACE_ORDER: {
+            return {
+                ...state,
+                goToPlaceOrder: false
+            }
+        }
+            
+        case ORDER_PLACED: {
+            return {
+                ...initialState
+            }
+        }
+            
+        default:
             return {
                 ...state
             }
     }
+};
+
+export {
+    initialState,
+    reducer
 }

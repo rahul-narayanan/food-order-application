@@ -4,25 +4,10 @@ import PopsChickenWrapImg from "../img/items/pops-chicken-wrap.png";
 import ChickenMessPoutine from "../img/items/chicken-mess-poutine.png";
 import TraditionalPoutine from "../img/items/traditional-poutine.png";
 import i18n from "../../i18n";
+import { Wraps } from "./wrap-items";
 
 const Items = [
-    {
-        categoryId: "wraps",
-        id: "caesarWrap",
-        name: i18n.t("foods.caesarWrap"),
-        description: i18n.t("foods.caesarWrapDesc"),
-        img: CeasarWrapImg,
-        price: "7.95",
-        veg: true
-    },
-    {
-        categoryId: "wraps",
-        id: "popsChickenWrap",
-        name: i18n.t("foods.popsChickenWrap"),
-        description: i18n.t("foods.popsChickenWrapDesc"),
-        img: PopsChickenWrapImg,
-        price: "9.95"
-    },
+    ...(Wraps.map(wrap => ({categoryId: "wraps", ...wrap }))),
     {
         categoryId: "salad_bowls",
         id: "popsChickenSaladBowl",

@@ -2,12 +2,16 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_SELECTED_ITEMS } from "../redux/actions";
+import { CLEAR_SELECTED_ITEMS, GO_TO_PLACE_ORDER } from "../redux/actions";
 
 export const OrderFooter = () => {
     const state = useSelector((state) => state);
     const { t } = useTranslation();
     const dispatch = useDispatch();
+
+    const handlePlaceOrderClick = useCallback(() => {
+        dispatch({type: GO_TO_PLACE_ORDER})
+    }, []);
 
     const handleCancelClick = useCallback(() => {
         dispatch({ type: CLEAR_SELECTED_ITEMS });
@@ -38,10 +42,14 @@ export const OrderFooter = () => {
                         className="btn col-6 Cancel"
                         onClick={handleCancelClick}
                     >
-                        <a href="#">{t("common.cancel")}</a>
+                        {t("common.cancel")}
                     </button>
-                    <button type="button" className="btn col-6 place_order" id="place-order">
-                        <a href="#">{t("common.place_order")}</a>
+                    <button
+                        type="button"
+                        className="btn col-6 place_order"
+                        onClick={handlePlaceOrderClick}
+                    >
+                        {t("common.place_order")}
                     </button>
                 </div>
             </div>

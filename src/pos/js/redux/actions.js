@@ -10,3 +10,9 @@ export const DECREASE_ITEM_COUNT = "decreaseItemCount";
 export const CLEAR_SELECTED_ITEMS = "clearSelectedItems";
 
 export const UPDATE_SEARCH_KEY = "updateSearchKey";
+
+export const GO_TO_PLACE_ORDER = "goToPlaceOrder";
+
+export const GO_BACK_FROM_PLACE_ORDER = "goBackFromPlaceOrder";
+
+export const ORDER_PLACED = "orderPlaced";
