@@ -1,20 +1,32 @@
 {
-  "api": {
-    "categories": {
-      "service": "AppSync",
+  "function": {
+    "moretaters": {
+      "build": true,
       "providerPlugin": "awscloudformation",
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "category"
-            }
-          },
-          "additionalAuthenticationProviders": []
+      "service": "Lambda"
+    }
+  },
+  "auth": {
+    "cognitob50bdb61": {
+      "service": "Cognito",
+      "serviceType": "managed",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "api": {
+    "orders": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "moretaters",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
         }
-      }
+      ]
     }
   }
 }

@@ -29,7 +29,7 @@
         },
         "menus" : {
             "pos": "POS",
-            "transaction": "Transaction"
+            "orders": "Orders"
         },
         "categories": {
             "wraps" : "Wraps",
