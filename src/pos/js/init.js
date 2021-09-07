@@ -1,3 +1,5 @@
+import "../scss/pos.scss";
+
 import React from 'react';
 import { createStore } from "redux";
 import { Provider } from "react-redux";
@@ -9,7 +11,7 @@ const store = createStore(reducer, initialState);
 
 export const POSContainer = () => {
     return (
-        <Provider store={store}>
+        <Provider store={store}>    
             <Orders />
             <Listing />
         </Provider>

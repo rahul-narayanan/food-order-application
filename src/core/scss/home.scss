@@ -1,0 +1,180 @@
+@import "./variables";
+@import "./common";
+@import "./animation";
+
+body {
+    overflow: hidden;
+    height: 100%;
+    background-color: var(--bg-color);
+}
+
+button.btn {
+    &:hover {
+        color: var(--white);
+    }
+    background: var(--primary);
+    border-radius: 0;
+    color: var(--white);
+    width: 100%;
+    border: 0;
+    box-shadow: none !important;
+    position: relative;
+    font-weight: 500;
+    min-height: 46px;
+}
+
+.main-container {
+    height: 100%;
+    background-color: var(--bg-color);
+    .main-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        .header {
+            z-index: 9998;
+            min-height: 72px;
+            background: var(--white);
+            .navbar {
+                padding: 0 25px;
+                .navbar-brand {
+                    width: 100%;
+                    max-width: 175px;
+                }
+                .navbar-nav {
+                    .nav-item {
+                        padding: 0px 24px;
+                        position: relative;
+                        transition: all 0.3s;
+                        .nav-link {
+                            color: var(--text-light);
+                            font-size: 1rem;
+                            font-weight: 600;
+                            padding: 0;
+                            height: 72px;
+                            line-height: 72px;
+                            transition: all 0.3s;
+                            i {
+                                color: var(--text-light);
+                                font-size: 1.4rem;
+                                min-width: 28px;
+                                position: relative;
+                                top: 2px;
+                                transition: all 0.3s;
+                            }
+                            &:hover {
+                                i {
+                                    color: var(--primary);
+                                }
+                            }
+                        }
+                        &:last-child {
+                            padding-right: 0;
+                        }
+                    }
+                    .nav-item.profile_img {
+                        .img_box {
+                            min-width: 55px;
+                            height: 55px;
+                            border-radius: 10px;
+                            display: block;
+                            position: relative;
+                        }
+                        span {
+                            position: absolute;
+                            z-index: 1;
+                            background: var(--primary);
+                            border-radius: 50%;
+                            width: 27px;
+                            height: 27px;
+                            text-align: center;
+                            line-height: 28px;
+                            bottom: -7px;
+                            right: -6px;
+                        }
+                        i {
+                            position: absolute;
+                            z-index: 1;
+                            color: var(--white);
+                            border-radius: 50%;
+                            font-size: 1.1rem;
+                            width: 0;
+                            height: 0;
+                            text-align: center;
+                            bottom: 0;
+                            right: 0;
+                            left: 0;
+                            margin: auto;
+                            top: 0;
+                            overflow: hidden;
+                            transition: all 0.5s;
+                        }
+                        i.zmdi-menu {
+                            width: 20px;
+                            height: 17px;
+                        }
+                    }
+                    flex-direction: unset;
+                    .nav-item.active {
+                        .nav-link {
+                            color: var(--text-black) !important;
+                            transition: all 0.3s;
+                            i {
+                                color: var(--primary);
+                            }
+                        }
+                    }
+                }
+                .dropdown-menu {
+                    border: 0;
+                    box-shadow: 0 10px 17px 1px rgba(0, 0, 0, 0.1);
+                    padding: 9px 0;
+                    overflow: hidden;
+                    border-radius: 8px;
+                    width: fit-content;
+                    min-width: 135px;
+                    .dropdown-item {
+                        color: var(--text-dark);
+                        font-weight: 700;
+                        font-size: 1.1rem;
+                        letter-spacing: 0.2px;
+                        padding: 4px 16px;
+                        &:active {
+                            color: var(--primary);
+                            background: var(--bg-color);
+                        }
+                    }
+                }
+            }
+        }
+        header.active {
+            .navbar {
+                .navbar-nav {
+                    .nav-item.profile_img {
+                        i.zmdi-menu {
+                            width: 0;
+                            height: 0;
+                        }
+                        i.zmdi-close {
+                            width: 20px;
+                            height: 17px;
+                        }
+                    }
+                }
+            }
+        }
+        .header {
+            .navbar {
+                .navbar-nav {
+                    .nav-item {
+                        .nav-link {
+                            &:hover {
+                                color: var(--text-black) !important;
+                                transition: all 0.3s;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

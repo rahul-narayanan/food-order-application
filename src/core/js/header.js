@@ -2,9 +2,8 @@ import React from "react";
 import Logo from "../img/logo.png";
 
 export const Header = ({ menus, selectedIndex }) => (
-    <header
-        id="header"
-        className="animate__animated animate__fadeInDown wow"
+    <div
+        className="header animate__animated animate__fadeInDown wow"
         data-wow-duration=".5s"
       >
         <nav className="navbar align-items-center" style={{ flexWrap: "unset" }}>
@@ -34,5 +33,5 @@ export const Header = ({ menus, selectedIndex }) => (
                 </ul>
             </div>
         </nav>
-    </header>
+    </div>
 );

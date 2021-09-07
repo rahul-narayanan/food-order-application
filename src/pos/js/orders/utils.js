@@ -32,7 +32,7 @@ export const PaymentMethod = () => {
                             className="custom-control-input"
                         />
                         <label className="custom-control-label" htmlFor="payByCard">
-                            <span>{t("common.cash")}</span>
+                            <span>{t("common.card")}</span>
                         </label>
                     </div>
                 </div>
@@ -53,14 +53,14 @@ export const OrderType = () => {
                         <input
                             checked
                             type="radio"
-                            id="takeaway"
+                            id="pickup"
                             name="OrderType"
                             className="custom-control-input"
                         />
                         <label
                             className="custom-control-label"
-                            htmlFor="takeaway">
-                            <span>{t("common.take_away")}</span>
+                            htmlFor="pickup">
+                            <span>{t("common.pickup")}</span>
                         </label>
                     </div>
                 </div>
@@ -68,14 +68,14 @@ export const OrderType = () => {
                     <div className="custom-control custom-radio">
                         <input
                             type="radio"
-                            id="dine-in"
+                            id="delivery"
                             name="OrderType"
                             className="custom-control-input"
                         />
                         <label
                             className="custom-control-label"
-                            htmlFor="dine-in">
-                            <span>{t("common.dine_in")}</span>
+                            htmlFor="delivery">
+                            <span>{t("common.delivery")}</span>
                         </label>
                     </div>
                 </div>

@@ -1,10 +1,8 @@
 
-export const MainContainer = ({view}) => {
-    
+export const MainContainer = ({containerCSS = "", view}) => {
     return (
-        <div className="body_wrapper">
+        <div className={containerCSS}>
             {view}
         </div>
     );
-
 }

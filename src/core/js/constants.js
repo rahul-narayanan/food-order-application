@@ -7,7 +7,8 @@ export const Menus = [
     {
         id: "pos",
         name: i18n.t("menus.pos"), //i18n.t("menu.pos"),
-        view: <POSContainer />
+        view: <POSContainer />,
+        containerCSS: "pos-wrapper"
     }
     // {
     //     id: "transaction",
