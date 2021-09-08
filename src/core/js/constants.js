@@ -4,6 +4,8 @@ import i18n from "../../i18n";
 import { OrdersContainer } from "../../orders/js/init";
 import { POSContainer } from "../../pos/js/init";
 
+export const ORDER_TABLE_NAME = "Orders";
+
 export const Menus = [
     {
         id: "pos",

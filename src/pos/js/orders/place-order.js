@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { showSuccessMessage } from "../../../core/js/utils";
 import { GO_BACK_FROM_PLACE_ORDER, ORDER_PLACED } from "../redux/actions";
+import { placeOrder } from "../utils";
 import { CustomerInfo, OrderType, PaymentMethod } from "./utils";
 
 export const PlaceOrder = () => {
@@ -14,8 +15,9 @@ export const PlaceOrder = () => {
         dispatch({ type: GO_BACK_FROM_PLACE_ORDER });
     }, []);
 
-    const handleSubmitClick = useCallback(() => {
-        dispatch({ type: ORDER_PLACED });
+    const handleSubmitClick = useCallback(async () => {
+        await placeOrder();
+        dispatch({ type: ORDER_PLACED, payload: state });
         setTimeout(() => {
             showSuccessMessage("Order placed successfully");
             //showSuccessMessage("Order placed successfully");

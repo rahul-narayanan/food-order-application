@@ -25,7 +25,11 @@
             "name": "Name",
             "phone_number": "Phone number",
             "submit": "Submit",
-            "go_back": "Go back"
+            "go_back": "Go back",
+            "order_id": "Order ID",
+            "customer_name": "Customer Name",
+            "customer_phone": "Customer Phone number",
+            "order_time": "Ordered at"
         },
         "menus" : {
             "pos": "POS",

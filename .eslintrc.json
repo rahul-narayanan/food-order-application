@@ -229,6 +229,12 @@
         "no-return-assign": [
             0,
             "always"
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "varsIgnorePattern": "^[A-Z]"
+            }
         ]
     }
 }

@@ -9,9 +9,16 @@ See the License for the specific language governing permissions and limitations 
 
 
 
-var express = require('express')
-var bodyParser = require('body-parser')
-var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+var express = require('express');
+var bodyParser = require('body-parser');
+var AWS = require("aws-sdk");
+var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware');
+
+// Remove this code when deploying to production
+AWS.config.update({
+    region: "us-west-2",
+    endpoint: "http://localhost:8000"
+});
 
 // declare a new express app
 var app = express()
@@ -25,13 +32,10 @@ app.use(function(req, res, next) {
     next()
 });
 
+//var docClient = new AWS.DynamoDB.DocumentClient();
 
-/**********************
- * Example get method *
- **********************/
-
-app.get('/orders', function(req, res) {
-    res.json({success: 'get call succeed 11!', url: req.url});
+app.get('/orders', function (req, res) {
+    res.json({success: `success`, url: req.url});
 });
 
 app.get('/orders/*', function(req, res) {
