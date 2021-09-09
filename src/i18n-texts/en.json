@@ -29,7 +29,8 @@
             "order_id": "Order ID",
             "customer_name": "Customer Name",
             "customer_phone": "Customer Phone number",
-            "order_time": "Ordered at"
+            "order_time": "Ordered at",
+            "no_orders_found": "No orders found"
         },
         "menus" : {
             "pos": "POS",

@@ -1,91 +1,59 @@
+import { forwardRef,  useImperativeHandle, useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { OrderTypes, PaymentTypes } from "../constants";
+import { RadioButtons } from "../../../core/js/components/radio-buttons";
 
-export const PaymentMethod = () => {
+const PaymentMethod = forwardRef((props, ref) => {
     const { t } = useTranslation();
+    const buttonRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        getSelectedValue: () => buttonRef.current.getSelectedValue()
+    }));
 
     return (
-        <div className="form-group mb-4 pb-2">
-            <label>{t("common.payment_method")}</label>
-            <div className="row no-gutters align-items-center ml-0">
-                <div className="col-6 col-sm-6 col-md-6 col-lg-4">
-                    <div className="custom-control custom-radio">
-                        <input
-                            checked
-                            type="radio"
-                            id="payByCash"
-                            name="PaymentMethod"
-                            className="custom-control-input"
-                        />
-                        <label
-                            className="custom-control-label"
-                            htmlFor="payByCash">
-                            <span>{t("common.cash")}</span>
-                        </label>
-                    </div>
-                </div>
-                <div className="col-6 col-sm-6 col-md-6 col-lg-4">
-                    <div className="custom-control custom-radio">
-                        <input
-                            type="radio"
-                            id="payByCard"
-                            name="PaymentMethod"
-                            className="custom-control-input"
-                        />
-                        <label className="custom-control-label" htmlFor="payByCard">
-                            <span>{t("common.card")}</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <RadioButtons
+            id="paymentType"
+            ref={buttonRef}
+            label={t("common.payment_method")}
+            options={PaymentTypes}
+        />
     );
-}
+});
 
-export const OrderType = () => {
+PaymentMethod.displayName = "PaymentMethod";
+
+const OrderType = forwardRef((props, ref) => {
     const { t } = useTranslation();
+    const buttonRef = useRef(null);
+    
+    useImperativeHandle(ref, () => ({
+        getSelectedValue: () => buttonRef.current.getSelectedValue()
+    }));
 
     return (
-        <div className="form-group mb-4 pb-2">
-            <label>{t("common.order_type")}</label>
-            <div className="row no-gutters align-items-center ml-0">
-                <div className="col-6 col-sm-6 col-md-6 col-lg-4">
-                    <div className="custom-control custom-radio">
-                        <input
-                            checked
-                            type="radio"
-                            id="pickup"
-                            name="OrderType"
-                            className="custom-control-input"
-                        />
-                        <label
-                            className="custom-control-label"
-                            htmlFor="pickup">
-                            <span>{t("common.pickup")}</span>
-                        </label>
-                    </div>
-                </div>
-                <div className="col-6 col-sm-6 col-md-6 col-lg-4">
-                    <div className="custom-control custom-radio">
-                        <input
-                            type="radio"
-                            id="delivery"
-                            name="OrderType"
-                            className="custom-control-input"
-                        />
-                        <label
-                            className="custom-control-label"
-                            htmlFor="delivery">
-                            <span>{t("common.delivery")}</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <RadioButtons
+            id="orderType"
+            ref={buttonRef}
+            label={t("common.order_type")}
+            options={OrderTypes}
+        />
     );
-}
+});
 
-export const CustomerInfo = () => {
+OrderType.displayName = "OrderType";
+
+const CustomerInfo = forwardRef((props, ref) => {
     const { t } = useTranslation();
+    const nameRef = useRef(null);
+    const phoneRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        getValues: () => ({
+            customerName: nameRef.current.value.trim() || "Taters",
+            customerPhone: phoneRef.current.value.trim() || "NA"
+        })
+    }));
     
     return (
         <>
@@ -95,15 +63,23 @@ export const CustomerInfo = () => {
                     type="text"
                     className="form-control"
                     placeholder={t("common.name")}
-                    />
+                    ref={nameRef}
+                />
             </div>
             <div className="form-group">
                 <input
                     type="text"
                     className="form-control"
                     placeholder={t("common.phone_number")}
-                    />
+                    ref={phoneRef}
+                />
             </div>
         </>
     )
+});
+
+CustomerInfo.displayName = "CustomerInfo";
+
+export {
+    OrderType, PaymentMethod, CustomerInfo
 }

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { showSuccessMessage } from "../../../core/js/utils";
@@ -11,18 +11,28 @@ export const PlaceOrder = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation();
 
+    const payMethodRef = useRef(null);
+    const orderTypeRef = useRef(null);
+    const customerInfoRef = useRef(null);
+
     const handleGoBackClick = useCallback(() => {
         dispatch({ type: GO_BACK_FROM_PLACE_ORDER });
     }, []);
 
     const handleSubmitClick = useCallback(async () => {
-        await placeOrder();
+        await placeOrder({
+            ...customerInfoRef.current.getValues(),
+            paymentType: payMethodRef.current.getSelectedValue(),
+            orderType: orderTypeRef.current.getSelectedValue(),
+            noOfItems: Object.keys(state.selectedItems).length,
+            amount: state.total
+        });
         dispatch({ type: ORDER_PLACED, payload: state });
         setTimeout(() => {
             showSuccessMessage("Order placed successfully");
             //showSuccessMessage("Order placed successfully");
         });
-    }, []);
+    }, [state]);
 
     if (!state.goToPlaceOrder) return "";
 
@@ -34,9 +44,9 @@ export const PlaceOrder = () => {
                         {t("common.amount_to_pay")}
                         <strong className="ml-2">${state.total}</strong>
                     </h4>
-                    <PaymentMethod />
-                    <OrderType />
-                    <CustomerInfo />
+                    <PaymentMethod ref={payMethodRef} />
+                    <OrderType ref={orderTypeRef} />
+                    <CustomerInfo ref={customerInfoRef} />
                 </form>
             </div>
             <div className="order_footer bg-white">

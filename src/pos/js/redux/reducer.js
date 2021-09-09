@@ -117,7 +117,8 @@ const reducer = (state = {}, action) => {
             
         case ORDER_PLACED: {
             return {
-                ...initialState
+                ...initialState,
+                selectedCategoryIndex: state.selectedCategoryIndex
             }
         }
             

@@ -22,3 +22,10 @@ export const getCurrentUTCTimeStamp = () => {
     return Date.UTC(now.getUTCFullYear(),now.getUTCMonth(), now.getUTCDate() , 
         now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
 }
+
+export const sortByKey = (array, key) => {
+    return array.sort(function(a, b) {
+        var x = a[key]; var y = b[key];
+        return ((x < y) ? 1 : ((x > y) ? -1 : 0));
+    });
+}
