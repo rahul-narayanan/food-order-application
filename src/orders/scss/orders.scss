@@ -40,37 +40,6 @@
                             font-weight: 600;
                         }
                     }
-                    .btn_container {
-                        button.btn {
-                            background: var(--bg-color);
-                            border-radius: 4px;
-                            margin: 0 3px;
-                            min-width: 33px;
-                            height: 33px;
-                            font-size: 1.2rem;
-                            &:last-child {
-                                margin-right: 0;
-                            }
-                            i.zmdi-eye {
-                                color: var(--green_color);
-                            }
-                            i.zmdi-receipt {
-                                color: var(--green_color);
-                            }
-                            i.zmdi-print {
-                                color: var(--green_color);
-                            }
-                            i.zmdi-delete {
-                                color: var(--red_color);
-                            }
-                            i.zmdi-edit {
-                                color: #29b6ff;
-                            }
-                            i.zmdi-image {
-                                color: var(--primary);
-                            }
-                        }
-                    }
                     &:nth-child(even) {
                         background: var(--bg-color2);
                     }

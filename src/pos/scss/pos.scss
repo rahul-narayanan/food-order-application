@@ -209,12 +209,6 @@
                         }
                     }
                 }
-                button.btn {
-                    height: 55px;
-                }
-                button.btn.Cancel {
-                    background: var(--red_color);
-                }
             }
             .order-page-container {
                 display: flex;
@@ -391,12 +385,6 @@
                             margin-bottom: 0;
                             padding: 0;
                             box-shadow: none !important;
-                        }
-                        button.btn {
-                            width: auto;
-                            padding: 0 14px;
-                            min-width: 115px;
-                            height: 40px;
                         }
                     }
                 }

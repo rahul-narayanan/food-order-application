@@ -1,8 +1,21 @@
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Form } from 'react-bootstrap';
 
 export const ItemModalDialog = (props) => {
     const { item } = props;
+
+    const renderSize = () => (
+        <>
+            <h4>Size</h4>
+            <Form.Check
+                type="checkbox"
+                value="1"
+                label="Checkbox"
+            //onChange={e => setChecked(e.currentTarget.checked)}
+            />
+        </>
+    );
+
     return (
         <Modal
             {...props}
@@ -17,14 +30,11 @@ export const ItemModalDialog = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h4>Size</h4>
-                <p>
-                    Required
-                </p>
+                {renderSize()}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={props.onHide}>Close</Button>
-                <Button variant="primary" onClick={props.onHide}>Place order</Button>
+                <Button variant="primary" onClick={props.onHide}>Add</Button>
             </Modal.Footer>
         </Modal>
     );
