@@ -6,12 +6,14 @@ import { Provider } from "react-redux";
 import { Listing } from "./listing/init";
 import { Orders } from "./orders/init";
 import { initialState, reducer } from './redux/reducer';
+import { OnBoarding } from "./on-boarding/init";
 
 const store = createStore(reducer, initialState);
 
 export const POSContainer = () => {
     return (
-        <Provider store={store}>    
+        <Provider store={store}>
+            <OnBoarding />
             <Orders />
             <Listing />
         </Provider>

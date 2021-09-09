@@ -42,7 +42,7 @@ export const OrderTable = () => {
     if (goToPlaceOrder || !Object.keys(items).length) return null;
 
     return (
-        <div id="item_list" className="item_list active">
+        <div className="item_list active">
             <Header />
             <ul>
                 {Object.keys(items).map((id) => {

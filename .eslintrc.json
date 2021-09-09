@@ -230,11 +230,6 @@
             0,
             "always"
         ],
-        "no-unused-vars": [
-            "error",
-            {
-                "varsIgnorePattern": "^[A-Z]"
-            }
-        ]
+        "no-unused-vars": "off"
     }
 }

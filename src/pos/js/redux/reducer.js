@@ -2,10 +2,13 @@ import {
     ADD_ITEM_ACTION, CHANGE_CATEGORY_ACTION,
     CLEAR_SELECTED_ITEMS,
     DECREASE_ITEM_COUNT, GO_BACK_FROM_PLACE_ORDER,
-    GO_TO_PLACE_ORDER, INCREASE_ITEM_COUNT, ORDER_PLACED, UPDATE_SEARCH_KEY
+    GO_TO_PLACE_ORDER, INCREASE_ITEM_COUNT, ORDER_PLACED,
+    UPDATE_SEARCH_KEY, GO_BACK_TO_SELECT_TYPE, GO_TO_ITEMS_LISTING
 } from "./actions"
 
 const initialState = {
+    type: "", // order, pickup or delivery
+    subType: "", // If order - dinein, pickup or delivery
     selectedCategoryIndex: 0,
     selectedItems: {},
     subTotal: "",
@@ -119,6 +122,20 @@ const reducer = (state = {}, action) => {
             return {
                 ...initialState,
                 selectedCategoryIndex: state.selectedCategoryIndex
+            }
+        }
+            
+        case GO_BACK_TO_SELECT_TYPE: {
+            return {
+                ...initialState
+            }
+        }
+            
+        case GO_TO_ITEMS_LISTING: {
+            return {
+                ...initialState,
+                type: action.selectedType,
+                subType: action.selectedSubType
             }
         }
             

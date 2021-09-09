@@ -10,7 +10,7 @@ export const NoOrder = () => {
     if (Object.keys(items).length) return null;
 
     return (
-        <div id="no-order" className="no-order p-4 p-sm-4 p-md-4 p-lg-5">
+        <div className="no-order p-4 p-sm-4 p-md-4 p-lg-5">
             <div className="banner_img">
                 <img src={NoOrderImg} className="img-fluid" />
             </div>

@@ -19,8 +19,10 @@
             "cash": "Cash",
             "card": "Card",
             "order_type": "Order type",
-            "pickup": "Pick up",
-            "delivery": "Delivery   ",
+            "pickup": "To-Go",
+            "delivery": "Delivery",
+            "dine_in": "Here",
+            "preorder": "Pre -Order",
             "customer_info": "Customer Info",
             "name": "Name",
             "phone_number": "Phone number",
@@ -30,7 +32,10 @@
             "customer_name": "Customer Name",
             "customer_phone": "Customer Phone number",
             "order_time": "Ordered at",
-            "no_orders_found": "No orders found"
+            "no_orders_found": "No orders found",
+            "welcome_message" : "Welcome to More Taters Please!",
+            "how_can_i_help_message": "How can I help you?",
+            "type_select_help_message": "Is your order for Here or To-Go?"
         },
         "menus" : {
             "pos": "POS",

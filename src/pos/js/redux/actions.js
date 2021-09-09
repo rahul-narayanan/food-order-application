@@ -16,3 +16,7 @@ export const GO_TO_PLACE_ORDER = "goToPlaceOrder";
 export const GO_BACK_FROM_PLACE_ORDER = "goBackFromPlaceOrder";
 
 export const ORDER_PLACED = "orderPlaced";
+
+export const GO_BACK_TO_SELECT_TYPE = "goBackToSelectType";
+
+export const GO_TO_ITEMS_LISTING = "goToItemsListing";
