@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "moretaters",
+            "orders",
             {
               "Fn::Join": [
                 "",
                 [
-                  "moretaters",
+                  "orders",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "foodorderapplicationLambdaRole1700b8d8",
+            "foodorderapplicationLambdaRoleb7b50071",
             {
               "Fn::Join": [
                 "",
                 [
-                  "foodorderapplicationLambdaRole1700b8d8",
+                  "foodorderapplicationLambdaRoleb7b50071",
                   "-",
                   {
                     "Ref": "env"

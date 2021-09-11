@@ -1,26 +1,19 @@
 {
   "function": {
-    "moretaters": {
+    "orders": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
-  "auth": {
-    "cognitob50bdb61": {
-      "service": "Cognito",
-      "serviceType": "managed",
-      "providerPlugin": "awscloudformation"
-    }
-  },
   "api": {
-    "orders": {
+    "api": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [
         {
           "category": "function",
-          "resourceName": "moretaters",
+          "resourceName": "orders",
           "attributes": [
             "Name",
             "Arn"

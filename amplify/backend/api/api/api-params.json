@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/orders",
+      "lambdaFunction": "orders",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/orders"
+    }
+  ],
+  "resourceName": "api",
+  "apiName": "api",
+  "functionArns": [
+    {
+      "lambdaFunction": "orders"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-foodorderapplication-dev-105628-authRole",
+    "unAuthRoleName": "amplify-foodorderapplication-dev-105628-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "orders",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}
