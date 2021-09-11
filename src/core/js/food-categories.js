@@ -2,47 +2,57 @@ import WrapsImg from "../img/categories/wraps.png";
 import LoadedFriesImg from "../img/categories/loaded-fries.png";
 import PoutinesImg from "../img/categories/poutines.png";
 import i18n from "../../i18n";
+import { WrapCombos } from "./combos";
 
 const Categories = [
     {
         id: "wraps",
         name: i18n.t("categories.wraps"),
-        img: WrapsImg
+        img: WrapsImg,
+        isAvailableInDiffSizes: false,
+        combos: WrapCombos
     },
     {
         id: "salad_bowls",
         name: i18n.t("categories.salad_bowls"),
-        img: LoadedFriesImg
+        img: LoadedFriesImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "loaded_taters",
         name: i18n.t("categories.loaded_taters"),
-        img: WrapsImg
+        img: WrapsImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "poutines",
         name: i18n.t("categories.poutines"),
-        img: PoutinesImg
+        img: PoutinesImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "chicken_wings",
         name: i18n.t("categories.chicken_wings"),
-        img: WrapsImg
+        img: WrapsImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "crispy_chicken_dinners",
         name: i18n.t("categories.crispy_chicken_dinners"),
-        img: LoadedFriesImg
+        img: LoadedFriesImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "baked_potato",
         name: i18n.t("categories.baked_potato"),
-        img: LoadedFriesImg
+        img: LoadedFriesImg,
+        isAvailableInDiffSizes: true
     },
     {
         id: "fries",
         name: i18n.t("categories.fries"),
-        img: LoadedFriesImg
+        img: LoadedFriesImg,
+        isAvailableInDiffSizes: true
     }
     // {
     //     id: "sides_and_drinks",

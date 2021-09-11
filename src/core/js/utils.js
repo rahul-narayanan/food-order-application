@@ -36,3 +36,5 @@ export const sortByKey = (array, key) => array.sort((a, b) => {
 
     return 0;
 });
+
+export const normalizeI18NText = (text = "") => text.replace(/[{}]/g, "");

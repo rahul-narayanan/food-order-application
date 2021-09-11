@@ -5,8 +5,10 @@ import { useCallback, useState } from "react";
 // import { ADD_ITEM_ACTION } from "../redux/actions";
 import ReactTooltip from "react-tooltip";
 import { ItemModalDialog } from "./item-modal-dialog";
+import { normalizeI18NText } from "../../../core/js/utils";
 
 const getTrimmedDesc = ({ id, description = "" }, maxLen = 95) => {
+    description = normalizeI18NText(description);
     if (!description) return <p className="noDesc" />;
 
     return description.length > maxLen ? (

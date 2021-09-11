@@ -6,7 +6,7 @@ import { POSContainer } from "../../pos/js/init";
 export const Menus = [
     {
         id: "pos",
-        name: i18n.t("menus.pos"), // i18n.t("menu.pos"),
+        name: i18n.t("menus.pos"),
         view: <POSContainer />,
         containerCSS: "pos-wrapper"
     },

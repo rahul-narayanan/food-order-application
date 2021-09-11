@@ -4,7 +4,6 @@ import Skeleton from "react-loading-skeleton";
 import { OrderTypes, PaymentTypes } from "../../pos/js/constants";
 import { useTranslation } from "react-i18next";
 import { ORDER_TABLE_NAME, sortByKey } from "../../core/js/utils";
-import { API } from "aws-amplify";
 
 const Header = () => (
     <div className="list_header d-flex">
@@ -24,12 +23,11 @@ export const OrderListing = () => {
 
     const fetchOrders = useCallback(async () => {
         try {
-            const res = await API.get("api", "/orders");
-            // const result = await readAllItemsFromTable({
-            //     TableName: ORDER_TABLE_NAME,
-            //     ScanIndexForward: false
-            // });
-            // setOrders(sortByKey(result, "OrderId"));
+            const result = await readAllItemsFromTable({
+                TableName: ORDER_TABLE_NAME,
+                ScanIndexForward: false
+            });
+            setOrders(sortByKey(result, "OrderId"));
         } catch (err) {
 
         }

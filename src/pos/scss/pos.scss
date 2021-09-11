@@ -580,3 +580,46 @@
         }
     }
 }
+
+.item-modal-dialog-container {
+    .modal-body {
+        display: flex;
+        .content {
+            flex: 0 0 70%;
+        }
+        .modifications {
+            position: relative;
+            flex: 0 0 30%;
+            text-transform: uppercase;
+            .link {
+                cursor: pointer;
+                position: absolute;
+                right: 15px;
+                color: var(--primary);
+            }
+            .content {
+                .title {
+                    color: var(--primary);
+                    margin-bottom: 5px;
+                }
+                .form-check {
+                    margin-bottom: 5px;
+                }
+                .form-check-inline {
+                    margin-right: 20px;
+                }
+            }
+        }
+        .combos-container {
+            .dropdown {
+                margin-right: 10px;
+                &.sides-dropdown {
+                    width: 290px;
+                }
+                &.drinks-dropdown {
+                    width: 190px;
+                }
+            }
+        }
+    }
+}

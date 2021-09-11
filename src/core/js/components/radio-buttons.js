@@ -1,46 +1,43 @@
 import {
     forwardRef, useCallback, useImperativeHandle, useState
 } from "react";
+import { Form } from "react-bootstrap";
 
 const RadioButtons = forwardRef(({
-    id, label, options, selectedValue: _selectedValue = ""
+    id, title, options, selectedValue: _selectedValue = "",
+    onChange = () => {}, inline = false
 }, ref) => {
     const [selectedValue, setSelectedValue] = useState(_selectedValue || options[0].value);
 
     const handleOnChange = useCallback((event) => {
-        setSelectedValue(event.currentTarget.value);
+        const newValue = event.currentTarget.value;
+        setSelectedValue(newValue);
+        onChange(newValue);
     }, [selectedValue]);
 
     useImperativeHandle(ref, () => ({
-        getSelectedValue: () => selectedValue
+        getSelectedValue: () => selectedValue,
+        getSelectedOption: () => options.find((_option) => _option.value === selectedValue)
     }));
 
     return (
-        <div className="form-group mb-4 pb-2">
-            <label>{label}</label>
-            <div className="row no-gutters align-items-center ml-0">
-                {options.map(({ name, value }) => (
-                    <div className="col-6 col-sm-6 col-md-6 col-lg-4" key={value}>
-                        <div className="custom-control custom-radio">
-                            <input
-                                type="radio"
-                                className="custom-control-input"
-                                id={`${id}_${value}`}
-                                value={value}
-                                checked={selectedValue === value}
-                                onChange={handleOnChange}
-                            />
-                            <label
-                                className="custom-control-label"
-                                htmlFor={`${id}_${value}`}
-                            >
-                                <span>{name}</span>
-                            </label>
-                        </div>
-                    </div>
+        <li>
+            <h6>{title}</h6>
+            <div key={id}>
+                {options.map((option) => (
+                    <Form.Check
+                        type="radio"
+                        key={option.value}
+                        inline={inline}
+                        id={option.value}
+                        value={option.value}
+                        label={option.name}
+                        onChange={handleOnChange}
+                        checked={selectedValue === option.value}
+                    />
                 ))}
             </div>
-        </div>
+        </li>
     );
 });
 
