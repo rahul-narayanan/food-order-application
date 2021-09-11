@@ -277,12 +277,20 @@ export const DrinkOptions = () => {
     const checkBoxRefArr = useRef([]);
     const counterRefArr = useRef([]);
 
+    const [showClear, setShowClear] = useState(false);
+
+    const isAtleastOneChecked = useCallback(() => {
+        const rider = "";
+        return checkBoxRefArr.current.some((checkBox) => checkBox.isChecked());
+    }, []);
+
     const handleOnChange = useCallback((drink, isChecked, index) => {
         counterRefArr.current[index].setCount(isChecked ? 1 : 0);
         Emitter.emit("UPDATE_PRICE_IN_DIALOG_HEADER", {
             type: isChecked ? "increase" : "decrease",
             price: drink.price
         });
+        setShowClear(isAtleastOneChecked());
     }, []);
 
     const handleIncrement = useCallback((drink, count, index) => {
@@ -302,26 +310,39 @@ export const DrinkOptions = () => {
         });
     }, []);
 
+    const handleClearSelection = useCallback(() => {
+        // Clear selection
+    }, []);
+
     return (
         <li>
-            <h5>{t("common.drinks")}</h5>
-            {Drinks.map((drink, index) => (
-                <div className="df">
-                    <CheckBox
-                        key={index}
-                        ref={(el) => checkBoxRefArr.current[index] = el}
-                        name={`${drink.name} (+$${drink.price})`}
-                        value={drink.id}
-                        onChange={(checked) => handleOnChange(drink, checked, index)}
-                    />
-                    <IncreaseDecreaseCounter
-                        key={`counterFor${drink.id}`}
-                        ref={(el) => counterRefArr.current[index] = el}
-                        onIncrement={(count) => handleIncrement(drink, count, index)}
-                        onDecrement={(count) => handleDecrement(drink, count, index)}
-                    />
-                </div>
-            ))}
+            <h5>
+                {t("common.drinks")}
+                {showClear ? (
+                    <a className="txtLink" onClick={handleClearSelection}>
+                        {t("common.clear")}
+                    </a>
+                ) : ""}
+            </h5>
+            <div className="drinks-container">
+                {Drinks.map((drink, index) => (
+                    <div className="df">
+                        <CheckBox
+                            key={index}
+                            ref={(el) => checkBoxRefArr.current[index] = el}
+                            name={`${drink.name} (+$${drink.price})`}
+                            value={drink.id}
+                            onChange={(checked) => handleOnChange(drink, checked, index)}
+                        />
+                        <IncreaseDecreaseCounter
+                            key={`counterFor${drink.id}`}
+                            ref={(el) => counterRefArr.current[index] = el}
+                            onIncrement={(count) => handleIncrement(drink, count, index)}
+                            onDecrement={(count) => handleDecrement(drink, count, index)}
+                        />
+                    </div>
+                ))}
+            </div>
         </li>
     );
 };

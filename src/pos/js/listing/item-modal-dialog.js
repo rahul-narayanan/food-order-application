@@ -47,7 +47,7 @@ export const ItemModalDialog = (props) => {
             show={props.show}
             onHide={props.onHide}
             className="item-modal-dialog-container"
-            size="lg"
+            size="xl"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >

@@ -1,5 +1,5 @@
 import {
-    forwardRef, useCallback, useImperativeHandle, useState
+    forwardRef, useCallback, useEffect, useImperativeHandle, useState
 } from "react";
 import { Form } from "react-bootstrap";
 
@@ -10,7 +10,6 @@ const CheckBox = forwardRef(({
 
     const handleOnChange = useCallback((event) => {
         setChecked(!checked);
-        onChange(!checked);
     }, [checked]);
 
     useImperativeHandle(ref, () => ({
@@ -18,6 +17,10 @@ const CheckBox = forwardRef(({
         check: () => setChecked(true),
         unCheck: () => setChecked(false)
     }));
+
+    useEffect(() => {
+        onChange(checked);
+    }, [checked]);
 
     return (
         <Form.Check

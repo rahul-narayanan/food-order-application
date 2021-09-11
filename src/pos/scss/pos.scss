@@ -621,5 +621,17 @@
                 }
             }
         }
+        .drinks-container {
+            display: flex;
+            flex-wrap: wrap;
+            > div {
+                flex-basis: 50%;
+            }
+            .df {
+                .form-check {
+                    width: 200px;
+                }
+            }
+        }
     }
 }
