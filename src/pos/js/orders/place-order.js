@@ -7,7 +7,7 @@ import { placeOrder } from "../utils";
 import { CustomerInfo, OrderType, PaymentMethod } from "./utils";
 
 export const PlaceOrder = () => {
-    const state = useSelector((state) => state);
+    const state = useSelector((_state) => _state);
     const dispatch = useDispatch();
     const { t } = useTranslation();
 
@@ -16,7 +16,7 @@ export const PlaceOrder = () => {
     const customerInfoRef = useRef(null);
 
     const handleGoBackClick = useCallback(() => {
-        dispatch({ type: GO_BACK_FROM_PLACE_ORDER });
+        // dispatch({ type: GO_BACK_FROM_PLACE_ORDER });
     }, []);
 
     const handleSubmitClick = useCallback(async () => {
@@ -27,10 +27,10 @@ export const PlaceOrder = () => {
             noOfItems: Object.keys(state.selectedItems).length,
             amount: state.total
         });
-        dispatch({ type: ORDER_PLACED, payload: state });
+        // dispatch({ type: ORDER_PLACED, payload: state });
         setTimeout(() => {
             showSuccessMessage("Order placed successfully");
-            //showSuccessMessage("Order placed successfully");
+            // showSuccessMessage("Order placed successfully");
         });
     }, [state]);
 
@@ -42,7 +42,10 @@ export const PlaceOrder = () => {
                 <form className="px-4 py-3">
                     <h4 className="pt-3 mb-3">
                         {t("common.amount_to_pay")}
-                        <strong className="ml-2">${state.total}</strong>
+                        <strong className="ml-2">
+                            $
+                            {state.total}
+                        </strong>
                     </h4>
                     <PaymentMethod ref={payMethodRef} />
                     <OrderType ref={orderTypeRef} />
@@ -70,5 +73,5 @@ export const PlaceOrder = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 };

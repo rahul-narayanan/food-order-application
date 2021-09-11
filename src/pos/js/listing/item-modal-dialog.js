@@ -1,5 +1,4 @@
-
-import { Modal, Button, Form } from 'react-bootstrap';
+import { Modal, Button, Form } from "react-bootstrap";
 
 export const ItemModalDialog = (props) => {
     const { item } = props;
@@ -11,7 +10,7 @@ export const ItemModalDialog = (props) => {
                 type="checkbox"
                 value="1"
                 label="Checkbox"
-            //onChange={e => setChecked(e.currentTarget.checked)}
+            // onChange={e => setChecked(e.currentTarget.checked)}
             />
         </>
     );
@@ -22,7 +21,7 @@ export const ItemModalDialog = (props) => {
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
-    >
+        >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {item.name}
@@ -38,4 +37,4 @@ export const ItemModalDialog = (props) => {
             </Modal.Footer>
         </Modal>
     );
-}
+};

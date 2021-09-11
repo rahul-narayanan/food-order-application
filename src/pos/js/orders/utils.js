@@ -1,4 +1,4 @@
-import { forwardRef,  useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { OrderTypes, PaymentTypes } from "../constants";
 import { RadioButtons } from "../../../core/js/components/radio-buttons";
@@ -26,7 +26,7 @@ PaymentMethod.displayName = "PaymentMethod";
 const OrderType = forwardRef((props, ref) => {
     const { t } = useTranslation();
     const buttonRef = useRef(null);
-    
+
     useImperativeHandle(ref, () => ({
         getSelectedValue: () => buttonRef.current.getSelectedValue()
     }));
@@ -54,7 +54,7 @@ const CustomerInfo = forwardRef((props, ref) => {
             customerPhone: phoneRef.current.value.trim() || "NA"
         })
     }));
-    
+
     return (
         <>
             <div className="form-group">
@@ -75,11 +75,11 @@ const CustomerInfo = forwardRef((props, ref) => {
                 />
             </div>
         </>
-    )
+    );
 });
 
 CustomerInfo.displayName = "CustomerInfo";
 
 export {
     OrderType, PaymentMethod, CustomerInfo
-}
+};

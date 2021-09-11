@@ -1,4 +1,3 @@
-
 import VegIcon from "../../img/veg_icon.png";
 import NonVegIcon from "../../img/nonveg_icon.png";
 import { useCallback, useState } from "react";
@@ -13,23 +12,23 @@ const getTrimmedDesc = ({ id, description = "" }, maxLen = 95) => {
     return description.length > maxLen ? (
         <>
             <p data-tip data-for={`${id}_desc`}>
-                {description.length > maxLen ?`${description.substr(0, maxLen)}...` : description}
+                {description.length > maxLen ? `${description.substr(0, maxLen)}...` : description}
             </p>
             <ReactTooltip
                 className="item-desc-tooltip"
                 id={`${id}_desc`}
                 place="top"
                 effect="solid"
-                >
+            >
                 {description}
             </ReactTooltip>
         </>
-    ): (
+    ) : (
         <p>
             {description}
         </p>
-    )
-} 
+    );
+};
 export const ItemsListing = ({ items = [] }) => {
     // const dispatch = useDispatch();
     // dispatch({ type: ADD_ITEM_ACTION, item });
@@ -74,4 +73,4 @@ export const ItemsListing = ({ items = [] }) => {
             />
         </>
     );
-}
+};

@@ -1,4 +1,3 @@
-
 import CeasarWrapImg from "../img/items/chicken-ceasar.png";
 import PopsChickenWrapImg from "../img/items/pops-chicken-wrap.png";
 import ChickenMessPoutine from "../img/items/chicken-mess-poutine.png";
@@ -7,7 +6,7 @@ import i18n from "../../i18n";
 import { Wraps } from "./wrap-items";
 
 const Items = [
-    ...(Wraps.map(wrap => ({categoryId: "wraps", ...wrap }))),
+    ...(Wraps.map((wrap) => ({ categoryId: "wraps", ...wrap }))),
     {
         categoryId: "salad_bowls",
         id: "popsChickenSaladBowl",

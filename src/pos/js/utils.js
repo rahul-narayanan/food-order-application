@@ -1,6 +1,5 @@
 import { putItemIntoTable } from "../../core/js/api-utils";
-import { ORDER_TABLE_NAME as TableName} from "../../core/js/constants";
-import { getCurrentUTCTimeStamp } from "../../core/js/utils";
+import { getCurrentUTCTimeStamp, ORDER_TABLE_NAME } from "../../core/js/utils";
 
 export const placeOrder = async (params) => {
     const {
@@ -11,7 +10,7 @@ export const placeOrder = async (params) => {
     const currentTime = String(getCurrentUTCTimeStamp());
     try {
         await putItemIntoTable({
-            TableName,
+            TableName: ORDER_TABLE_NAME,
             Item: {
                 OrderId: `MTP${currentTime}`,
                 OrderTime: currentTime,
@@ -24,6 +23,6 @@ export const placeOrder = async (params) => {
             }
         });
     } catch (err) {
-        console.log(err);
+
     }
-} 
+};

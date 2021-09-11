@@ -4,7 +4,7 @@ import {
     DECREASE_ITEM_COUNT, GO_BACK_FROM_PLACE_ORDER,
     GO_TO_PLACE_ORDER, INCREASE_ITEM_COUNT, ORDER_PLACED,
     UPDATE_SEARCH_KEY, GO_BACK_TO_SELECT_TYPE, GO_TO_ITEMS_LISTING
-} from "./actions"
+} from "./actions";
 
 const initialState = {
     type: "", // order, pickup or delivery
@@ -18,11 +18,11 @@ const initialState = {
     goToPlaceOrder: false
 };
 
-const computeSubTotal = (items) => {
-    return Object.keys(items).map(key => items[key])
-        .map(({ price, quantity }) => Number(price).toFixed(2) * quantity)
-        .reduce((acc, val) => acc + val, 0).toFixed(2).toString();
-};
+const computeSubTotal = (items) => Object.keys(items).map((key) => items[key])
+    .map(({ price, quantity }) => Number(price).toFixed(2) * quantity)
+    .reduce((acc, val) => acc + val, 0)
+    .toFixed(2)
+    .toString();
 
 const getStateVariables = (items) => {
     const subtotal = computeSubTotal(items);
@@ -32,8 +32,8 @@ const getStateVariables = (items) => {
         subtotal,
         tax,
         total: (Number(subtotal) + Number(tax)).toFixed(2)
-    }
-}
+    };
+};
 
 const reducer = (state = {}, action) => {
     switch (action.type) {
@@ -51,33 +51,33 @@ const reducer = (state = {}, action) => {
                 selectedItems[item.id] = {
                     ...item,
                     quantity: 1
-                }
+                };
             }
 
             return {
                 ...state,
                 selectedItems,
                 ...getStateVariables(selectedItems)
-            }
+            };
         }
-            
+
         case INCREASE_ITEM_COUNT: {
             const { itemId } = action;
             const selectedItems = { ...state.selectedItems };
-            
+
             selectedItems[itemId].quantity += 1;
 
             return {
                 ...state,
                 selectedItems,
                 ...getStateVariables(selectedItems)
-            }
+            };
         }
-            
+
         case DECREASE_ITEM_COUNT: {
             const { itemId } = action;
             const selectedItems = { ...state.selectedItems };
-            
+
             selectedItems[itemId].quantity -= 1;
 
             if (!selectedItems[itemId].quantity) {
@@ -88,65 +88,65 @@ const reducer = (state = {}, action) => {
                 ...state,
                 selectedItems,
                 ...getStateVariables(selectedItems)
-            }
+            };
         }
-            
+
         case CLEAR_SELECTED_ITEMS:
             return {
                 ...state,
                 selectedItems: {},
                 ...getStateVariables({})
-            }
+            };
 
         case UPDATE_SEARCH_KEY:
             return {
                 ...state,
                 searchKey: action.searchKey
-            }
-        
+            };
+
         case GO_TO_PLACE_ORDER: {
             return {
                 ...state,
                 goToPlaceOrder: true
-            }
+            };
         }
-            
+
         case GO_BACK_FROM_PLACE_ORDER: {
             return {
                 ...state,
                 goToPlaceOrder: false
-            }
+            };
         }
-            
+
         case ORDER_PLACED: {
             return {
                 ...initialState,
                 selectedCategoryIndex: state.selectedCategoryIndex
-            }
+            };
         }
-            
+
         case GO_BACK_TO_SELECT_TYPE: {
             return {
                 ...initialState
-            }
+            };
         }
-            
+
         case GO_TO_ITEMS_LISTING: {
             return {
                 ...initialState,
                 type: action.selectedType,
                 subType: action.selectedSubType
-            }
+            };
         }
-            
+
         default:
             return {
                 ...state
-            }
+            };
     }
 };
 
 export {
     initialState,
     reducer
-}
+};

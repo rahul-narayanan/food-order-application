@@ -19,12 +19,12 @@ const Header = () => {
                     <h2>{ t("common.quantity")}</h2>
                 </div>
                 <div className="col-3 text-right">
-                    <h2>{ t("common.total") + "($)" }</h2>
+                    <h2>{ `${t("common.total")}($)` }</h2>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export const OrderTable = () => {
     const goToPlaceOrder = useSelector((state) => state?.goToPlaceOrder || false);
@@ -32,11 +32,11 @@ export const OrderTable = () => {
     const dispatch = useDispatch();
 
     const handleMinusClick = useCallback((itemId) => {
-        dispatch({type: DECREASE_ITEM_COUNT, itemId})
+        dispatch({ type: DECREASE_ITEM_COUNT, itemId });
     }, []);
 
     const handlePlusClick = useCallback((itemId) => {
-        dispatch({type: INCREASE_ITEM_COUNT, itemId})
+        dispatch({ type: INCREASE_ITEM_COUNT, itemId });
     }, []);
 
     if (goToPlaceOrder || !Object.keys(items).length) return null;

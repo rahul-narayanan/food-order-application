@@ -1,9 +1,10 @@
-
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import {
+    forwardRef, useCallback, useImperativeHandle, useState
+} from "react";
 
 const RadioButtons = forwardRef(({
-    id, label, options, selectedValue: _selectedValue = "" },ref
-) => {
+    id, label, options, selectedValue: _selectedValue = ""
+}, ref) => {
     const [selectedValue, setSelectedValue] = useState(_selectedValue || options[0].value);
 
     const handleOnChange = useCallback((event) => {
@@ -18,7 +19,7 @@ const RadioButtons = forwardRef(({
         <div className="form-group mb-4 pb-2">
             <label>{label}</label>
             <div className="row no-gutters align-items-center ml-0">
-                {options.map(({name, value}) => (
+                {options.map(({ name, value }) => (
                     <div className="col-6 col-sm-6 col-md-6 col-lg-4" key={value}>
                         <div className="custom-control custom-radio">
                             <input
@@ -31,7 +32,8 @@ const RadioButtons = forwardRef(({
                             />
                             <label
                                 className="custom-control-label"
-                                htmlFor={`${id}_${value}`} >
+                                htmlFor={`${id}_${value}`}
+                            >
                                 <span>{name}</span>
                             </label>
                         </div>
@@ -39,7 +41,7 @@ const RadioButtons = forwardRef(({
                 ))}
             </div>
         </div>
-    )
+    );
 });
 
 RadioButtons.displayName = "RadioButtons";

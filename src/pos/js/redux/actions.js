@@ -1,4 +1,3 @@
-
 export const CHANGE_CATEGORY_ACTION = "changeCategory";
 
 export const ADD_ITEM_ACTION = "addItem";

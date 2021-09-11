@@ -1,16 +1,15 @@
-
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { CLEAR_SELECTED_ITEMS, GO_TO_PLACE_ORDER } from "../redux/actions";
 
 export const OrderFooter = () => {
-    const state = useSelector((state) => state);
+    const state = useSelector((_state) => _state);
     const { t } = useTranslation();
     const dispatch = useDispatch();
 
     const handlePlaceOrderClick = useCallback(() => {
-        dispatch({type: GO_TO_PLACE_ORDER})
+        dispatch({ type: GO_TO_PLACE_ORDER });
     }, []);
 
     const handleCancelClick = useCallback(() => {
@@ -21,7 +20,10 @@ export const OrderFooter = () => {
         <div className="order_footer">
             <div className="amount_details">
                 <h2 className="d-flex text-right">
-                    <span className="text">{t("common.subtotal")} </span>
+                    <span className="text">
+                        {t("common.subtotal")}
+                        {" "}
+                    </span>
                     <span className="mr-0 ml-auto">{state.subtotal}</span>
                 </h2>
                 <h2 className="d-flex text-right">

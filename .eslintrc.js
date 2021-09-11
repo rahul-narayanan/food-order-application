@@ -1,57 +1,56 @@
-{
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "es6": true,
-        "node": true
+module.exports = {
+    env: {
+        browser: true,
+        es2021: true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+    extends: [
+        "plugin:react/recommended",
+        "airbnb"
     ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "sourceType": "module",
-        "allowImportExportEverywhere": true,
-        "ecmaFeatures": {
-            "jsx": true,
-            "impliedStrict": false,
-            "modules": true
-        }
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        },
+        ecmaVersion: 12,
+        sourceType: "module"
     },
-    "plugins": [
+    plugins: [
         "react"
     ],
-    "rules": {
-        "import/extensions": 0,
-        "import/no-unresolved": 0,
-        "import/order": 0,
-        "no-plusplus": 0,
+    rules: {
+        "quotes": ["error", "double"],
+        "comma-dangle": ["error", "never"],
+        "no-unused-vars": ["off"],
         "import/prefer-default-export": 0,
+        "react/jsx-filename-extension": [
+            1,
+            {
+                extensions: [".js", ".jsx"]
+            }
+        ],
         "indent": [
             2,
             4,
             {
-                "SwitchCase": 1,
-                "VariableDeclarator": 1,
-                "ArrayExpression": "first",
-                "outerIIFEBody": 1,
-                "FunctionDeclaration": {
-                    "parameters": 1,
-                    "body": 1
+                SwitchCase: 1,
+                VariableDeclarator: 1,
+                ArrayExpression: "first",
+                outerIIFEBody: 1,
+                FunctionDeclaration: {
+                    parameters: 1,
+                    body: 1
                 },
-                "FunctionExpression": {
-                    "parameters": 1,
-                    "body": 1
+                FunctionExpression: {
+                    parameters: 1,
+                    body: 1
                 },
-                "CallExpression": {
-                    "arguments": 1
+                CallExpression: {
+                    arguments: 1
                 },
-                "ObjectExpression": 1,
-                "ImportDeclaration": 1,
-                "flatTernaryExpressions": false,
-                "ignoredNodes": [
+                ObjectExpression: 1,
+                ImportDeclaration: 1,
+                flatTernaryExpressions: false,
+                ignoredNodes: [
                     "JSXElement",
                     "JSXElement > *",
                     "JSXAttribute",
@@ -66,46 +65,54 @@
                     "JSXEmptyExpression",
                     "JSXSpreadChild"
                 ],
-                "ignoreComments": false
+                ignoreComments: false
             }
         ],
+        "react/jsx-indent-props": [
+            2,
+            4
+        ],
+        "react/jsx-indent": [
+            2,
+            4
+        ],
+        "import/extensions": 0,
+        "import/no-unresolved": 0,
+        "import/order": 0,
+        "no-plusplus": 0,
         "default-case": 1,
         "no-underscore-dangle": [
             0,
             {
-                "allow": [],
-                "allowAfterThis": false,
-                "allowAfterSuper": false,
-                "enforceInMethodNames": false
+                allow: [],
+                allowAfterThis: false,
+                allowAfterSuper: false,
+                enforceInMethodNames: false
             }
-        ],
-        "comma-dangle": [
-            2,
-            "never"
         ],
         "prefer-destructuring": [
             1,
             {
-                "VariableDeclarator": {
-                    "array": false,
-                    "object": true
+                VariableDeclarator: {
+                    array: false,
+                    object: true
                 },
-                "AssignmentExpression": {
-                    "array": true,
-                    "object": true
+                AssignmentExpression: {
+                    array: true,
+                    object: true
                 }
             },
             {
-                "enforceForRenamedProperties": false
+                enforceForRenamedProperties: false
             }
         ],
         "quote-props": [
             2,
             "consistent-as-needed",
             {
-                "keywords": false,
-                "unnecessary": true,
-                "numbers": false
+                keywords: false,
+                unnecessary: true,
+                numbers: false
             }
         ],
         "max-len": [
@@ -113,11 +120,11 @@
             200,
             2,
             {
-                "ignoreUrls": true,
-                "ignoreComments": false,
-                "ignoreRegExpLiterals": true,
-                "ignoreStrings": false,
-                "ignoreTemplateLiterals": true
+                ignoreUrls: true,
+                ignoreComments: false,
+                ignoreRegExpLiterals: true,
+                ignoreStrings: false,
+                ignoreTemplateLiterals: true
             }
         ],
         "radix": [
@@ -132,27 +139,10 @@
         "react/prefer-stateless-function": 0,
         "react/react-in-jsx-scope": 0,
         "react/no-string-refs": 0,
-        "react/jsx-filename-extension": [
-            1,
-            {
-                "extensions": [
-                    ".js",
-                    ".jsx"
-                ]
-            }
-        ],
-        "react/jsx-indent-props": [
-            2,
-            4
-        ],
-        "react/jsx-indent": [
-            2,
-            4
-        ],
         "react/no-unknown-property": [
             2,
             {
-                "ignore": [
+                ignore: [
                     "class"
                 ]
             }
@@ -162,7 +152,7 @@
         "react/sort-comp": [
             0,
             {
-                "order": [
+                order: [
                     "static-methods",
                     "instance-variables",
                     "lifecycle",
@@ -179,7 +169,7 @@
         "class-methods-use-this": [
             0,
             {
-                "exceptMethods": [
+                exceptMethods: [
                     "requestUrl",
                     "requestMethod",
                     "requestBody",
@@ -195,7 +185,7 @@
         "no-empty": [
             2,
             {
-                "allowEmptyCatch": true
+                allowEmptyCatch: true
             }
         ],
         "jsx-a11y/alt-text": 0,
@@ -218,7 +208,6 @@
         "prefer-rest-params": 0,
         "new-cap": 0,
         "no-mixed-operators": 0,
-        "quotes": 0,
         "valid-typeof": 2,
         "no-restricted-globals": 0,
         "no-continue": 0,
@@ -230,6 +219,6 @@
             0,
             "always"
         ],
-        "no-unused-vars": "off"
+        "react/jsx-props-no-spreading": 0
     }
-}
+};

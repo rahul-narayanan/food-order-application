@@ -1,4 +1,4 @@
-
+/* eslint-disable no-await-in-loop */
 import AWS from "aws-sdk";
 
 // Remove this code when deploying to production
@@ -17,28 +17,28 @@ export const readAllItemsFromTable = async (params = {
 }) => {
     const scanResults = [];
     let items;
-    do{
-        items =  await DocClient.scan(params).promise();
+    do {
+        items = await DocClient.scan(params).promise();
         items.Items.forEach((item) => scanResults.push(item));
-        params.ExclusiveStartKey  = items.LastEvaluatedKey;
-    }while(typeof items.LastEvaluatedKey !== "undefined");
-    
+        params.ExclusiveStartKey = items.LastEvaluatedKey;
+    } while (typeof items.LastEvaluatedKey !== "undefined");
+
     return scanResults;
 };
 
 export const queryItemsFromTable = async (params) => {
     const scanResults = [];
     let items;
-    do{
-        items =  await DocClient.query(params).promise();
+    do {
+        items = await DocClient.query(params).promise();
         items.Items.forEach((item) => scanResults.push(item));
-        params.ExclusiveStartKey  = items.LastEvaluatedKey;
-    }while(typeof items.LastEvaluatedKey !== "undefined");
-    
+        params.ExclusiveStartKey = items.LastEvaluatedKey;
+    } while (typeof items.LastEvaluatedKey !== "undefined");
+
     return scanResults;
 };
 
 export const putItemIntoTable = async (params) => {
     const response = await DocClient.put(params).promise();
     return response;
-}
+};
