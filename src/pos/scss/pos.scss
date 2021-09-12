@@ -585,8 +585,12 @@
 .item-modal-dialog-container {
     .modal-body {
         display: flex;
+        h6 {
+            color: var(--primary);
+        }
         .content {
             flex: 0 0 70%;
+            padding-right: 20px;
         }
         .modifications {
             position: relative;
@@ -599,15 +603,29 @@
                 color: var(--primary);
             }
             .content {
+                padding-right: 0px;
                 .title {
                     color: var(--primary);
                     margin-bottom: 5px;
+                    .btn-close {
+                        float: right;
+                        font-size: 10px;
+                        margin-top: 3px;
+                    }
                 }
                 .form-check {
                     margin-bottom: 5px;
                 }
                 .form-check-inline {
                     margin-right: 20px;
+                }
+            }
+        }
+        .combos-option-container,
+        .drinks-option-container {
+            .form-check {
+                label {
+                    text-transform: uppercase;
                 }
             }
         }
@@ -622,6 +640,9 @@
                 }
             }
         }
+        .drinks-option-container + h6 {
+            margin-top: -5px;
+        }
         .drinks-container {
             display: flex;
             flex-wrap: wrap;
@@ -629,10 +650,20 @@
                 flex-basis: 50%;
             }
             .df {
+                margin-bottom: 5px;
+                display: flex;
+
                 .form-check {
                     width: 190px;
                 }
             }
+        }
+        .instruction-textbox-container {
+            margin-top: 20px;
+        }
+
+        .item-dialog-scroll-div {
+            height: 20px;
         }
     }
 }

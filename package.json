@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@aws-amplify/ui-react": "^1.2.12",
+    "@craco/craco": "^6.3.0",
     "aws-amplify": "^4.2.6",
     "aws-sdk": "^2.987.0",
     "bootstrap": "^5.1.0",
@@ -27,9 +28,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

@@ -1,12 +1,15 @@
 {
     "translation" : {
         "common": {
+            "yes": "Yes",
+            "no": "No",
             "add" : "Add",
             "item": "Item",
             "price" : "Price",
             "quantity": "Qnt.",
             "total": "Total",
             "cancel": "Cancel",
+            "close": "Close",
             "clear": "Clear",
             "place_order": "Place order",
             "amount_to_pay": "Amount to Pay",
@@ -45,9 +48,10 @@
             "regular": "Regular",
             "jumbo": "Jumbo",
             "modifications": "Modifications",
-            "no": "No",
             "modify": "Modify",
             "drinks_help_message": "Would you like some drinks?",
+            "extra_drinks_help_message": "Would you like to have extra drinks?",
+            "which_drinks": "Which drink do you want?",
             "drinks": "Drinks",
             "comboTitleMessage": "Combos include Choice of Side and a Drink",
             "selectSide": "Select a side",

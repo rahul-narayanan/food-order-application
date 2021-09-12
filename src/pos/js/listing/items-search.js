@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { debounce } from "../../../core/js/utils";
+import { debounce } from "src/core/js/utils";
 import { UPDATE_SEARCH_KEY } from "../redux/actions";
 
 export const ItemsSearch = () => {

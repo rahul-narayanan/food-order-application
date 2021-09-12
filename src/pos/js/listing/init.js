@@ -1,8 +1,8 @@
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { HeaderNavigator } from "../../../core/js/components/header-navigator";
-import Categories from "../../../core/js/food-categories";
-import Items from "../../../core/js/food-items";
+import { HeaderNavigator } from "src/core/js/components/header-navigator";
+import Categories from "src/core/js/food-categories";
+import Items from "src/core/js/food-items";
 import { OrderTypes, Types } from "../constants";
 import { CategoriesListing } from "./category-listing";
 import { ItemsListing } from "./items-listing";

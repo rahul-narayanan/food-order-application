@@ -1,6 +1,6 @@
 import {
     forwardRef,
-    useCallback, useImperativeHandle, useState
+    useCallback, useEffect, useImperativeHandle, useState
 } from "react";
 import BootstrapSelect from "react-bootstrap-select-dropdown";
 
@@ -14,14 +14,17 @@ export const SelectBox = forwardRef(({
         const newOption = options.find((option) => option.labelKey === selectedId);
         if (newOption) {
             setSelectedOption(newOption);
-            onChange(newOption);
         }
     }, [selectedOption]);
 
     useImperativeHandle(ref, () => ({
-        getSelectedValue: () => selectedOption.labelKey,
+        getSelectedValue: () => selectedOption?.labelKey || null,
         getSelectedOption: () => selectedOption
     }));
+
+    useEffect(() => {
+        onChange(selectedOption);
+    }, [selectedOption]);
 
     return (
         <BootstrapSelect

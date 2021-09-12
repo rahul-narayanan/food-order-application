@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import NoOrderImg from "../../img/noorder.png";
 import { OrderTypes, Types } from "../constants";
-import { HeaderNavigator } from "../../../core/js/components/header-navigator";
+import { HeaderNavigator } from "src/core/js/components/header-navigator";
 import { SelectType } from "./select-type";
 import { GO_TO_ITEMS_LISTING } from "../redux/actions";
 

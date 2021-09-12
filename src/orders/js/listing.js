@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
-import { readAllItemsFromTable } from "../../core/js/api-utils";
+import { readAllItemsFromTable } from "src/core/js/api-utils";
 import Skeleton from "react-loading-skeleton";
-import { OrderTypes, PaymentTypes } from "../../pos/js/constants";
+import { OrderTypes, PaymentTypes } from "src/pos/js/constants";
 import { useTranslation } from "react-i18next";
-import { ORDER_TABLE_NAME, sortByKey } from "../../core/js/utils";
+import { ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
 
 const Header = () => (
     <div className="list_header d-flex">

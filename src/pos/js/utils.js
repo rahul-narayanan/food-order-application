@@ -1,5 +1,5 @@
-import { putItemIntoTable } from "../../core/js/api-utils";
-import { getCurrentUTCTimeStamp, ORDER_TABLE_NAME } from "../../core/js/utils";
+import { putItemIntoTable } from "src/core/js/api-utils";
+import { getCurrentUTCTimeStamp, ORDER_TABLE_NAME } from "src/core/js/utils";
 
 export const placeOrder = async (params) => {
     const {

@@ -1,7 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { OrderTypes, PaymentTypes } from "../constants";
-import { RadioButtons } from "../../../core/js/components/radio-buttons";
+import { RadioButtons } from "src/core/js/components/radio-buttons";
 
 const PaymentMethod = forwardRef((props, ref) => {
     const { t } = useTranslation();
