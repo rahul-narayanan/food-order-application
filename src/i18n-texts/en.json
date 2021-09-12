@@ -37,9 +37,9 @@
             "welcome_message" : "Welcome to More Taters Please!",
             "how_can_i_help_message": "How can I help you?",
             "type_select_help_message": "Is your order for Here or To-Go?",
-            "combo_help_message": "Would you like to make it as combo?",
+            "combo_help_message": "Would you like this to be a combo?",
             "with_combo": "With Combo",
-            "without_combo": "Without Combo",
+            "without_combo": "No Combo",
             "size_help_message": "Which size you would like to have?",
             "small": "Small",
             "regular": "Regular",
@@ -51,7 +51,8 @@
             "drinks": "Drinks",
             "comboTitleMessage": "Combos include Choice of Side and a Drink",
             "selectSide": "Select a side",
-            "selectDrink": "Select a Drink"
+            "selectDrink": "Select a Drink",
+            "specialInstructions": "Special instructions if any"
         },
         "menus" : {
             "pos": "POS",

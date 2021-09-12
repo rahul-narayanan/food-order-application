@@ -18,12 +18,12 @@ export const JUMBO_SIZE_EXTRA_CHARGE = 4;
 
 const getComboOptions = (translation) => [
     {
-        name: translation("common.without_combo"),
-        value: "withOutCombo"
-    },
-    {
         name: translation("common.with_combo"),
         value: "withCombo"
+    },
+    {
+        name: translation("common.without_combo"),
+        value: "withOutCombo"
     }
 ];
 
@@ -146,7 +146,7 @@ export const Combos = forwardRef(({ selectedCategory = {} }, ref) => {
     const sideRef = useRef(null);
     const drinkRef = useRef(null);
 
-    const [selectedValue, setSelectedValue] = useState(COMBOS_OPTIONS[0].value);
+    const [selectedValue, setSelectedValue] = useState(null);
 
     const handleOnChange = useCallback((_selectedValue) => {
         if (_selectedValue === "withOutCombo" && sideRef.current) {

@@ -12,7 +12,7 @@ export const SelectType = ({
             {options.map((_type) => (
                 <div
                     key={_type.id || _type.value}
-                    className="col col-6 col-sm-6 col-md-6 col-lg-4 col-xl-3"
+                    className="box"
                     onClick={() => onSelect(_type)}
                 >
                     <div className="item animate__animated animate__zoomIn wow">

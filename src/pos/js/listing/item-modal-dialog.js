@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { TextBox } from "../../../core/js/components/text-box";
 import Categories from "../../../core/js/food-categories";
 import {
     Combos, DialogHeader, DrinkOptions, Modifications, Sizes
@@ -17,6 +18,7 @@ export const ItemModalDialog = (props) => {
     const comboRef = useRef(null);
     const sizeRef = useRef(null);
     const drinksRef = useRef(null);
+    const instructionRef = useRef(null);
 
     function renderSize() {
         if (selectedCategory?.isAvailableInDiffSizes) {
@@ -35,6 +37,7 @@ export const ItemModalDialog = (props) => {
                         {renderSize()}
                         <Combos ref={comboRef} selectedCategory={selectedCategory} />
                         <DrinkOptions ref={drinksRef} />
+                        <TextBox ref={instructionRef} label={t("common.specialInstructions")} type="textarea" />
                     </ul>
                 </div>
                 <Modifications item={item} />
