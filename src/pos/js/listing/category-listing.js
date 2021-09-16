@@ -44,7 +44,9 @@ export const ListingCategory = () => {
                             onClick={() => handleOnClick(category)}
                         >
                             <img src={category.img} />
-                            <h2>{category.name}</h2>
+                            {category.name.length > 19
+                                ? <h3>{category.name}</h3>
+                                : <h2>{category.name}</h2>}
                         </div>
                     ))}
                 </div>

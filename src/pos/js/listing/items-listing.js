@@ -30,7 +30,9 @@ export const ListingItems = () => {
                             onClick={() => handleOnClick(item)}
                         >
                             <img src={item.img} />
-                            <h2>{item.name}</h2>
+                            {item.name.length > 19
+                                ? <h3>{item.name}</h3>
+                                : <h2>{item.name}</h2>}
                         </div>
                     ))}
                 </div>

@@ -355,7 +355,7 @@
             &.items {
                 position: absolute;
                 height: 100%;
-                padding-top: 30px;
+                padding-top: 15px;
                 .item-section {
                     width: 100%;
                     flex-wrap: wrap;
@@ -376,7 +376,8 @@
                             width: 100%;
                             min-height: 70%;
                         }
-                        h2 {
+                        h2,
+                        h3 {
                             margin-top: 10px;
                             margin-bottom: 0;
                         }
@@ -498,7 +499,7 @@
     .modal-footer {
         .btn {
             span {
-                margin-right: 10px;
+                margin-right: 15px;
             }
         }
     }

@@ -82,7 +82,6 @@ export const ComboSideAndDrink = ({
                 ? (
                     <Modal.Footer>
                         <Button
-                            variant="success"
                             disabled={loading}
                             onClick={() => handleClick(selectedItem)}
                             className="themeBtn"
@@ -211,7 +210,6 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
                     ? (
                         <Modal.Footer>
                             <Button
-                                variant="success"
                                 className="themeBtn"
                                 onClick={() => onComplete(selectedItems)}
                             >
@@ -317,7 +315,7 @@ export const Addons = ({ item }) => {
     return (
         <DropdownMultiselect
             buttonClass="btn-outline-secondary"
-            placeholder={t("common.addons")}
+            placeholder={selected.length ? `${selected.length} ${t("common.selected")}` : t("common.addons")}
             placeholderMultipleChecked={`${selected.length} ${t("common.selected")}`}
             name="addons"
             options={ingredients}
