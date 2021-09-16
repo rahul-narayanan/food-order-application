@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { CLEAR_SELECTED_ITEMS, GO_TO_PLACE_ORDER } from "../redux/actions";
 
 export const OrderFooter = () => {
     const state = useSelector((_state) => _state);
@@ -9,11 +8,11 @@ export const OrderFooter = () => {
     const dispatch = useDispatch();
 
     const handlePlaceOrderClick = useCallback(() => {
-        dispatch({ type: GO_TO_PLACE_ORDER });
+
     }, []);
 
     const handleCancelClick = useCallback(() => {
-        dispatch({ type: CLEAR_SELECTED_ITEMS });
+
     }, []);
 
     return (

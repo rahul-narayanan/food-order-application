@@ -2,9 +2,8 @@ import { useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { showSuccessMessage } from "src/core/js/utils";
-import { GO_BACK_FROM_PLACE_ORDER, ORDER_PLACED } from "../redux/actions";
 import { placeOrder } from "../utils";
-import { CustomerInfo, OrderType, PaymentMethod } from "./utils";
+import { CustomerInfo, OrderType, PaymentMethod } from "./order-utils";
 
 export const PlaceOrder = () => {
     const state = useSelector((_state) => _state);

@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { DECREASE_ITEM_COUNT, INCREASE_ITEM_COUNT } from "../redux/actions";
 import { OrderFooter } from "./order-footer";
 
 const Header = () => {
@@ -32,11 +31,11 @@ export const OrderTable = () => {
     const dispatch = useDispatch();
 
     const handleMinusClick = useCallback((itemId) => {
-        dispatch({ type: DECREASE_ITEM_COUNT, itemId });
+
     }, []);
 
     const handlePlusClick = useCallback((itemId) => {
-        dispatch({ type: INCREASE_ITEM_COUNT, itemId });
+
     }, []);
 
     if (goToPlaceOrder || !Object.keys(items).length) return null;

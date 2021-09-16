@@ -1,39 +1,48 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCallback } from "react";
-import { CHANGE_CATEGORY_ACTION } from "../redux/actions";
+import Categories from "src/core/js/food-categories";
+import { useTranslation } from "react-i18next";
+import { CATEGORY_SELECTED } from "./redux";
 
-export const CategoriesListing = ({ categories = [], selectedIndex = 0 }) => {
+export const ListingCategory = () => {
+    const state = useSelector((_state) => _state || {});
+    const { t } = useTranslation();
+
     const dispatch = useDispatch();
 
-    const handleOnChange = useCallback((index) => {
-        dispatch({ type: CHANGE_CATEGORY_ACTION, index });
+    const handleOnClick = useCallback((category) => {
+        dispatch({ type: CATEGORY_SELECTED, selectedCategory: category });
     }, []);
 
+    // If type not selected, dont render
+    // If type is order and subtype not selected, dont render
+    // If category already selected, dont render
+    if (!state.selectedType || (state.selectedType.id === "order" && !state.selectedSubType) || state.selectedCategory) {
+        return "";
+    }
+
     return (
-        <div className="tab_btn_container">
-            <div className="nav nav-tabs">
-                {categories.map((category, index) => (
-                    <div
-                        key={category.id}
-                        className={`owl-item ${selectedIndex === index ? "active" : ""}`}
-                        onClick={() => handleOnChange(index)}
-                    >
+        <div className="listing-section-wrapper">
+            <div className="item-section-wrapper categories">
+                <div className="title">
+                    <h2 className="msgText">{t("common.category_help_message")}</h2>
+                </div>
+                <div className="item-section">
+                    {Categories.map((category) => (
                         <div
-                            className={`tab nav-item ${selectedIndex === index ? "active" : ""} animate__animated animate__zoomIn wow`}
+                            key={category.id}
+                            className="item animate__animated animate__zoomIn wow"
                             data-wow-duration=".5s"
                             role="presentation"
                             data-tip
                             data-for={category.id}
+                            onClick={() => handleOnClick(category)}
                         >
                             <img src={category.img} />
-                            <h5>{category.name}</h5>
-                            {/* <ReactTooltip id={category.id}
-                            place="top" effect="float" type="info">
-                                    {category.name}
-                                </ReactTooltip> */}
+                            <h2>{category.name}</h2>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     );

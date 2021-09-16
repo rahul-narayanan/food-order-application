@@ -75,26 +75,26 @@ export const Wraps = [
         img: PopsChickenWrapImg,
         price: "11.95",
         type: "veg"
-    },
-    {
-        id: "mealDeal3",
-        name: i18n.t("foods.wraps.mealDeal3"),
-        description: i18n.t("foods.wraps.mealDeal3Desc"),
-        img: PopsChickenWrapImg,
-        price: "29.95"
-    },
-    {
-        id: "mealDeal4",
-        name: i18n.t("foods.wraps.mealDeal4"),
-        description: i18n.t("foods.wraps.mealDeal4Desc"),
-        img: PopsChickenWrapImg,
-        price: "39.95"
-    },
-    {
-        id: "mealDeal5",
-        name: i18n.t("foods.wraps.mealDeal5"),
-        description: i18n.t("foods.wraps.mealDeal5Desc"),
-        img: PopsChickenWrapImg,
-        price: "49.95"
     }
+    // {
+    //     id: "mealDeal3",
+    //     name: i18n.t("foods.wraps.mealDeal3"),
+    //     description: i18n.t("foods.wraps.mealDeal3Desc"),
+    //     img: PopsChickenWrapImg,
+    //     price: "29.95"
+    // },
+    // {
+    //     id: "mealDeal4",
+    //     name: i18n.t("foods.wraps.mealDeal4"),
+    //     description: i18n.t("foods.wraps.mealDeal4Desc"),
+    //     img: PopsChickenWrapImg,
+    //     price: "39.95"
+    // },
+    // {
+    //     id: "mealDeal5",
+    //     name: i18n.t("foods.wraps.mealDeal5"),
+    //     description: i18n.t("foods.wraps.mealDeal5Desc"),
+    //     img: PopsChickenWrapImg,
+    //     price: "49.95"
+    // }
 ];

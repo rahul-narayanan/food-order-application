@@ -18,6 +18,104 @@ body {
     }
 }
 
+.tick {
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 20px;
+    width: 10px;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+
+    &.themed {
+        border-color: var(--primary);
+    }
+}
+
+.msgText {
+    background-color: var(--blue_color);
+    color: white;
+    padding: 10px 30px;
+    border-radius: 20px;
+    position: relative;
+
+    &::before,
+    &::after {
+        bottom: 1px;
+        content: "";
+        height: 1rem;
+        position: absolute;
+    }
+
+    &::before {
+        border-bottom-left-radius: 0.8rem 0.7rem;
+        border-right: 1rem solid #248bf5;
+        right: -0.35rem;
+        transform: translate(0, -0.1rem);
+    }
+
+    &::after {
+        background-color: #fff;
+        border-bottom-left-radius: 0.5rem;
+        right: -40px;
+        transform: translate(-30px, -2px);
+        width: 10px;
+    }
+}
+
+.header-navigator {
+    display: flex;
+    height: 60px;
+    background-color: var(--white);
+    padding: 3px 5px;
+    .backBtn {
+        cursor: pointer;
+        position: relative;
+        width: 40px;
+        margin: 2px 10px;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            top: 0;
+            right: -0.375rem;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .back-arrow {
+            position: absolute;
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 2px solid var(--primary);
+            transition: all 0.5s ease;
+            top: 50%;
+            left: 30%;
+            transform: translateY(-50%) rotate(-45deg);
+            border-right: none;
+            border-bottom: none;
+            &::before {
+                content: "";
+                position: absolute;
+                width: 1rem;
+                height: 0.125rem;
+                background: var(--primary);
+                transform-origin: right;
+                transform: rotate(45deg) translate(4px, 11px) scaleX(1);
+                transition: all 0.5s ease;
+            }
+        }
+    }
+    .headerText {
+        margin-left: 10px;
+        font-size: 2rem;
+        font-weight: bold;
+        display: flex;
+        p {
+            font-weight: normal;
+        }
+    }
+}
+
 .main-container {
     height: 100%;
     background-color: var(--bg-color);
@@ -221,55 +319,6 @@ body {
                         padding: 0;
                     }
                 }
-            }
-        }
-
-        .header-navigator {
-            display: flex;
-            height: 50px;
-            background-color: var(--white);
-            padding: 7px 5px;
-            .backBtn {
-                cursor: pointer;
-                position: relative;
-                width: 40px;
-                margin: 2px 10px;
-                &::before {
-                    content: "";
-                    position: absolute;
-                    width: 1px;
-                    height: 100%;
-                    top: 0;
-                    right: -0.375rem;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.1);
-                }
-                .back-arrow {
-                    position: absolute;
-                    width: 0.75rem;
-                    height: 0.75rem;
-                    border: 2px solid var(--primary);
-                    transition: all 0.5s ease;
-                    top: 50%;
-                    left: 30%;
-                    transform: translateY(-50%) rotate(-45deg);
-                    border-right: none;
-                    border-bottom: none;
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        width: 1rem;
-                        height: 0.125rem;
-                        background: var(--primary);
-                        transform-origin: right;
-                        transform: rotate(45deg) translate(4px, 11px) scaleX(1);
-                        transition: all 0.5s ease;
-                    }
-                }
-            }
-            .headerText {
-                margin-left: 10px;
-                font-size: 1.5rem;
             }
         }
     }

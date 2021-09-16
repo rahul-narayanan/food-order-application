@@ -9,7 +9,11 @@ export const IncreaseDecreaseCounter = forwardRef(({
 }, ref) => {
     const [count, _setCount] = useState(_count);
 
-    const handleIncrementClick = useCallback(() => {
+    const handleClick = useCallback((event) => {
+        event.stopPropagation();
+    }, []);
+
+    const handleIncrementClick = useCallback((event) => {
         _setCount(count + 1);
         onIncrement(count + 1);
     }, [count]);
@@ -26,11 +30,11 @@ export const IncreaseDecreaseCounter = forwardRef(({
     if (!count) return "";
 
     return (
-        <div className="increment-decrement-counter-container">
-            <h3 class="d-flex align-items-center">
-                <i class="zmdi zmdi-minus" onClick={handleDecrementClick} />
+        <div className="increment-decrement-counter-container" onClick={handleClick}>
+            <h3 className="d-flex align-items-center">
+                <i className="zmdi zmdi-minus" onClick={handleDecrementClick} />
                 <strong>{count}</strong>
-                <i class="zmdi zmdi-plus" onClick={handleIncrementClick} />
+                <i className="zmdi zmdi-plus" onClick={handleIncrementClick} />
             </h3>
         </div>
     );

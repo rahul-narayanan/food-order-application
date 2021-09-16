@@ -3,6 +3,7 @@ import LoadedFriesImg from "../img/categories/loaded-fries.png";
 import PoutinesImg from "../img/categories/poutines.png";
 import i18n from "../../i18n";
 import { WrapCombos } from "./combos";
+import { Wraps } from "./wrap-items";
 
 const Categories = [
     {
@@ -10,6 +11,7 @@ const Categories = [
         name: i18n.t("categories.wraps"),
         img: WrapsImg,
         isAvailableInDiffSizes: false,
+        items: Wraps,
         combos: WrapCombos
     },
     {
