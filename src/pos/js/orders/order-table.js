@@ -1,7 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
+import { calculatePrice } from "src/pos/js/listing/listing-utils";
+import { usePOSContext } from "src/pos/js/utils";
 import { OrderFooter } from "./order-footer";
+import { Trash } from "react-bootstrap-icons";
 
 const Header = () => {
     const { t } = useTranslation();
@@ -17,7 +20,7 @@ const Header = () => {
                 <div className="col-3 text-center">
                     <h2>{ t("common.quantity")}</h2>
                 </div>
-                <div className="col-3 text-right">
+                <div className="col-3 text-center">
                     <h2>{ `${t("common.total")}($)` }</h2>
                 </div>
             </div>
@@ -26,51 +29,107 @@ const Header = () => {
 };
 
 export const OrderTable = () => {
-    const goToPlaceOrder = useSelector((state) => state?.goToPlaceOrder || false);
-    const items = useSelector((state) => state?.selectedItems || {});
-    const dispatch = useDispatch();
+    const { selectedItems, handleUpdateItem, handleDeleteItem } = usePOSContext();
+    const { t } = useTranslation();
 
-    const handleMinusClick = useCallback((itemId) => {
+    const handleMinusClick = useCallback((count, index) => {
+        const obj = selectedItems[index];
+        if (count > 0) {
+            obj.quantity = count;
+            obj.price = calculatePrice(obj.item, obj);
+            handleUpdateItem(obj, index);
+            return;
+        }
 
-    }, []);
+        handleDeleteItem(index);
+    }, [selectedItems]);
 
-    const handlePlusClick = useCallback((itemId) => {
+    const handlePlusClick = useCallback((count, index) => {
+        const obj = selectedItems[index];
+        obj.quantity = count;
+        obj.price = calculatePrice(obj.item, obj);
+        handleUpdateItem(obj, index);
+    }, [selectedItems]);
 
-    }, []);
+    function renderAdditionalItemDetails(obj) {
+        const {
+            selectedComboOption, selectedComboSide, selectedComboDrink, selectedExtraDrinks
+        } = obj;
 
-    if (goToPlaceOrder || !Object.keys(items).length) return null;
+        if (selectedComboOption === "yes") {
+            return (
+                <>
+                    <p className="m5" key="comboSide">
+                        {`${selectedComboSide.name} ${t("common.combo")}`}
+                    </p>
+                    <p className="m5" key="comboDrink">
+                        {`${selectedComboDrink.name} ${t("common.combo")}`}
+                    </p>
+                </>
+            );
+        }
+
+        if (selectedExtraDrinks && Object.keys(selectedExtraDrinks).length) {
+            return Object.values(selectedExtraDrinks).map((item) => (
+                <p className="m5">{item.name}</p>
+            ));
+        }
+    }
+
+    function renderAdditionalPriceDetails(obj) {
+        const {
+            selectedComboOption, selectedComboSide, selectedExtraDrinks
+        } = obj;
+
+        if (selectedComboOption === "yes") {
+            return (
+                <>
+                    <p className="m5" key="comboSidePrice">{selectedComboSide.price}</p>
+                </>
+            );
+        }
+
+        if (selectedExtraDrinks && Object.keys(selectedExtraDrinks).length) {
+            return Object.values(selectedExtraDrinks).map((item, index) => (
+                <p className="m5" key={`extraDrinkPrice_${index}`}>{item.price}</p>
+            ));
+        }
+    }
+
+    if (!selectedItems.length) return null;
 
     return (
         <div className="item_list active">
             <Header />
             <ul>
-                {Object.keys(items).map((id) => {
-                    const item = items[id];
+                {selectedItems.map((obj, index) => {
+                    const { item, quantity, price } = obj;
+
                     return (
-                        <li key={item.id}>
+                        <li key={`${item.id}_${index}`}>
                             <div className="row">
                                 <div className="col-4">
                                     <h2>{item.name}</h2>
+                                    {renderAdditionalItemDetails(obj)}
                                 </div>
                                 <div className="col-2 text-center">
                                     <h3>{item.price}</h3>
+                                    {renderAdditionalPriceDetails(obj)}
                                 </div>
                                 <div className="col-3 text-center">
-                                    <h3 className="d-flex align-items-center">
-                                        <i
-                                            className="zmdi zmdi-minus"
-                                            onClick={() => handleMinusClick(item.id)}
-                                        />
-                                        <strong>{item.quantity}</strong>
-                                        <i
-                                            className="zmdi zmdi-plus"
-                                            onClick={() => handlePlusClick(item.id)}
-                                        />
-                                    </h3>
+                                    <IncreaseDecreaseCounter
+                                        key={`counter_${item.id}`}
+                                        count={quantity}
+                                        onIncrement={(count) => handlePlusClick(count, index)}
+                                        onDecrement={(count) => handleMinusClick(count, index)}
+                                    />
                                 </div>
                                 <div className="col-3 text-right">
-                                    <h4>{(item.price * item.quantity).toFixed(2)}</h4>
+                                    <h4>{(quantity * Number(price)).toFixed(2)}</h4>
                                 </div>
+                            </div>
+                            <div className="delete-icon">
+                                <Trash onClick={() => handleDeleteItem(index)} />
                             </div>
                         </li>
                     );

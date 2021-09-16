@@ -1,8 +1,9 @@
 import React, { useCallback, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
+import DropdownMultiselect from "react-multiselect-dropdown-bootstrap";
 
 export const SelectType = ({
     options, title, description, onSelect, containerCSS = ""
@@ -20,12 +21,7 @@ export const SelectType = ({
                     className="item animate__animated animate__zoomIn wow"
                     onClick={() => onSelect(_type)}
                 >
-                    <div className="item_img center_img">
-                        <img src={_type.img} className="crop_img" />
-                    </div>
-                    <div className="text_box">
-                        <h2>{_type.name}</h2>
-                    </div>
+                    <img src={_type.img} className="crop_img" />
                 </div>
             ))}
         </div>
@@ -35,10 +31,36 @@ export const SelectType = ({
 export const ComboSideAndDrink = ({
     items = [],
     actionBtnName = "",
+    actionBtnPrefixIcon = "",
     showPrice = true,
-    onComplete = () => {}
+    onComplete = () => {},
+    showLoading = false
 }) => {
     const [selectedItem, setSelectedItem] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleClick = useCallback((item) => {
+        if (showLoading) {
+            setLoading(true);
+        }
+        onComplete(selectedItem);
+    }, [selectedItem, showLoading]);
+
+    function renderIconInActionButton() {
+        if (loading) {
+            return (
+                <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                />
+            );
+        }
+
+        return actionBtnPrefixIcon;
+    }
 
     return (
         <>
@@ -59,7 +81,13 @@ export const ComboSideAndDrink = ({
             {selectedItem
                 ? (
                     <Modal.Footer>
-                        <Button variant="success" onClick={() => onComplete(selectedItem)}>
+                        <Button
+                            variant="success"
+                            disabled={loading}
+                            onClick={() => handleClick(selectedItem)}
+                            className="themeBtn"
+                        >
+                            {renderIconInActionButton()}
                             {actionBtnName}
                         </Button>
                     </Modal.Footer>
@@ -80,7 +108,7 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
     const handleItemSelect = useCallback((item) => {
         const isItemSelected = selectedItems[item.id];
 
-        const newItems = { ...selectedItems };
+        let newItems = { ...selectedItems };
         if (isItemSelected) {
             delete newItems[item.id];
         } else {
@@ -89,6 +117,11 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
                 quantity: 1
             };
         }
+
+        if (!Object.keys(newItems).length) {
+            newItems = null;
+        }
+
         setSelectedItems(newItems);
     }, [selectedOption, selectedItems]);
 
@@ -100,13 +133,19 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
         setSelectedOption(null);
     }, [selectedOption]);
 
+    const handleIncrement = useCallback((item, count) => {
+        const newItems = { ...selectedItems };
+        newItems[item.id].quantity = count;
+        setSelectedItems(newItems);
+    }, [selectedItems]);
+
     const handleDecrement = useCallback((item, count) => {
         if (count === 0) {
             const newItems = { ...selectedItems };
             delete newItems[item.id];
             setSelectedItems(newItems);
         }
-    }, []);
+    }, [selectedItems]);
 
     function renderOptions() {
         return (
@@ -117,6 +156,7 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
                         variant="primary"
                         size="lg"
                         onClick={() => handleOptionSelect("yes")}
+                        className="themeBtn"
                     >
                         {t("common.drink")}
                     </Button>
@@ -158,6 +198,7 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
                                         <IncreaseDecreaseCounter
                                             key={`counter_${item.id}`}
                                             count={isItemSelected.quantity}
+                                            onIncrement={(count) => handleIncrement(item, count)}
                                             onDecrement={(count) => handleDecrement(item, count)}
                                         />
                                     ) : ""}
@@ -169,7 +210,11 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
                 {selectedOption === "no" || Object.keys(selectedItems).length > 0
                     ? (
                         <Modal.Footer>
-                            <Button variant="success" onClick={() => onComplete(selectedItems)}>
+                            <Button
+                                variant="success"
+                                className="themeBtn"
+                                onClick={() => onComplete(selectedItems)}
+                            >
                                 <span className="tick" />
                                 {t("common.place_order")}
                             </Button>
@@ -196,5 +241,89 @@ export const ExtraDrinkSelect = ({ items = [], onComplete = () => {}, onBack }) 
             />
             {renderChildren()}
         </>
+    );
+};
+
+export const calculatePrice = (item, obj) => {
+    let price = Number(item.price);
+
+    const { selectedComboOption, selectedComboSide, selectedExtraDrinks } = obj;
+
+    if (selectedComboOption === "yes") {
+        price += Number(selectedComboSide.price);
+    }
+
+    if (selectedExtraDrinks) {
+        for (const key in selectedExtraDrinks) {
+            price += Number(selectedExtraDrinks[key].price + selectedExtraDrinks[key].quantity);
+        }
+    }
+
+    return price.toFixed(2);
+};
+
+export const Modifier = ({ item }) => {
+    const { t } = useTranslation();
+    const { description = "" } = item || {};
+
+    const [selected, setSelected] = useState([]);
+
+    const handleOnChange = useCallback((list) => {
+        setSelected(list);
+    });
+
+    if (!description) return "";
+
+    let ingredients = description.match(/{(.*?)}/g);
+
+    if (ingredients) {
+        ingredients = ingredients.map((ingredient) => ingredient.replace(/[{}]/g, ""))
+            .map((ingredient) => `${t("common.no")} ${ingredient}`);
+    }
+
+    return (
+        <DropdownMultiselect
+            buttonClass="btn-outline-secondary"
+            placeholder={t("common.modifier")}
+            placeholderMultipleChecked={`${selected.length} ${t("common.selected")}`}
+            name="ingredientsModifiers"
+            options={ingredients}
+            handleOnChange={handleOnChange}
+            selected={selected}
+            showSelectToggle={false}
+        />
+    );
+};
+
+export const Addons = ({ item }) => {
+    const { t } = useTranslation();
+    const { description = "" } = item || {};
+
+    const [selected, setSelected] = useState([]);
+
+    const handleOnChange = useCallback((list) => {
+        setSelected(list);
+    });
+
+    if (!description) return "";
+
+    let ingredients = description.match(/{(.*?)}/g);
+
+    if (ingredients) {
+        ingredients = ingredients.map((ingredient) => ingredient.replace(/[{}]/g, ""))
+            .map((ingredient) => `${t("common.no")} ${ingredient}`);
+    }
+
+    return (
+        <DropdownMultiselect
+            buttonClass="btn-outline-secondary"
+            placeholder={t("common.addons")}
+            placeholderMultipleChecked={`${selected.length} ${t("common.selected")}`}
+            name="addons"
+            options={ingredients}
+            handleOnChange={handleOnChange}
+            selected={selected}
+            showSelectToggle={false}
+        />
     );
 };

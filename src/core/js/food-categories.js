@@ -17,7 +17,7 @@ const Categories = [
     {
         id: "salad_bowls",
         name: i18n.t("categories.salad_bowls"),
-        img: LoadedFriesImg,
+        img: WrapsImg,
         isAvailableInDiffSizes: true
     },
     {
@@ -29,7 +29,7 @@ const Categories = [
     {
         id: "poutines",
         name: i18n.t("categories.poutines"),
-        img: PoutinesImg,
+        img: WrapsImg,
         isAvailableInDiffSizes: true
     },
     {
@@ -41,19 +41,19 @@ const Categories = [
     {
         id: "crispy_chicken_dinners",
         name: i18n.t("categories.crispy_chicken_dinners"),
-        img: LoadedFriesImg,
+        img: WrapsImg,
         isAvailableInDiffSizes: true
     },
     {
         id: "baked_potato",
         name: i18n.t("categories.baked_potato"),
-        img: LoadedFriesImg,
+        img: WrapsImg,
         isAvailableInDiffSizes: true
     },
     {
         id: "fries",
         name: i18n.t("categories.fries"),
-        img: LoadedFriesImg,
+        img: WrapsImg,
         isAvailableInDiffSizes: true
     }
     // {

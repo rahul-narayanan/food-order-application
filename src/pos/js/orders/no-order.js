@@ -1,23 +1,20 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { usePOSContext } from "src/pos/js/utils";
 import NoOrderImg from "../../img/noorder.png";
 
 export const NoOrder = () => {
     const { t } = useTranslation();
-    const items = useSelector((state) => state?.selectedItems || new Map());
+    const { selectedItems } = usePOSContext();
 
-    if (Object.keys(items).length) return null;
+    if (Object.keys(selectedItems).length) return null;
 
     return (
         <div className="no-order p-4 p-sm-4 p-md-4 p-lg-5">
             <div className="banner_img">
                 <img src={NoOrderImg} className="img-fluid" />
+                <h5>{t("common.no_order_desc")}</h5>
             </div>
-            <h2>
-                {t("common.no_order_desc")}
-            </h2>
-            <h3>{t("common.click_to_order")}</h3>
         </div>
     );
 };

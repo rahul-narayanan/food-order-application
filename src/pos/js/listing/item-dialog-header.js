@@ -1,18 +1,26 @@
-import { Modal, Button } from "react-bootstrap";
+import { Modal, CloseButton } from "react-bootstrap";
 import { normalizeI18NText } from "src/core/js/utils";
+import { Modifier, Addons } from "src/pos/js/listing/listing-utils";
 
-export const DialogHeader = ({ item }) => {
-    const { name } = item || {};
+export const DialogHeader = ({ item, onClose }) => {
+    const { name, description = "", price } = item || {};
 
     return (
         <Modal.Header>
+            <div>
+                <CloseButton onClick={onClose} />
+            </div>
             <Modal.Title id="contained-modal-title-vcenter">
                 {name}
-                <p>{normalizeI18NText(item.description)}</p>
+                &nbsp;
+                &nbsp;
+                <span className="small">$</span>
+                {price}
+                <p>{normalizeI18NText(description)}</p>
             </Modal.Title>
             <div className="actionButtons">
-                <Button variant="outline-secondary">Modifier</Button>
-                <Button variant="outline-secondary">Add-ons</Button>
+                <Modifier item={item} />
+                <Addons item={item} />
             </div>
         </Modal.Header>
 

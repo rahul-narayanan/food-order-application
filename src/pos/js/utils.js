@@ -1,5 +1,10 @@
+import { createContext, useContext } from "react";
 import { putItemIntoTable } from "src/core/js/api-utils";
 import { getCurrentUTCTimeStamp, ORDER_TABLE_NAME } from "src/core/js/utils";
+
+export const POSContext = createContext();
+
+export const usePOSContext = () => useContext(POSContext);
 
 export const placeOrder = async (params) => {
     const {

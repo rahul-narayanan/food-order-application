@@ -1,17 +1,51 @@
 import "../scss/pos.scss";
 
-import React from "react";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import React, { useCallback, useState } from "react";
 import { Listing } from "./listing/init";
 import { Orders } from "./orders/init";
-import { initialState, reducer } from "./redux";
+import { POSContext } from "src/pos/js/utils";
 
-const store = createStore(reducer, initialState);
+export const POSContainer = () => {
+    const [selectedItems, setSelectedItems] = useState([]);
 
-export const POSContainer = () => (
-    <Provider store={store}>
-        <Orders />
-        <Listing />
-    </Provider>
-);
+    const handleAddItem = useCallback((item) => {
+        const newItems = selectedItems.slice();
+        newItems.push(item);
+        setSelectedItems(newItems);
+    }, [selectedItems]);
+
+    const handleUpdateItem = useCallback((item, index) => {
+        const newItems = [
+            ...selectedItems
+        ];
+        newItems[index] = item;
+        setSelectedItems(newItems);
+    }, [selectedItems]);
+
+    const handleDeleteItem = useCallback((index) => {
+        const newItems = [
+            ...selectedItems
+        ];
+        newItems.splice(index, 1);
+        setSelectedItems(newItems);
+    }, [selectedItems]);
+
+    const handleClearItems = useCallback(() => {
+        setSelectedItems([]);
+    });
+
+    const context = {
+        selectedItems,
+        handleAddItem,
+        handleUpdateItem,
+        handleDeleteItem,
+        handleClearItems
+    };
+
+    return (
+        <POSContext.Provider value={context}>
+            <Orders />
+            <Listing />
+        </POSContext.Provider>
+    );
+};

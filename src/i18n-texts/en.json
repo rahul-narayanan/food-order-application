@@ -18,8 +18,8 @@
             "tax": "Tax",
             "search_items": "Search items",
             "search": "Search",
-            "no_order_desc": "You've no order in process from Counter Desk.",
-            "click_to_order" : "Click on any item to create order",
+            "no_order_desc": "Start adding items from the menu to build your order.",
+            "click_to_order" : "Start adding items from the menu to build your order.",
             "payment_method" : "Payment method",
             "cash": "Cash",
             "card": "Card",
@@ -41,6 +41,7 @@
             "welcome_message" : "Welcome to More Taters Please! How can I help you?",
             "type_select_help_message": "Is your order for Here or To-Go?",
             "category_help_message": "What would you like?",
+            "category_help_message1": "Is there anything else I can get you?",
             "combo_help_message": "Would you like this to be a combo?",
             "size_help_message": "Which size you would like to have?",
             "small": "Small",
@@ -56,7 +57,10 @@
             "combo": "Combo",
             "noCombo": "No Combo",
             "drink": "Drink",
-            "noDrink": "No Drink"
+            "noDrink": "No Drink",
+            "modifier": "Modifier",
+            "selected": "selected",
+            "addons": "Add-ons"
         },
         "menus" : {
             "pos": "POS",

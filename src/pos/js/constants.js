@@ -1,7 +1,7 @@
 import i18n from "../../i18n";
 import OrderImg from "../img/order.png";
 import PickUpImg from "../img/pickup.png";
-import DeliveryImg from "../img/delivery.png";
+import PhoneImg from "../img/phone.png";
 
 export const Types = [
     {
@@ -17,7 +17,7 @@ export const Types = [
     {
         id: "phone",
         name: "Phone",
-        img: OrderImg
+        img: PhoneImg
     }
 ];
 
@@ -46,6 +46,6 @@ export const OrderTypes = [
     {
         name: i18n.t("common.preorder"),
         value: "preorder",
-        img: DeliveryImg
+        img: PhoneImg
     }
 ];

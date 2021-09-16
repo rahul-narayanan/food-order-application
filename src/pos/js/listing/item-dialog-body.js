@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { ComboSideAndDrink, ExtraDrinkSelect } from "./listing-utils";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
@@ -8,12 +8,27 @@ const initialState = {
     selectedComboOption: null,
     selectedComboSide: null,
     selectedComboDrink: null,
-    selectedExtraDrink: null
+    selectedExtraDrinks: null
 };
 
-export const DialogBody = ({ category }) => {
+export const DialogBody = ({ category, onAdd = () => {} }) => {
     const { t } = useTranslation();
     const [state, setState] = useState(initialState);
+
+    useEffect(() => {
+        const {
+            selectedComboOption, selectedComboSide, selectedComboDrink, selectedExtraDrinks
+        } = state;
+        if (!selectedComboOption) return;
+
+        if (selectedComboOption === "yes" && selectedComboSide && selectedComboDrink) {
+            onAdd(state);
+        }
+
+        if (selectedExtraDrinks) {
+            onAdd(state);
+        }
+    }, [state]);
 
     const handleComboOptionSelect = useCallback((value) => {
         setState({
@@ -50,9 +65,12 @@ export const DialogBody = ({ category }) => {
         });
     }, [state]);
 
-    const handleExtraDrinkSelectionComplete = useCallback((drink) => {
-
-    }, []);
+    const handleExtraDrinkSelectionComplete = useCallback((drinks) => {
+        setState({
+            ...state,
+            selectedExtraDrinks: drinks
+        });
+    }, [state]);
 
     function renderComboQuestion() {
         if (state.selectedComboOption) return "";
@@ -65,6 +83,7 @@ export const DialogBody = ({ category }) => {
                         variant="primary"
                         size="lg"
                         onClick={() => handleComboOptionSelect("yes")}
+                        className="themeBtn"
                     >
                         {t("common.combo")}
                     </Button>
@@ -98,12 +117,8 @@ export const DialogBody = ({ category }) => {
                         items={combos.drinks}
                         onComplete={handleComboDrinkSelect}
                         showPrice={false}
-                        actionBtnName={(
-                            <>
-                                <span className="tick" />
-                                {t("common.place_order")}
-                            </>
-                        )}
+                        actionBtnPrefixIcon={(<span className="tick" />)}
+                        actionBtnName={t("common.place_order")}
                     />
                 </>
             );

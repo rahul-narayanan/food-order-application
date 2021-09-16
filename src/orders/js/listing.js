@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { readAllItemsFromTable } from "src/core/js/api-utils";
 import Skeleton from "react-loading-skeleton";
-import { OrderTypes, PaymentTypes } from "src/pos-old/js/constants";
+import { OrderTypes, PaymentTypes } from "src/pos/js/constants";
 import { useTranslation } from "react-i18next";
 import { ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
 

@@ -3,9 +3,11 @@ import { useCallback } from "react";
 import Categories from "src/core/js/food-categories";
 import { useTranslation } from "react-i18next";
 import { CATEGORY_SELECTED } from "./redux";
+import { usePOSContext } from "src/pos/js/utils";
 
 export const ListingCategory = () => {
     const state = useSelector((_state) => _state || {});
+    const { selectedItems } = usePOSContext();
     const { t } = useTranslation();
 
     const dispatch = useDispatch();
@@ -25,7 +27,10 @@ export const ListingCategory = () => {
         <div className="listing-section-wrapper">
             <div className="item-section-wrapper categories">
                 <div className="title">
-                    <h2 className="msgText">{t("common.category_help_message")}</h2>
+                    <h2 className="msgText">
+                        {selectedItems && selectedItems.length > 0
+                            ? t("common.category_help_message1") : t("common.category_help_message")}
+                    </h2>
                 </div>
                 <div className="item-section">
                     {Categories.map((category) => (

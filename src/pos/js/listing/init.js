@@ -14,8 +14,8 @@ export const Listing = () => (
     <Provider store={store}>
         <div className="listing-section-wrapper">
             <ListingHeaderNavigator />
-            <ListingTypeSelect />
-            <ListingSubTypeSelect />
+            <ListingTypeSelect key="typeSelect" />
+            <ListingSubTypeSelect key="subTypeSelect" />
             <ListingCategory />
             <ListingItems />
             <ItemDialog />
