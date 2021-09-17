@@ -2,8 +2,10 @@ import WrapsImg from "../img/categories/wraps.png";
 import LoadedFriesImg from "../img/categories/loaded-fries.png";
 import PoutinesImg from "../img/categories/poutines.png";
 import i18n from "../../i18n";
-import { WrapCombos } from "./combos";
+import { WrapCombos, LoadedFriesCombos } from "./combos";
 import { Wraps } from "./wrap-items";
+import { LoadedFries } from "src/core/js/loaded-fries-items";
+import { AddOns } from "src/core/js/addons";
 
 const Categories = [
     {
@@ -15,14 +17,17 @@ const Categories = [
         combos: WrapCombos
     },
     {
-        id: "salad_bowls",
-        name: i18n.t("categories.salad_bowls"),
+        id: "loaded_fries",
+        name: i18n.t("categories.loaded_fries"),
         img: WrapsImg,
-        isAvailableInDiffSizes: true
+        isAvailableInDiffSizes: true,
+        items: LoadedFries,
+        combos: LoadedFriesCombos,
+        addons: AddOns
     },
     {
-        id: "loaded_taters",
-        name: i18n.t("categories.loaded_taters"),
+        id: "salad_bowls",
+        name: i18n.t("categories.salad_bowls"),
         img: WrapsImg,
         isAvailableInDiffSizes: true
     },
@@ -56,41 +61,6 @@ const Categories = [
         img: WrapsImg,
         isAvailableInDiffSizes: true
     }
-    // {
-    //     id: "sides_and_drinks",
-    //     name: i18n.t("categories.sides_and_drinks"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_wraps",
-    //     name: i18n.t("categories.catering_menu_wraps"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_wings",
-    //     name: i18n.t("categories.catering_menu_wings"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_taters",
-    //     name: i18n.t("categories.catering_menu_taters"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_loaded_taters",
-    //     name: i18n.t("categories.catering_menu_loaded_taters"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_poutines",
-    //     name: i18n.t("categories.catering_menu_poutines"),
-    //     img: LoadedFriesImg
-    // },
-    // {
-    //     id: "catering_menu_salads",
-    //     name: i18n.t("categories.catering_menu_salads"),
-    //     img: LoadedFriesImg
-    // }
 ];
 
 export default Categories;

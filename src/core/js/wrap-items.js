@@ -4,14 +4,6 @@ import PopsChickenWrapImg from "../img/items/pops-chicken-wrap.png";
 
 export const Wraps = [
     {
-        id: "caesarWrap",
-        name: i18n.t("foods.wraps.caesarWrap"),
-        description: i18n.t("foods.wraps.caesarWrapDesc"),
-        img: CeasarWrapImg,
-        price: "7.95",
-        veg: true
-    },
-    {
         id: "popsChickenWrap",
         name: i18n.t("foods.wraps.popsChickenWrap"),
         description: i18n.t("foods.wraps.popsChickenWrapDesc"),
@@ -19,11 +11,18 @@ export const Wraps = [
         price: "9.95"
     },
     {
-        id: "popsWildChickenWrap",
-        name: i18n.t("foods.wraps.popsWildChickenWrap"),
-        description: i18n.t("foods.wraps.popsWildChickenWrapDesc"),
+        id: "wildChickenWrap",
+        name: i18n.t("foods.wraps.wildChickenWrap"),
+        description: i18n.t("foods.wraps.wildChickenWrapDesc"),
         img: CeasarWrapImg,
         price: "10.95"
+    },
+    {
+        id: "chickenCaesarWrap",
+        name: i18n.t("foods.wraps.chickenCaesarWrap"),
+        description: i18n.t("foods.wraps.chickenCaesarWrapDesc"),
+        img: CeasarWrapImg,
+        price: "9.95"
     },
     {
         id: "garlicParmChickenWrap",
@@ -40,13 +39,19 @@ export const Wraps = [
         price: "11.95"
     },
     {
+        id: "buffaloChickenWrap",
+        name: i18n.t("foods.wraps.buffaloChickenWrap"),
+        description: i18n.t("foods.wraps.buffaloChickenWrapDesc"),
+        img: CeasarWrapImg,
+        price: "10.95"
+    },
+    {
         id: "bostonSteakWrap",
         name: i18n.t("foods.wraps.bostonSteakWrap"),
         description: i18n.t("foods.wraps.bostonSteakWrapDesc"),
         img: CeasarWrapImg,
         price: "11.95"
     },
-
     {
         id: "nachoGroundBeefWrap",
         name: i18n.t("foods.wraps.nachoGroundBeefWrap"),
@@ -67,34 +72,5 @@ export const Wraps = [
         description: i18n.t("foods.wraps.countryPorkWrapDesc"),
         img: CeasarWrapImg,
         price: "10.95"
-    },
-    {
-        id: "southernMushroomWrap",
-        name: i18n.t("foods.wraps.southernMushroomWrap"),
-        description: i18n.t("foods.wraps.southernMushroomWrapDesc"),
-        img: CeasarWrapImg,
-        price: "11.95",
-        type: "veg"
     }
-    // {
-    //     id: "mealDeal3",
-    //     name: i18n.t("foods.wraps.mealDeal3"),
-    //     description: i18n.t("foods.wraps.mealDeal3Desc"),
-    //     img: PopsChickenWrapImg,
-    //     price: "29.95"
-    // },
-    // {
-    //     id: "mealDeal4",
-    //     name: i18n.t("foods.wraps.mealDeal4"),
-    //     description: i18n.t("foods.wraps.mealDeal4Desc"),
-    //     img: PopsChickenWrapImg,
-    //     price: "39.95"
-    // },
-    // {
-    //     id: "mealDeal5",
-    //     name: i18n.t("foods.wraps.mealDeal5"),
-    //     description: i18n.t("foods.wraps.mealDeal5Desc"),
-    //     img: PopsChickenWrapImg,
-    //     price: "49.95"
-    // }
 ];

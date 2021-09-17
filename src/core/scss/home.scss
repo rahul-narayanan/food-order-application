@@ -396,3 +396,28 @@ body {
     border-color: var(--primary) !important;
     font-size: 18px;
 }
+.offcanvas-backdrop {
+    z-index: 10000 !important;
+}
+
+.offcanvas {
+    &.show {
+        z-index: 10001 !important;
+    }
+
+    .offcanvas-header {
+        background-color: var(--bg-color);
+        border-bottom: 1px solid #dee2e6;
+        .btn-close {
+            font-size: 12px;
+        }
+    }
+}
+
+.modal {
+    .modal-header {
+        .btn-close {
+            font-size: 12px;
+        }
+    }
+}

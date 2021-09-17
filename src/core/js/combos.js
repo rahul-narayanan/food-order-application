@@ -2,7 +2,6 @@ import i18n from "../../i18n";
 import { Drinks } from "./drink-items";
 
 export const WrapCombos = {
-    title: i18n.t("common.comboTitleMessage"),
     sides: [
         {
             id: "freshCutFries",
@@ -33,6 +32,24 @@ export const WrapCombos = {
             id: "poutine",
             name: i18n.t("foods.combos.poutine"),
             price: "6.95"
+        },
+        {
+            id: "houseSalad",
+            name: i18n.t("foods.combos.houseSalad"),
+            price: "5.95",
+            veg: true
+        }
+    ],
+    drinks: [...Drinks]
+};
+
+export const LoadedFriesCombos = {
+    sides: [
+        {
+            id: "sideChili",
+            name: i18n.t("foods.combos.sideChili"),
+            price: "4.95",
+            veg: true
         },
         {
             id: "houseSalad",

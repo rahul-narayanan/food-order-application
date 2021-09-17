@@ -117,6 +117,12 @@
                         top: 13px;
                         cursor: pointer;
                     }
+                    .modifiers-info {
+                        opacity: 0.5;
+                        svg {
+                            margin-right: 5px;
+                        }
+                    }
                 }
             }
             .order_footer {
@@ -388,7 +394,8 @@
     }
 }
 
-.item-dialog-container {
+.item-dialog-container,
+.modifier-dialog-container {
     .btn-close {
         background-color: #b3b3b3;
         border-radius: 20px;
@@ -398,36 +405,32 @@
         padding-left: 10px;
         background-color: var(--bg-color);
         .modal-title {
-            flex: 0 0 64%;
+            flex: 0 0 62%;
             .small {
                 font-size: 18px;
                 margin-right: 5px;
             }
         }
         .actionButtons {
-            flex: 0 0 28%;
+            flex: 0 0 30%;
             display: flex;
             justify-content: flex-end;
-            .dropdown-menu {
-                //right: 0;
-                width: 200px !important;
-                .dropdown-item {
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: normal;
-                    word-break: break-word;
-                }
-            }
-            .dropdown {
+            .btn {
                 &:first-child {
-                    margin-right: 15px;
+                    margin-right: 5px;
+                }
+                svg {
+                    width: 12px;
+                    margin-left: 7px;
+                    margin-top: -3px;
                 }
             }
         }
     }
 
     .modal-header,
-    .modal-body {
+    .modal-body,
+    .offcanvas-body {
         max-height: 600px;
 
         .header-navigator {
@@ -456,6 +459,7 @@
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
+            width: 100%;
 
             .combo-item {
                 width: 50%;
@@ -496,7 +500,50 @@
         }
     }
 
+    .offcanvas-body {
+        &.addon-canvas-body {
+            padding: 0px !important;
+        }
+
+        .combo-item {
+            width: 85% !important;
+        }
+
+        .addons-container {
+            .addon-container {
+                margin-bottom: 10px;
+                h5 {
+                    color: var(--text-dark2);
+                }
+                .combo-items {
+                    margin-top: 5px;
+                    padding: 10px 5px;
+                    .combo-item {
+                        .symbol {
+                            font-size: 15px;
+                            margin-right: 2px;
+                        }
+                        .increment-decrement-counter-container {
+                            margin-top: 4px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modifier-action-buttons {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .btn {
+            width: 80%;
+        }
+    }
+
     .modal-footer {
+        padding-bottom: 0;
         .btn {
             span {
                 margin-right: 15px;

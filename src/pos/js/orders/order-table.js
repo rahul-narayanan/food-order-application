@@ -1,10 +1,12 @@
-import { useCallback, useState } from "react";
+import {
+    useCallback, useEffect, useRef, useState
+} from "react";
 import { useTranslation } from "react-i18next";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
 import { calculatePrice } from "src/pos/js/listing/listing-utils";
 import { usePOSContext } from "src/pos/js/utils";
 import { OrderFooter } from "./order-footer";
-import { Trash } from "react-bootstrap-icons";
+import { Trash, InfoCircleFill } from "react-bootstrap-icons";
 
 const Header = () => {
     const { t } = useTranslation();
@@ -31,6 +33,7 @@ const Header = () => {
 export const OrderTable = () => {
     const { selectedItems, handleUpdateItem, handleDeleteItem } = usePOSContext();
     const { t } = useTranslation();
+    const listingParentRef = useRef(null);
 
     const handleMinusClick = useCallback((count, index) => {
         const obj = selectedItems[index];
@@ -52,58 +55,106 @@ export const OrderTable = () => {
     }, [selectedItems]);
 
     function renderAdditionalItemDetails(obj) {
+        let result = [];
         const {
-            selectedComboOption, selectedComboSide, selectedComboDrink, selectedExtraDrinks
+            selectedSize, selectedComboOption, selectedComboSide,
+            selectedComboDrink, selectedExtraDrinks
         } = obj;
 
+        if (selectedSize && selectedSize !== "small") {
+            result.push(
+                <p className="m5" key="sizeName">
+                    {selectedSize.name}
+                </p>
+            );
+        }
+
         if (selectedComboOption === "yes") {
-            return (
-                <>
-                    <p className="m5" key="comboSide">
-                        {`${selectedComboSide.name} ${t("common.combo")}`}
-                    </p>
-                    <p className="m5" key="comboDrink">
-                        {`${selectedComboDrink.name} ${t("common.combo")}`}
-                    </p>
-                </>
+            result.push(
+                <p className="m5" key="comboSide">
+                    {`${selectedComboSide.name} ${t("common.combo")}`}
+                </p>
+            );
+
+            result.push(
+                <p className="m5" key="comboDrink">
+                    {`${selectedComboDrink.name} ${t("common.combo")}`}
+                </p>
             );
         }
 
         if (selectedExtraDrinks && Object.keys(selectedExtraDrinks).length) {
-            return Object.values(selectedExtraDrinks).map((item) => (
+            result = result.concat(Object.values(selectedExtraDrinks).map((item) => (
                 <p className="m5">{item.name}</p>
-            ));
+            )));
         }
+
+        return result;
     }
 
     function renderAdditionalPriceDetails(obj) {
         const {
-            selectedComboOption, selectedComboSide, selectedExtraDrinks
+            selectedSize, selectedComboOption,
+            selectedComboSide, selectedExtraDrinks
         } = obj;
 
+        let result = [];
+
+        if (selectedSize) {
+            result.push(<p className="m5" key="selectedSizePrice">&nbsp;</p>);
+        }
+
         if (selectedComboOption === "yes") {
-            return (
-                <>
-                    <p className="m5" key="comboSidePrice">{selectedComboSide.price}</p>
-                </>
-            );
+            result.push(<p className="m5" key="comboSidePrice">{selectedComboSide.price}</p>);
         }
 
         if (selectedExtraDrinks && Object.keys(selectedExtraDrinks).length) {
-            return Object.values(selectedExtraDrinks).map((item, index) => (
-                <p className="m5" key={`extraDrinkPrice_${index}`}>{item.price}</p>
-            ));
+            result = result.concat(Object.values(selectedExtraDrinks).map((drink, index) => (
+                <p className="m5" key={`extraDrinkPrice_${index}`}>{drink.price}</p>
+            )));
         }
+
+        return result;
     }
+
+    function renderModifiers(obj) {
+        const { modifiers } = obj;
+
+        if (modifiers && modifiers.length) {
+            return (
+                <div className="modifiers-info">
+                    <InfoCircleFill />
+                    {modifiers.join(", ")}
+                </div>
+            );
+        }
+
+        return "";
+    }
+
+    useEffect(() => {
+        try {
+            const { children } = listingParentRef.current;
+            const el = children[children.length - 1];
+
+            if (el.scrollIntoViewIfNeeded) {
+                el.scrollIntoViewIfNeeded();
+            } else {
+                el.scrollIntoView();
+            }
+        } catch {}
+    }, [selectedItems]);
 
     if (!selectedItems.length) return null;
 
     return (
         <div className="item_list active">
             <Header />
-            <ul>
+            <ul ref={listingParentRef}>
                 {selectedItems.map((obj, index) => {
-                    const { item, quantity, price } = obj;
+                    const {
+                        item, quantity, finalPrice, selectedSize
+                    } = obj;
 
                     return (
                         <li key={`${item.id}_${index}`}>
@@ -113,7 +164,10 @@ export const OrderTable = () => {
                                     {renderAdditionalItemDetails(obj)}
                                 </div>
                                 <div className="col-2 text-center">
-                                    <h3>{item.price}</h3>
+                                    <h3>
+                                        {selectedSize && selectedSize.value !== "small"
+                                            ? item[`${selectedSize.value}Price`] : item.price}
+                                    </h3>
                                     {renderAdditionalPriceDetails(obj)}
                                 </div>
                                 <div className="col-3 text-center">
@@ -125,9 +179,10 @@ export const OrderTable = () => {
                                     />
                                 </div>
                                 <div className="col-3 text-right">
-                                    <h4>{(quantity * Number(price)).toFixed(2)}</h4>
+                                    <h4>{(quantity * Number(finalPrice)).toFixed(2)}</h4>
                                 </div>
                             </div>
+                            {renderModifiers(obj)}
                             <div className="delete-icon">
                                 <Trash onClick={() => handleDeleteItem(index)} />
                             </div>

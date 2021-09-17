@@ -3,6 +3,10 @@ import OrderImg from "../img/order.png";
 import PickUpImg from "../img/pickup.png";
 import PhoneImg from "../img/phone.png";
 
+import ForHereImg from "../img/forhere.png";
+import ToGoImg from "../img/togo.png";
+import PreOrderImg from "../img/preorder.png";
+
 export const Types = [
     {
         id: "order",
@@ -36,16 +40,31 @@ export const OrderTypes = [
     {
         name: i18n.t("common.dine_in"),
         value: "dinein",
-        img: OrderImg
+        img: ForHereImg
     },
     {
         name: i18n.t("common.pickup"),
         value: "pickup",
-        img: PickUpImg
+        img: ToGoImg
     },
     {
         name: i18n.t("common.preorder"),
         value: "preorder",
-        img: PhoneImg
+        img: PreOrderImg
+    }
+];
+
+export const Sizes = [
+    {
+        name: i18n.t("common.small"),
+        value: "small"
+    },
+    {
+        name: i18n.t("common.regular"),
+        value: "regular"
+    },
+    {
+        name: i18n.t("common.jumbo"),
+        value: "jumbo"
     }
 ];

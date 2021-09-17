@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { DialogHeader } from "./item-dialog-header";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HANDLE_GO_BACK_CLICK, HANDLE_SHOW_CATEGORIES } from "./redux";
 import { DialogBody } from "./item-dialog-body";
@@ -13,6 +13,8 @@ export const ItemDialog = () => {
     const dispatch = useDispatch();
     const { handleAddItem } = useContext(POSContext);
 
+    const headerRef = useRef(null);
+
     const handleCloseDialog = useCallback(() => {
         dispatch({ type: HANDLE_GO_BACK_CLICK });
     }, []);
@@ -22,22 +24,34 @@ export const ItemDialog = () => {
             item: selectedItem,
             ...obj,
             quantity: 1,
-            price: calculatePrice(selectedItem, obj)
+            finalPrice: calculatePrice(selectedItem, obj),
+            modifiers: headerRef.current.getSelectedModifiers()
         });
         dispatch({ type: HANDLE_SHOW_CATEGORIES });
     }, [selectedItem]);
 
+    if (!selectedItem) return "";
+
     return (
         <Modal
-            show={Boolean(selectedItem)}
+            show
             onHide={handleCloseDialog}
             className="item-dialog-container"
             size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <DialogHeader item={selectedItem} onClose={handleCloseDialog} />
-            <DialogBody item={selectedItem} category={selectedCategory} onAdd={handleAdd} />
+            <DialogHeader
+                ref={headerRef}
+                item={selectedItem}
+                category={selectedCategory}
+                onClose={handleCloseDialog}
+            />
+            <DialogBody
+                item={selectedItem}
+                category={selectedCategory}
+                onAdd={handleAdd}
+            />
         </Modal>
     );
 };

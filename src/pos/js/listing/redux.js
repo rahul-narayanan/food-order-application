@@ -61,6 +61,15 @@ export const reducer = (state = {}, action) => {
                 };
             }
 
+            if (state.selectedSize) {
+                return {
+                    ...state,
+                    selectedSize: null,
+                    selectedCategory: null,
+                    selectedItem: null
+                };
+            }
+
             if (state.selectedSubType) {
                 return {
                     ...state,

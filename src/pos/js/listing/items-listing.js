@@ -2,6 +2,15 @@ import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ITEM_SELECTED } from "./redux";
 
+const renderItemName = (name) => {
+    name = name.substr(0, name.lastIndexOf(" "));
+    if (name.length > 19) {
+        return <h3>{name}</h3>;
+    }
+
+    return <h2>{name}</h2>;
+};
+
 export const ListingItems = () => {
     const selectedCategory = useSelector((state) => state?.selectedCategory || null);
     const dispatch = useDispatch();
@@ -30,9 +39,7 @@ export const ListingItems = () => {
                             onClick={() => handleOnClick(item)}
                         >
                             <img src={item.img} />
-                            {item.name.length > 19
-                                ? <h3>{item.name}</h3>
-                                : <h2>{item.name}</h2>}
+                            {renderItemName(item.name)}
                         </div>
                     ))}
                 </div>

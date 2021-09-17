@@ -12,7 +12,7 @@ export const OrderFooter = () => {
         let value = 0;
         for (let i = 0; i < selectedItems.length; i++) {
             const item = selectedItems[i];
-            value += item.quantity * Number(item.price);
+            value += item.quantity * Number(item.finalPrice);
         }
         return value;
     }, [selectedItems]);

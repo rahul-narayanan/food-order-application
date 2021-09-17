@@ -1,19 +1,22 @@
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { ComboSideAndDrink, ExtraDrinkSelect } from "./listing-utils";
+import { ComboSideAndDrink, ExtraDrinkSelect, calculatePrice } from "./listing-utils";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
+import { Sizes } from "src/pos/js/constants";
+import Emitter from "src/core/js/event-emitter";
 
-const initialState = {
+const getInitialState = () => ({
+    selectedSize: null,
     selectedComboOption: null,
     selectedComboSide: null,
     selectedComboDrink: null,
     selectedExtraDrinks: null
-};
+});
 
-export const DialogBody = ({ category, onAdd = () => {} }) => {
+export const DialogBody = ({ category, item, onAdd = () => {} }) => {
     const { t } = useTranslation();
-    const [state, setState] = useState(initialState);
+    const [state, setState] = useState((getInitialState()));
 
     useEffect(() => {
         const {
@@ -30,32 +33,130 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
         }
     }, [state]);
 
+    const updatePriceInHeader = (obj) => Emitter.emit("UPDATE_PRICE_IN_ITEM_DIALOG", calculatePrice(item, obj, category.isAvailableInDiffSizes));
+
+    const handleSizeSelect = useCallback((size) => {
+        const newState = {
+            ...getInitialState(),
+            selectedSize: size
+        };
+        setState(newState);
+        updatePriceInHeader(newState);
+    }, [state]);
+
+    const handleSizeDeSelect = useCallback((size) => {
+        const newState = {
+            ...getInitialState()
+        };
+        setState(newState);
+        updatePriceInHeader(newState);
+    }, [state]);
+
+    function renderSize() {
+        if (!category?.isAvailableInDiffSizes) {
+            return "";
+        }
+
+        if (!state.selectedSize) {
+            return (
+                <div className="combo-options">
+                    <h5 className="msgText">{t("common.size_help_message")}</h5>
+                    <div className="combo-items">
+                        {Sizes.map((size) => {
+                            const isSelected = state.selectedSize === size.value;
+
+                            return (
+                                <div
+                                    key={`sizeOption_${size.value}`}
+                                    className={`combo-item ${isSelected ? "active" : ""}`}
+                                    onClick={() => handleSizeSelect(size)}
+                                >
+                                    {size.name}
+                                    &nbsp;
+                                    {" - $ "}
+                                    {item[`${size.value}Price`] ? item[`${size.value}Price`] : item.price}
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        return "";
+    }
+
     const handleComboOptionSelect = useCallback((value) => {
         setState({
-            ...initialState,
+            ...getInitialState(),
+            selectedSize: state.selectedSize,
             selectedComboOption: value
         });
     }, [state]);
 
+    function renderComboQuestion() {
+        if (category?.isAvailableInDiffSizes && !state.selectedSize) return "";
+
+        if (state.selectedComboOption) return "";
+
+        return (
+            <>
+                {state.selectedSize ? (
+                    <HeaderNavigator
+                        headerText={state.selectedSize.name}
+                        onBack={handleSizeDeSelect}
+                    />
+                ) : ""}
+                <div className="combo-options">
+                    <h5 className="msgText">{t("common.combo_help_message")}</h5>
+                    <div>
+                        <Button
+                            variant="primary"
+                            size="lg"
+                            onClick={() => handleComboOptionSelect("yes")}
+                            className="themeBtn"
+                        >
+                            {t("common.combo")}
+                        </Button>
+                        <Button
+                            variant="secondary"
+                            size="lg"
+                            onClick={() => handleComboOptionSelect("no")}
+                        >
+                            {t("common.noCombo")}
+                        </Button>
+                    </div>
+                </div>
+            </>
+        );
+    }
+
     const handleDeSelectComboOption = useCallback(() => {
         setState({
-            ...initialState
+            ...getInitialState(),
+            selectedSize: state.selectedSize
         });
     }, [state]);
 
     const handleComboSideSelect = useCallback((side) => {
-        setState({
-            ...initialState,
+        const newState = {
+            ...getInitialState(),
+            selectedSize: state.selectedSize,
             selectedComboOption: state.selectedComboOption,
             selectedComboSide: side
-        });
+        };
+        setState(newState);
+        updatePriceInHeader(newState);
     }, [state]);
 
     const handleComboSideDeSelect = useCallback(() => {
-        setState({
-            ...initialState,
+        const newState = {
+            ...getInitialState(),
+            selectedSize: state.selectedSize,
             selectedComboOption: state.selectedComboOption
-        });
+        };
+        setState(newState);
+        updatePriceInHeader(newState);
     }, [state]);
 
     const handleComboDrinkSelect = useCallback((drink) => {
@@ -64,40 +165,6 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
             selectedComboDrink: drink
         });
     }, [state]);
-
-    const handleExtraDrinkSelectionComplete = useCallback((drinks) => {
-        setState({
-            ...state,
-            selectedExtraDrinks: drinks
-        });
-    }, [state]);
-
-    function renderComboQuestion() {
-        if (state.selectedComboOption) return "";
-
-        return (
-            <div className="combo-options">
-                <h5 className="msgText">{t("common.combo_help_message")}</h5>
-                <div>
-                    <Button
-                        variant="primary"
-                        size="lg"
-                        onClick={() => handleComboOptionSelect("yes")}
-                        className="themeBtn"
-                    >
-                        {t("common.combo")}
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        size="lg"
-                        onClick={() => handleComboOptionSelect("no")}
-                    >
-                        {t("common.noCombo")}
-                    </Button>
-                </div>
-            </div>
-        );
-    }
 
     function renderComboSideAndDrink() {
         if (!state.selectedComboOption || state.selectedComboOption === "no") return "";
@@ -109,7 +176,7 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
                 <>
                     <HeaderNavigator
                         key="comboDrinkSelectHeader"
-                        headerText={`${t("common.combo")} - ${t("common.drinks")}`}
+                        headerText={`${state.selectedSize ? `${state.selectedSize.name} - ` : ""}${t("common.combo")} - ${t("common.drinks")}`}
                         onBack={handleComboSideDeSelect}
                     />
                     <ComboSideAndDrink
@@ -127,7 +194,7 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
             <>
                 <HeaderNavigator
                     key="comboSideSelectHeader"
-                    headerText={`${t("common.combo")} - ${t("common.sides")}`}
+                    headerText={`${state.selectedSize ? `${state.selectedSize.name} - ` : ""}${t("common.combo")} - ${t("common.sides")}`}
                     onBack={handleDeSelectComboOption}
                 />
                 <ComboSideAndDrink
@@ -140,6 +207,21 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
         );
     }
 
+    const handleExtraDrinkSelectionComplete = useCallback((drinks) => {
+        setState({
+            ...state,
+            selectedExtraDrinks: drinks
+        });
+    }, [state]);
+
+    const handleExtraDrinkSelection = useCallback((drinks) => {
+        const newState = {
+            ...state,
+            selectedExtraDrinks: drinks
+        };
+        updatePriceInHeader(newState);
+    }, [state]);
+
     function renderDrinks() {
         if (!state.selectedComboOption || state.selectedComboOption === "yes") return "";
 
@@ -147,7 +229,9 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
         return (
             <ExtraDrinkSelect
                 key="nonComboDrinkSelect"
+                selectedSizeName={state.selectedSize?.name}
                 items={combos.drinks}
+                onSelect={handleExtraDrinkSelection}
                 onComplete={handleExtraDrinkSelectionComplete}
                 onBack={handleDeSelectComboOption}
                 actionBtnName={t("common.next")}
@@ -155,8 +239,11 @@ export const DialogBody = ({ category, onAdd = () => {} }) => {
         );
     }
 
+    if (!item) return "";
+
     return (
         <Modal.Body>
+            {renderSize()}
             {renderComboQuestion()}
             {renderComboSideAndDrink()}
             {renderDrinks()}
