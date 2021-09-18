@@ -141,9 +141,12 @@ body {
                             height: 72px;
                             line-height: 72px;
                             transition: all 0.3s;
-                            width: 50px;
+                            &.pos {
+                                width: 65px;
+                            }
                             img {
-                                width: 3%;
+                                width: 35%;
+                                margin-right: 5px;
                             }
                             i {
                                 color: var(--text-light);
@@ -422,6 +425,14 @@ body {
     .modal-header {
         .btn-close {
             font-size: 12px;
+        }
+    }
+}
+
+.btn {
+    &.btn-outline-secondary {
+        &:focus {
+            box-shadow: none !important;
         }
     }
 }

@@ -20,14 +20,14 @@ export const Header = ({ menus, selectedIndex, onMenuChange }) => (
                 <ul className="navbar-nav d-flex align-items-center w-100">
                     {menus.map((menu, index) => (
                         <li
-                            key={menu.id}
+                            key={`menu_${menu.id}`}
                             className={`nav-item show-only-large-devices ${
                                 index === selectedIndex ? "active" : ""
                             }`}
                             onClick={() => onMenuChange(index)}
                         >
-                            <div className="nav-link">
-                                {/* {menu.img ? <img src={menu.img} /> : <i className="zmdi zmdi-assignment" />} */}
+                            <div className={`nav-link ${menu.id}`}>
+                                {menu.img ? <img src={menu.img} /> : <i className="zmdi zmdi-assignment" />}
                                 {menu.name}
                             </div>
                         </li>
