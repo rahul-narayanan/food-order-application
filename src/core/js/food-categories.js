@@ -21,6 +21,7 @@ const Categories = [
         name: i18n.t("categories.loaded_fries"),
         img: WrapsImg,
         isAvailableInDiffSizes: true,
+        isSwapFriesAvailable: true,
         items: LoadedFries,
         combos: LoadedFriesCombos,
         addons: AddOns
@@ -35,7 +36,8 @@ const Categories = [
         id: "poutines",
         name: i18n.t("categories.poutines"),
         img: WrapsImg,
-        isAvailableInDiffSizes: true
+        isAvailableInDiffSizes: true,
+        isSwapFriesAvailable: true
     },
     {
         id: "chicken_wings",

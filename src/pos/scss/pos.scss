@@ -118,10 +118,13 @@
                         cursor: pointer;
                     }
                     .modifiers-info {
-                        opacity: 0.5;
+                        color: red;
                         svg {
                             margin-right: 5px;
                         }
+                    }
+                    .light {
+                        opacity: 0.5;
                     }
                 }
             }
@@ -405,14 +408,18 @@
         padding-left: 10px;
         background-color: var(--bg-color);
         .modal-title {
-            flex: 0 0 62%;
+            flex: 0 0 60%;
+            img {
+                width: 20px;
+                margin-right: 7px;
+            }
             .small {
                 font-size: 18px;
                 margin-right: 5px;
             }
         }
         .actionButtons {
-            flex: 0 0 30%;
+            flex: 0 0 32%;
             display: flex;
             justify-content: flex-end;
             .btn {
@@ -529,6 +536,11 @@
                     }
                 }
             }
+        }
+
+        .vegOptionBtn {
+            text-align: center;
+            margin-bottom: 20px;
         }
     }
 

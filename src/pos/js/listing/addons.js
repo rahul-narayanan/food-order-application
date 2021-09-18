@@ -5,10 +5,9 @@ import { Button, Offcanvas, Accordion } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Pencil } from "react-bootstrap-icons";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
+import { calculateTotalOfAddOns } from "./listing-utils";
 
-export const calculateTotalOfAddOns = (items = []) => items.reduce((acc, obj) => acc + (obj.quantity * Number(obj.price)), 0).toFixed(2);
-
-export const Addons = forwardRef(({ item, addons }, ref) => {
+export const Addons = forwardRef(({ item, addons, onComplete = () => {} }, ref) => {
     const { t } = useTranslation();
 
     const [show, setShow] = useState(false);
@@ -39,6 +38,7 @@ export const Addons = forwardRef(({ item, addons }, ref) => {
 
     const handleDoneClick = useCallback(() => {
         setSelected(tempSelected);
+        onComplete(tempSelected);
         handleClose();
     }, [tempSelected, selected]);
 

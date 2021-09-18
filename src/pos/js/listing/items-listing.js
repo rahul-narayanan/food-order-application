@@ -1,8 +1,10 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { normalizeI18NText } from "src/core/js/utils";
 import { ITEM_SELECTED } from "./redux";
 
 const renderItemName = (name) => {
+    name = normalizeI18NText(name);
     name = name.substr(0, name.lastIndexOf(" "));
     if (name.length > 19) {
         return <h3>{name}</h3>;

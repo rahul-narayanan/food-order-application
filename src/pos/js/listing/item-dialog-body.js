@@ -33,7 +33,7 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
         }
     }, [state]);
 
-    const updatePriceInHeader = (obj) => Emitter.emit("UPDATE_PRICE_IN_ITEM_DIALOG", calculatePrice(item, obj, category.isAvailableInDiffSizes));
+    const updatePriceInHeader = (obj) => Emitter.emit("UPDATE_PRICE_IN_ITEM_DIALOG", calculatePrice(item, obj, !category.isAvailableInDiffSizes));
 
     const handleSizeSelect = useCallback((size) => {
         const newState = {
@@ -132,13 +132,24 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
     }
 
     const handleDeSelectComboOption = useCallback(() => {
-        setState({
+        const newState = {
             ...getInitialState(),
             selectedSize: state.selectedSize
-        });
+        };
+        setState(newState);
+        updatePriceInHeader(newState);
     }, [state]);
 
     const handleComboSideSelect = useCallback((side) => {
+        updatePriceInHeader({
+            ...getInitialState(),
+            selectedSize: state.selectedSize,
+            selectedComboOption: state.selectedComboOption,
+            selectedComboSide: side
+        });
+    }, [state]);
+
+    const handleComboSideSelectComplete = useCallback((side) => {
         const newState = {
             ...getInitialState(),
             selectedSize: state.selectedSize,
@@ -200,7 +211,8 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
                 <ComboSideAndDrink
                     key="comboSideSelect"
                     items={combos.sides}
-                    onComplete={handleComboSideSelect}
+                    onSelect={handleComboSideSelect}
+                    onComplete={handleComboSideSelectComplete}
                     actionBtnName={t("common.next")}
                 />
             </>
@@ -222,6 +234,17 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
         updatePriceInHeader(newState);
     }, [state]);
 
+    const handleDeSelectDrinkOption = useCallback(() => {
+        const newState = {
+            ...state,
+            selectedExtraDrinks: null
+        };
+        updatePriceInHeader({
+            ...state,
+            selectedExtraDrinks: null
+        });
+    }, [state]);
+
     function renderDrinks() {
         if (!state.selectedComboOption || state.selectedComboOption === "yes") return "";
 
@@ -233,7 +256,7 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
                 items={combos.drinks}
                 onSelect={handleExtraDrinkSelection}
                 onComplete={handleExtraDrinkSelectionComplete}
-                onBack={handleDeSelectComboOption}
+                onBack={handleDeSelectDrinkOption}
                 actionBtnName={t("common.next")}
             />
         );

@@ -64,13 +64,15 @@ export const Wraps = [
         name: i18n.t("foods.wraps.porkNSlawWrap"),
         description: i18n.t("foods.wraps.porkNSlawWrapDesc"),
         img: CeasarWrapImg,
-        price: "9.95"
+        price: "9.95",
+        isVegNotAvailable: true
     },
     {
         id: "countryPorkWrap",
         name: i18n.t("foods.wraps.countryPorkWrap"),
         description: i18n.t("foods.wraps.countryPorkWrapDesc"),
         img: CeasarWrapImg,
-        price: "10.95"
+        price: "10.95",
+        isVegNotAvailable: true
     }
 ];

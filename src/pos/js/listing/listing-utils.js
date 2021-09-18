@@ -1,8 +1,13 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+    forwardRef, useCallback, useImperativeHandle, useState
+} from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
+import Switch from "react-switch";
+import i18n from "src/i18n";
+import { normalizeI18NText } from "src/core/js/utils";
 
 export const SelectType = ({
     options, title, description, onSelect, containerCSS = ""
@@ -33,10 +38,16 @@ export const ComboSideAndDrink = ({
     actionBtnPrefixIcon = "",
     showPrice = true,
     onComplete = () => {},
+    onSelect = () => {},
     showLoading = false
 }) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const handleItemClick = useCallback((item) => {
+        setSelectedItem(item);
+        onSelect(item);
+    }, [selectedItem]);
 
     const handleClick = useCallback((item) => {
         if (showLoading) {
@@ -68,7 +79,7 @@ export const ComboSideAndDrink = ({
                     <div
                         key={item.id}
                         className={`combo-item ${selectedItem && selectedItem.id === item.id ? "active" : ""}`}
-                        onClick={() => setSelectedItem(item)}
+                        onClick={() => handleItemClick(item)}
                     >
                         {item.name}
                         &nbsp;
@@ -127,11 +138,9 @@ export const ExtraDrinkSelect = ({
     }, [selectedOption, selectedItems]);
 
     const handleGoBack = useCallback(() => {
-        if (!selectedOption) {
-            onBack();
-        }
-
+        onBack();
         setSelectedOption(null);
+        setSelectedItems([]);
     }, [selectedOption]);
 
     const handleIncrement = useCallback((item, count) => {
@@ -244,6 +253,9 @@ export const ExtraDrinkSelect = ({
     );
 };
 
+export const calculateTotalOfAddOns = (items = []) =>
+    items.reduce((acc, obj) => acc + (obj.quantity * Number(obj.price)), 0).toFixed(2);
+
 export const calculatePrice = (item, obj, includeBasePrice = true) => {
     if (!includeBasePrice && !obj.selectedSize) return "";
 
@@ -254,7 +266,9 @@ export const calculatePrice = (item, obj, includeBasePrice = true) => {
 
     price = Number(price);
 
-    const { selectedComboOption, selectedComboSide, selectedExtraDrinks } = obj;
+    const {
+        selectedComboOption, selectedComboSide, selectedExtraDrinks, selectedAddOns
+    } = obj;
 
     if (selectedComboOption && selectedComboOption === "yes" && selectedComboSide) {
         price += Number(selectedComboSide.price);
@@ -262,9 +276,22 @@ export const calculatePrice = (item, obj, includeBasePrice = true) => {
 
     if (selectedExtraDrinks) {
         for (const key in selectedExtraDrinks) {
-            price += Number(selectedExtraDrinks[key].price + selectedExtraDrinks[key].quantity);
+            price += Number(selectedExtraDrinks[key].price * selectedExtraDrinks[key].quantity);
         }
     }
 
+    if (selectedAddOns?.length) {
+        price += Number(calculateTotalOfAddOns(selectedAddOns));
+    }
+
     return price.toFixed(2);
+};
+
+export const normalizeItemName = (name = "", isVeg = false) => {
+    if (!isVeg) return normalizeI18NText(name);
+
+    const arr = name.match(/\${(.*?)}/g);
+    if (!arr?.length) return name;
+
+    return normalizeI18NText(name.replace(arr[0], i18n.t("common.veggie")));
 };

@@ -141,6 +141,10 @@ body {
                             height: 72px;
                             line-height: 72px;
                             transition: all 0.3s;
+                            width: 50px;
+                            img {
+                                width: 3%;
+                            }
                             i {
                                 color: var(--text-light);
                                 font-size: 1.4rem;

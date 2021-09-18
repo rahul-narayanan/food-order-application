@@ -20,12 +20,15 @@ export const ItemDialog = () => {
     }, []);
 
     const handleAdd = useCallback((obj) => {
+        obj.selectedAddOns = headerRef.current.getSelectedAddOns();
         handleAddItem({
             item: selectedItem,
             ...obj,
             quantity: 1,
             finalPrice: calculatePrice(selectedItem, obj),
-            modifiers: headerRef.current.getSelectedModifiers()
+            modifiers: headerRef.current.getSelectedIngModifiers(),
+            swapFries: headerRef.current.getSelectedSwapFries(),
+            isVeggie: headerRef.current.isVeggieSelected()
         });
         dispatch({ type: HANDLE_SHOW_CATEGORIES });
     }, [selectedItem]);

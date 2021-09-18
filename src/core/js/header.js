@@ -1,5 +1,6 @@
-import React from "react";
 import Logo from "../img/logo.png";
+
+import React from "react";
 
 export const Header = ({ menus, selectedIndex, onMenuChange }) => (
     <div
@@ -25,10 +26,10 @@ export const Header = ({ menus, selectedIndex, onMenuChange }) => (
                             }`}
                             onClick={() => onMenuChange(index)}
                         >
-                            <a className="nav-link">
-                                <i className="zmdi zmdi-assignment" />
+                            <div className="nav-link">
+                                {/* {menu.img ? <img src={menu.img} /> : <i className="zmdi zmdi-assignment" />} */}
                                 {menu.name}
-                            </a>
+                            </div>
                         </li>
                     ))}
                 </ul>
