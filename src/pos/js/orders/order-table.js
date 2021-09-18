@@ -117,6 +117,7 @@ export const OrderTable = () => {
         if (selectedComboOption === "yes") {
             result.push(<p className="m5" key="comboSideHeaderPrice">&nbsp;</p>);
             result.push(<p className="m5" key="comboSidePrice">{selectedComboSide.price}</p>);
+            result.push(<p className="m5" key="comboDrinkPrice">&nbsp;</p>);
         }
 
         if (selectedExtraDrinks && Object.keys(selectedExtraDrinks).length) {
