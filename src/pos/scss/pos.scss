@@ -293,7 +293,7 @@
 
             &.type,
             &.subType {
-                padding-top: 5rem;
+                padding-top: 6rem;
 
                 .item {
                     padding: 0;
@@ -309,6 +309,10 @@
                 }
             }
 
+            &.subType {
+                padding-top: 3rem;
+            }
+
             .title {
                 display: flex;
                 flex-direction: column;
@@ -321,41 +325,15 @@
             .item-section {
                 display: flex;
                 margin: 0 auto;
-                margin-top: 1rem;
+                margin-top: 2.5rem;
                 width: 90%;
-
-                .item {
-                    position: relative;
-                    overflow: hidden;
+                .card {
+                    margin: 5px;
                     border-radius: 20px;
-                    width: 100%;
-                    background: var(--white);
-                    margin: 2rem;
-                    margin-bottom: 0;
                     cursor: pointer;
-                    padding: 10px;
-                    cursor: pointer;
-                    box-shadow: 2px 2px #ebebf5;
-                    border: 1px solid #ebebf5;
-
-                    .item_img {
-                        width: 100%;
-                    }
-                    .text_box {
-                        padding-bottom: 15px;
-                        z-index: 99;
-                        position: relative;
-                        h2 {
-                            margin: 0;
-                            font-size: 0.89rem;
-                            color: var(--text-black);
-                            font-weight: 600;
-                            overflow: hidden;
-                            white-space: nowrap;
-                            text-overflow: ellipsis;
-                            padding-bottom: 7px;
-                            font-size: 2.5rem;
-                        }
+                    img {
+                        border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
                     }
                 }
             }

@@ -1,12 +1,36 @@
 import "../scss/pos.scss";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Listing } from "./listing/init";
 import { Orders } from "./orders/init";
-import { POSContext } from "src/pos/js/utils";
+import { POSContext } from "./utils";
+import { PlaceOrderDialog } from "./orders/place-order-dialog";
 
 export const POSContainer = () => {
     const [selectedItems, setSelectedItems] = useState([]);
+
+    const [showPlaceOrderDialog, setShowPlaceOrderDialog] = useState(false);
+
+    const subtotal = useMemo(() => {
+        let value = 0;
+        for (let i = 0; i < selectedItems.length; i++) {
+            const item = selectedItems[i];
+            value += item.quantity * Number(item.finalPrice);
+        }
+        return value;
+    }, [selectedItems]);
+
+    const tax = useMemo(() => subtotal * 0.13, [subtotal]);
+
+    const total = useMemo(() => subtotal + tax, [subtotal, tax]);
+
+    const openPlaceOrderDialog = useCallback(() => {
+        setShowPlaceOrderDialog(true);
+    }, []);
+
+    const closePlaceOrderDialog = useCallback((value) => {
+        setShowPlaceOrderDialog(false);
+    }, []);
 
     const handleAddItem = useCallback((item) => {
         const newItems = selectedItems.slice();
@@ -39,13 +63,22 @@ export const POSContainer = () => {
         handleAddItem,
         handleUpdateItem,
         handleDeleteItem,
-        handleClearItems
+        handleClearItems,
+
+        showPlaceOrderDialog,
+        openPlaceOrderDialog,
+        closePlaceOrderDialog,
+
+        subtotal: subtotal.toFixed(2),
+        tax: tax.toFixed(2),
+        total: total.toFixed(2)
     };
 
     return (
         <POSContext.Provider value={context}>
             <Orders />
             <Listing />
+            <PlaceOrderDialog />
         </POSContext.Provider>
     );
 };

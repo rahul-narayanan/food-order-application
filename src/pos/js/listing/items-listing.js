@@ -2,15 +2,12 @@ import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { normalizeI18NText } from "src/core/js/utils";
 import { ITEM_SELECTED } from "./redux";
+import { Card } from "react-bootstrap";
 
 const renderItemName = (name) => {
     name = normalizeI18NText(name);
     name = name.substr(0, name.lastIndexOf(" "));
-    if (name.length > 19) {
-        return <h3>{name}</h3>;
-    }
-
-    return <h2>{name}</h2>;
+    return name;
 };
 
 export const ListingItems = () => {
@@ -31,18 +28,17 @@ export const ListingItems = () => {
                 </div>
                 <div className="item-section">
                     {selectedCategory.items.map((item) => (
-                        <div
-                            key={item.id}
-                            className="item animate__animated animate__zoomIn wow"
-                            data-wow-duration=".5s"
-                            role="presentation"
-                            data-tip
-                            data-for={item.id}
+                        <Card
+                            key={`item_${item.id}`}
+                            style={{ width: "20rem" }}
+                            className="animate__animated animate__zoomIn"
                             onClick={() => handleOnClick(item)}
                         >
-                            <img src={item.img} />
-                            {renderItemName(item.name)}
-                        </div>
+                            <Card.Img variant="top" src={item.img} />
+                            <Card.Body>
+                                <Card.Title as="h3">{renderItemName(item.name)}</Card.Title>
+                            </Card.Body>
+                        </Card>
                     ))}
                 </div>
             </div>

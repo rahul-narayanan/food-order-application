@@ -3,7 +3,8 @@ import { useCallback } from "react";
 import Categories from "src/core/js/food-categories";
 import { useTranslation } from "react-i18next";
 import { CATEGORY_SELECTED } from "./redux";
-import { usePOSContext } from "src/pos/js/utils";
+import { usePOSContext } from "../utils";
+import { Card } from "react-bootstrap";
 
 export const ListingCategory = () => {
     const state = useSelector((_state) => _state || {});
@@ -32,22 +33,20 @@ export const ListingCategory = () => {
                             ? t("common.category_help_message1") : t("common.category_help_message")}
                     </h2>
                 </div>
+
                 <div className="item-section">
                     {Categories.map((category) => (
-                        <div
-                            key={category.id}
-                            className="item animate__animated animate__zoomIn wow"
-                            data-wow-duration=".5s"
-                            role="presentation"
-                            data-tip
-                            data-for={category.id}
+                        <Card
+                            key={`category_${category.id}`}
+                            style={{ width: "20rem" }}
+                            className="animate__animated animate__zoomIn"
                             onClick={() => handleOnClick(category)}
                         >
-                            <img src={category.img} />
-                            {category.name.length > 19
-                                ? <h3>{category.name}</h3>
-                                : <h2>{category.name}</h2>}
-                        </div>
+                            <Card.Img variant="top" src={category.img} />
+                            <Card.Body>
+                                <Card.Title as="h3">{category.name}</Card.Title>
+                            </Card.Body>
+                        </Card>
                     ))}
                 </div>
             </div>

@@ -1,11 +1,8 @@
-import React, {
-    forwardRef, useCallback, useImperativeHandle, useState
-} from "react";
+import React, { useCallback, useState } from "react";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
-import Switch from "react-switch";
 import i18n from "src/i18n";
 import { normalizeI18NText } from "src/core/js/utils";
 
@@ -22,7 +19,7 @@ export const SelectType = ({
             {options.map((_type) => (
                 <div
                     key={_type.id || _type.value}
-                    className="item animate__animated animate__zoomIn wow"
+                    className="item animate__animated animate__zoomIn"
                     onClick={() => onSelect(_type)}
                 >
                     <img src={_type.img} className="crop_img" />

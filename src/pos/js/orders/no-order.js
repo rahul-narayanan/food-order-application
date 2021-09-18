@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { usePOSContext } from "src/pos/js/utils";
+import { usePOSContext } from "../utils";
 import NoOrderImg from "../../img/noorder.png";
 
 export const NoOrder = () => {

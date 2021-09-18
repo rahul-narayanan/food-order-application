@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { ComboSideAndDrink, ExtraDrinkSelect, calculatePrice } from "./listing-utils";
 import { HeaderNavigator } from "src/core/js/components/header-navigator";
-import { Sizes } from "src/pos/js/constants";
+import { Sizes } from "../constants";
 import Emitter from "src/core/js/event-emitter";
 
 const getInitialState = () => ({

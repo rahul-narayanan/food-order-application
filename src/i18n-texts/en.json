@@ -63,7 +63,10 @@
             "addons": "Add-ons",
             "swapFries": "Swap Fries",
             "veggie": "Veggie",
-            "veggieOption": "Veggie Option"
+            "veggieOption": "Veggie Option",
+            "giftCard": "Gift Card",
+            "storeCredit": "Store Credit",
+            "other": "Other"
         },
         "menus" : {
             "pos": "POS",

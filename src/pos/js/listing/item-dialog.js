@@ -4,8 +4,8 @@ import { useCallback, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { HANDLE_GO_BACK_CLICK, HANDLE_SHOW_CATEGORIES } from "./redux";
 import { DialogBody } from "./item-dialog-body";
-import { POSContext } from "src/pos/js/utils";
-import { calculatePrice } from "src/pos/js/listing/listing-utils";
+import { POSContext } from "../utils";
+import { calculatePrice } from "./listing-utils";
 
 export const ItemDialog = () => {
     const selectedCategory = useSelector((state) => state?.selectedCategory || null);
