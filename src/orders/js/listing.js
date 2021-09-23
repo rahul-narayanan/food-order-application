@@ -1,21 +1,23 @@
 import { useCallback, useEffect, useState } from "react";
 import { readAllItemsFromTable } from "src/core/js/api-utils";
 import Skeleton from "react-loading-skeleton";
-import { OrderTypes, PaymentTypes } from "src/pos/js/constants";
+import { getOrderSubTypeName, getOrderTypeName } from "src/pos/js/constants";
 import { useTranslation } from "react-i18next";
-import { ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
+import { getStatusText, ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
+import { Table } from "react-bootstrap";
+import i18n from "src/i18n";
 
-const Header = () => (
-    <div className="list_header d-flex">
-        <h2 className="text-left" style={{ width: "10%" }}>Order Id</h2>
-        <h2 className="text-left" style={{ width: "25%" }}>Name</h2>
-        <h2 className="text-center" style={{ width: "25%" }}>Phone number</h2>
-        <h2 className="text-center" style={{ width: "10%" }}>Items</h2>
-        <h2 className="text-center" style={{ width: "10%" }}>Payment type</h2>
-        <h2 className="text-center" style={{ width: "10%" }}>Order type</h2>
-        <h2 className="text-center" style={{ width: "10%" }}>Amount</h2>
-    </div>
-);
+const headerTexts = [
+    i18n.t("orders.id"),
+    i18n.t("orders.orderedAt"),
+    i18n.t("common.customer_name"),
+    i18n.t("common.customer_phone"),
+    i18n.t("orders.type"),
+    i18n.t("orders.subtype"),
+    i18n.t("orders.noOfItems"),
+    i18n.t("common.total"),
+    i18n.t("common.status")
+];
 
 export const OrderListing = () => {
     const [orders, setOrders] = useState(null);
@@ -38,56 +40,79 @@ export const OrderListing = () => {
     }, []);
 
     const renderOrders = () => {
+        if (orders === null) {
+            const result = [];
+
+            for (let i = 0; i < 5; i++) {
+                result.push(
+                    <tr>
+                        {headerTexts.map((header, index) => (
+                            <td
+                                key={`loadingHeaderSkeleton_${i}_${index}`}
+                            >
+                                <Skeleton />
+                            </td>
+                        ))}
+                    </tr>
+                );
+            }
+
+            return result;
+        }
+
         if (!orders.length) {
             return (
-                <li
-                    className="d-flex animate__animated animate__fadeInUp wow"
-                    key="noOrdersFound"
-                >
-                    <h3 className="text-center" style={{ width: "100%" }}>
-                        {t("common.no_orders_found")}
-                    </h3>
-                </li>
+                <tr>
+                    <td
+                        colSpan={headerTexts.length}
+                        key="noOrdersFound"
+                    >
+                        <h3 className="text-center" style={{ width: "100%" }}>
+                            {t("common.no_orders_found")}
+                        </h3>
+                    </td>
+                </tr>
             );
         }
 
         return orders.map((order) => (
-            <li
-                className="d-flex animate__animated animate__fadeInUp wow"
-                key={order.OrderId}
-            >
-                <h3 className="text-left" style={{ width: "10%" }}>{order.OrderId}</h3>
-                <h3
-                    className="text-left"
-                    style={{ width: "25%" }}
-                >
-                    <strong>{order.Customer_Name}</strong>
-                </h3>
-                <h3 className="text-center" style={{ width: "25%" }}>{order.Customer_Phone_Number}</h3>
-                <h3 className="text-center" style={{ width: "10%" }}>{order.NoOfItems}</h3>
-                <h3 className="text-center" style={{ width: "10%" }}>
-                    {PaymentTypes.find((type) => type.value === order.PaymentType)?.name || ""}
-                </h3>
-                <h3 className="text-center" style={{ width: "10%" }}>
-                    {OrderTypes.find((type) => type.value === order.OrderType)?.name || ""}
-                </h3>
-                <h3 className="text-center" style={{ width: "10%" }}>
-                    {order.Amount ? `$${order.Amount}` : ""}
-                </h3>
-            </li>
+            <tr key={`order_${order.OrderId}`}>
+                <td>{order.OrderId}</td>
+                <td>{new Date(Number(order.OrderTime)).toLocaleString()}</td>
+                <td>{order.customerPhone}</td>
+                <td>{order.customerName}</td>
+                <td>{getOrderTypeName(order.orderType) || ""}</td>
+                <td>{getOrderSubTypeName(order.orderSubType) || ""}</td>
+                <td>{order.selectedItems.length}</td>
+                <td>{`$${order.total}`}</td>
+                <td>{getStatusText(order.status)}</td>
+            </tr>
         ));
     };
 
+    function renderHeaders() {
+        return (
+            <thead>
+                <tr>
+                    {headerTexts.map((header, index) => <th key={`header_${index}`}>{header}</th>)}
+                </tr>
+            </thead>
+        );
+    }
+
     return (
         <div className="table-container">
-            <div className="order_list">
-                <Header />
-                {orders === null ? <Skeleton count={5} /> : (
-                    <ul>
-                        {renderOrders()}
-                    </ul>
-                )}
-            </div>
+            <Table
+                responsive
+                striped={orders !== null}
+                borderless
+                hover
+            >
+                {renderHeaders()}
+                <tbody>
+                    {renderOrders()}
+                </tbody>
+            </Table>
         </div>
     );
 };

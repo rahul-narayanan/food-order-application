@@ -28,8 +28,8 @@ body {
 .tick {
     display: inline-block;
     transform: rotate(45deg);
-    height: 20px;
-    width: 10px;
+    height: 15px;
+    width: 8px;
     border-bottom: 2px solid white;
     border-right: 2px solid white;
 
@@ -45,6 +45,7 @@ body {
     padding: 10px 30px;
     border-radius: 20px;
     position: relative;
+    text-align: center;
 
     &::before,
     &::after {
@@ -52,6 +53,10 @@ body {
         content: "";
         height: 1rem;
         position: absolute;
+    }
+
+    &.noBorder {
+        border: none;
     }
 }
 
@@ -203,7 +208,7 @@ body {
                             overflow: hidden;
                             transition: all 0.5s;
                         }
-                        i.zmdi-menu {
+                        i.mtpi-menu {
                             width: 20px;
                             height: 17px;
                         }
@@ -245,11 +250,11 @@ body {
             .navbar {
                 .navbar-nav {
                     .nav-item.profile_img {
-                        i.zmdi-menu {
+                        i.mtpi-menu {
                             width: 0;
                             height: 0;
                         }
-                        i.zmdi-close {
+                        i.mtpi-close {
                             width: 20px;
                             height: 17px;
                         }
@@ -344,6 +349,18 @@ body {
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
+            &.mtpi-plus {
+                background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), var(--primary) !important;
+                background-position: center !important;
+                background-size: 50% 2px, 2px 50% !important;
+                background-repeat: no-repeat !important;
+            }
+            &.mtpi-minus {
+                background: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), var(--primary) !important;
+                background-position: center !important;
+                background-size: 50% 2px !important;
+                background-repeat: no-repeat !important;
+            }
         }
         strong {
             min-width: 30px;
@@ -433,6 +450,41 @@ body {
     &.btn-outline-secondary {
         &:focus {
             box-shadow: none !important;
+        }
+    }
+}
+
+button:focus,
+input:focus {
+    box-shadow: none !important;
+}
+
+.react-loading-skeleton {
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+table {
+    thead {
+        tr {
+            background: var(--bg-color2);
+            border-bottom: 1.5px solid var(--primary);
+            th {
+                color: var(--text-dark2);
+                font-size: 18px;
+                background: var(--bg-color2);
+                border-bottom: 1.5px solid var(--primary);
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            cursor: pointer;
+            td {
+                padding-top: 15px !important;
+                padding-bottom: 15px !important;
+            }
         }
     }
 }

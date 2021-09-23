@@ -17,6 +17,8 @@ export const HANDLE_GO_BACK_CLICK = "HANDLE_GO_BACK_CLICK_ACTION";
 
 export const HANDLE_SHOW_CATEGORIES = "HANDLE_SHOW_CATEGORIES_ACTION";
 
+export const RESET_TO_DEFAULT = "RESET_TO_DEFAULT_ACTION";
+
 export const reducer = (state = {}, action) => {
     switch (action.type) {
         case TYPE_SELECTED:
@@ -89,6 +91,11 @@ export const reducer = (state = {}, action) => {
                 ...state,
                 selectedCategory: null,
                 selectedItem: null
+            };
+
+        case RESET_TO_DEFAULT:
+            return {
+                ...initialState
             };
 
         default:

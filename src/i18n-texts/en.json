@@ -14,6 +14,7 @@
             "next": "Next",
             "place_order": "Place order",
             "amount_to_pay": "Amount to Pay",
+            "amount_due": "Amount due",
             "subtotal": "Sub total",
             "tax": "Tax",
             "search_items": "Search items",
@@ -66,7 +67,19 @@
             "veggieOption": "Veggie Option",
             "giftCard": "Gift Card",
             "storeCredit": "Store Credit",
-            "other": "Other"
+            "other": "Other",
+            "payment_help_message": "How'd you like to pay?",
+            "payment_rest_help_message": "How'd you like to pay the rest?",
+            "tenderAmount": "Tender Amount",
+            "startPayment": "Start Payment",
+            "transaction_completed": "Transaction Completed",
+            "change_due": "Change Due",
+            "optional": "Optional",
+            "order_success_message": "Order placed successfully",
+            "transaction_details": "Transaction details",
+            "amount_paid": "Amount Paid",
+            "remaining_balance": "Remaining Balance",
+            "status": "Status"
         },
         "menus" : {
             "pos": "POS",
@@ -215,6 +228,16 @@
             "waffleFries": "Waffle Fries",
             "coleslaw": "Coleslaw",
             "chili": "Chili"
+        },
+        "orders": {
+            "id": "Order Id",
+            "type": "Order Type",
+            "subtype": "Order Subtype",
+            "noOfItems": "No. of Items",
+            "orderedAt": "Ordered At"
+        },
+        "status": {
+            "placed": "Order Placed"
         }
     }
 }

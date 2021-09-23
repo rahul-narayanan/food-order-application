@@ -1,33 +1,23 @@
 import { createContext, useContext } from "react";
-import { putItemIntoTable } from "src/core/js/api-utils";
-import { getCurrentUTCTimeStamp, ORDER_TABLE_NAME } from "src/core/js/utils";
+import { putItemIntoTable, readLastItemFromTable } from "src/core/js/api-utils";
+import { ORDER_TABLE_NAME } from "src/core/js/utils";
 
 export const POSContext = createContext();
 
 export const usePOSContext = () => useContext(POSContext);
 
 export const placeOrder = async (params) => {
-    const {
-        customerName, customerPhone,
-        paymentType, orderType, amount, noOfItems
-    } = params;
+    const lastInsertedItem = await readLastItemFromTable(ORDER_TABLE_NAME);
 
-    const currentTime = String(getCurrentUTCTimeStamp());
-    try {
-        await putItemIntoTable({
-            TableName: ORDER_TABLE_NAME,
-            Item: {
-                OrderId: `MTP${currentTime}`,
-                OrderTime: currentTime,
-                Customer_Name: customerName,
-                Customer_Phone_Number: customerPhone,
-                PaymentType: paymentType,
-                OrderType: orderType,
-                NoOfItems: noOfItems,
-                Amount: amount
-            }
-        });
-    } catch (err) {
+    const newId = Number((lastInsertedItem?.OrderId || "").match(/\d+/)?.[0] || 0) + 1;
 
-    }
+    await putItemIntoTable({
+        TableName: ORDER_TABLE_NAME,
+        Item: {
+            OrderId: `G${newId}`,
+            OrderTime: String(Date.now()),
+            ...params,
+            status: "ORDER_PLACED"
+        }
+    });
 };

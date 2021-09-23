@@ -135,9 +135,12 @@ export const ExtraDrinkSelect = ({
     }, [selectedOption, selectedItems]);
 
     const handleGoBack = useCallback(() => {
-        onBack();
-        setSelectedOption(null);
-        setSelectedItems([]);
+        if (selectedOption) {
+            setSelectedOption(null);
+            setSelectedItems([]);
+        } else {
+            onBack();
+        }
     }, [selectedOption]);
 
     const handleIncrement = useCallback((item, count) => {
@@ -230,7 +233,7 @@ export const ExtraDrinkSelect = ({
         );
     }
 
-    let headerText = `${selectedSizeName || ""} - ${t("common.noCombo")}`;
+    let headerText = `${selectedSizeName ? `${selectedSizeName} - ` : ""}${t("common.noCombo")}`;
     if (selectedOption) {
         if (selectedOption === "yes") {
             headerText += ` - ${t("common.drink")}`;

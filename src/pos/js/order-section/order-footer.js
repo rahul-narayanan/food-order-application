@@ -47,7 +47,6 @@ export const OrderFooter = () => {
                     {t("common.cancel")}
                 </Button>
                 <Button
-                    variant="warning"
                     onClick={handlePlaceOrderClick}
                     className="themeBtn"
                 >

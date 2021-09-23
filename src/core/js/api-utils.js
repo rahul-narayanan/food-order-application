@@ -26,6 +26,23 @@ export const readAllItemsFromTable = async (params = {
     return scanResults;
 };
 
+export const readLastItemFromTable = async (tableName) => {
+    const scanResults = [];
+    let items;
+    const params = {
+        TableName: tableName,
+        Limit: 1,
+        ScanIndexForward: false
+    };
+    do {
+        items = await DocClient.scan(params).promise();
+        items.Items.forEach((item) => scanResults.push(item));
+        params.ExclusiveStartKey = items.LastEvaluatedKey;
+    } while (typeof items.LastEvaluatedKey !== "undefined");
+
+    return scanResults[0] || null;
+};
+
 export const queryItemsFromTable = async (params) => {
     const scanResults = [];
     let items;

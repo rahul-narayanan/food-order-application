@@ -40,13 +40,13 @@ export const IncreaseDecreaseCounter = forwardRef(({
         <div className="increment-decrement-counter-container" onClick={handleClick}>
             <h3 className="d-flex align-items-center">
                 <i
-                    className="zmdi zmdi-minus"
+                    className="mtpi mtpi-minus"
                     onClick={handleDecrementClick}
                     style={count <= 0 ? { opacity: "0.5" } : {}}
                 />
                 <strong>{count}</strong>
                 <i
-                    className="zmdi zmdi-plus"
+                    className="mtpi mtpi-plus"
                     onClick={handleIncrementClick}
                     style={count >= limit ? { opacity: "0.5" } : {}}
                 />

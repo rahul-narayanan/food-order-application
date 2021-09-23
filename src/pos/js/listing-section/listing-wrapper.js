@@ -1,17 +1,28 @@
-import { Provider } from "react-redux";
-import { createStore } from "redux";
 import { ListingCategory } from "./category-listing";
 import { ListingItems } from "./items-listing";
 import { ListingHeaderNavigator } from "./listing-header-navigator";
-import { initialState, reducer } from "./redux";
 import { ListingSubTypeSelect } from "./sub-type-listing";
 import { ListingTypeSelect } from "./type-listing";
 import { ItemDialog } from "./item-dialog";
+import { useEffect } from "react";
+import Emitter from "src/core/js/event-emitter";
+import { useDispatch } from "react-redux";
+import { RESET_TO_DEFAULT } from "src/pos/js/listing-section/redux";
 
-const store = createStore(reducer, initialState);
+export const ListingWrapper = () => {
+    const dispatch = useDispatch();
 
-export const Listing = () => (
-    <Provider store={store}>
+    useEffect(() => {
+        Emitter.on("PLACE_ORDER_SUCCESSFUL", () => {
+            dispatch({ type: RESET_TO_DEFAULT });
+        });
+
+        return () => {
+            Emitter.off("PLACE_ORDER_SUCCESSFUL");
+        };
+    }, []);
+
+    return (
         <div className="listing-section-wrapper">
             <ListingHeaderNavigator />
             <ListingTypeSelect key="typeSelect" />
@@ -20,5 +31,5 @@ export const Listing = () => (
             <ListingItems />
             <ItemDialog />
         </div>
-    </Provider>
-);
+    );
+};

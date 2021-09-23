@@ -7,49 +7,5 @@
         padding-left: 50px;
         padding-right: 30px;
         padding-bottom: 20px;
-
-        .order_list {
-            position: relative;
-            height: 100%;
-            overflow-x: hidden;
-            overflow-y: auto;
-
-            .list_header {
-                background: var(--bg-color2);
-                border-bottom: 1.5px solid var(--primary);
-                padding: 14px 30px;
-                h2 {
-                    color: var(--text-dark2);
-                    margin: 0;
-                    font-size: 0.85rem;
-                    font-weight: 600;
-                    text-transform: uppercase;
-                    letter-spacing: 1.3px;
-                }
-            }
-            ul {
-                li {
-                    padding: 20px 30px;
-                    color: var(--text-dark);
-                    align-items: center;
-                    h3 {
-                        margin: 0;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        strong {
-                            font-weight: 600;
-                        }
-                    }
-                    &:nth-child(even) {
-                        background: var(--bg-color2);
-                    }
-                    &:nth-child(odd) {
-                        background: var(--white);
-                    }
-                }
-                list-style: none;
-                padding: 0;
-            }
-        }
     }
 }

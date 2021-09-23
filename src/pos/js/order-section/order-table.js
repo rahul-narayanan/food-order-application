@@ -4,7 +4,7 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import { IncreaseDecreaseCounter } from "src/core/js/components/increase-decrease-counter";
-import { calculatePrice, normalizeItemName } from "../listing/listing-utils";
+import { calculatePrice, normalizeItemName } from "../listing-section/listing-utils";
 import { usePOSContext } from "../utils";
 import { OrderFooter } from "./order-footer";
 import { Trash, InfoCircleFill } from "react-bootstrap-icons";

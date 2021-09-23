@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import i18n from "src/i18n";
 
 export const ORDER_TABLE_NAME = "Orders";
 
@@ -13,7 +14,14 @@ export const debounce = (func, timeout = 100) => {
 export const showSuccessMessage = (msg) => {
     toast.success(msg, {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
+        hideProgressBar: true
+    });
+};
+
+export const showErrorMessage = (msg) => {
+    toast.error(msg, {
+        position: "top-center",
         hideProgressBar: true
     });
 };
@@ -38,3 +46,9 @@ export const sortByKey = (array, key) => array.sort((a, b) => {
 });
 
 export const normalizeI18NText = (text = "") => text.replace(/[${}]/g, "").replace(/[{}]/g, "");
+
+export const getStatusText = (value) => {
+    switch (value) {
+        default: return i18n.t("status.placed");
+    }
+};

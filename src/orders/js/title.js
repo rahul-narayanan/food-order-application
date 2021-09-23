@@ -16,7 +16,7 @@ export const Title = () => {
                     <form className="search_box col-12 col-sm-12 col-md-12 col-lg-8 col-xl-7 p-0 px-lg-3 mt-3 mt-lg-0 pb-3 pb-md-0 ml-auto">
                         <div className="form-group d-flex">
                             <div className="input-group-prepend">
-                                <div className="input-group-text"><i className="zmdi zmdi-search" /></div>
+                                <div className="input-group-text"><i className="mtpi mtpi-search" /></div>
                             </div>
                             <input type="text" className="form-control" placeholder={t("common.search")} />
                         </div>

@@ -1,10 +1,11 @@
 import "../scss/pos.scss";
 
 import React, { useCallback, useMemo, useState } from "react";
-import { Listing } from "./listing/init";
-import { Orders } from "./orders/init";
+import { Orders } from "./order-section/init";
 import { POSContext } from "./utils";
-import { PlaceOrderDialog } from "./orders/place-order-dialog";
+import { PlaceOrderDialog } from "./order-section/place-order-dialog";
+import { Listing } from "./listing-section/init";
+import Emitter from "src/core/js/event-emitter";
 
 export const POSContainer = () => {
     const [selectedItems, setSelectedItems] = useState([]);
@@ -58,6 +59,12 @@ export const POSContainer = () => {
         setSelectedItems([]);
     });
 
+    const handlePlaceOrderSuccess = useCallback(() => {
+        setShowPlaceOrderDialog(false);
+        setSelectedItems([]);
+        Emitter.emit("PLACE_ORDER_SUCCESSFUL");
+    }, []);
+
     const context = {
         selectedItems,
         handleAddItem,
@@ -69,6 +76,8 @@ export const POSContainer = () => {
         openPlaceOrderDialog,
         closePlaceOrderDialog,
 
+        handlePlaceOrderSuccess,
+
         subtotal: subtotal.toFixed(2),
         tax: tax.toFixed(2),
         total: total.toFixed(2)
@@ -78,7 +87,7 @@ export const POSContainer = () => {
         <POSContext.Provider value={context}>
             <Orders />
             <Listing />
-            <PlaceOrderDialog />
+            <PlaceOrderDialog key={`placeOrderDialog_${Date.now()}`} />
         </POSContext.Provider>
     );
 };

@@ -7,8 +7,6 @@ import ForHereImg from "../img/forhere.png";
 import ToGoImg from "../img/togo.png";
 import PreOrderImg from "../img/preorder.png";
 
-import { CashCoin, CreditCard2Back, Gift } from "react-bootstrap-icons";
-
 export const Types = [
     {
         id: "order",
@@ -27,31 +25,7 @@ export const Types = [
     }
 ];
 
-export const PaymentTypes = [
-    {
-        name: i18n.t("common.cash"),
-        value: "cash",
-        icon: <CashCoin />
-    },
-    {
-        name: i18n.t("common.card"),
-        value: "card",
-        icon: <CreditCard2Back />
-    },
-    {
-        name: i18n.t("common.giftCard"),
-        value: "giftCard",
-        icon: <Gift />
-    },
-    {
-        name: i18n.t("common.storeCredit"),
-        value: "storeCredit"
-    },
-    {
-        name: i18n.t("common.other"),
-        value: "other"
-    }
-];
+export const getOrderTypeName = (id) => Types.find((type) => type.id === id).name;
 
 export const OrderTypes = [
     {
@@ -70,6 +44,8 @@ export const OrderTypes = [
         img: PreOrderImg
     }
 ];
+
+export const getOrderSubTypeName = (id) => OrderTypes.find((type) => type.id === id).name;
 
 export const Sizes = [
     {

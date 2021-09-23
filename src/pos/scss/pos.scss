@@ -304,7 +304,7 @@
                     border: none !important;
                     box-shadow: none !important;
                     img {
-                        width: 90%;
+                        width: 80%;
                     }
                 }
             }
@@ -472,14 +472,6 @@
 
                 .increment-decrement-counter-container {
                     margin-top: 2px;
-                    .zmdi {
-                        background: white;
-                        color: var(--primary);
-                    }
-                    float: right;
-                    strong {
-                        color: white;
-                    }
                 }
             }
         }
@@ -544,5 +536,143 @@
     .tick {
         margin-left: 5px;
         margin-right: 15px;
+    }
+}
+
+.place-order-dialog-container {
+    .modal-title {
+        .msgText {
+            padding: 0;
+            margin: 0;
+            svg {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    .modal-body {
+        max-height: 600px;
+    }
+
+    .title {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    .header-navigator {
+        height: 35px;
+        .headerText {
+            font-size: 1.2rem;
+        }
+    }
+
+    .payment-types {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .card {
+            width: 7.5rem;
+            height: 7rem;
+            margin: 10px;
+            border-color: #eef1fd;
+            cursor: pointer;
+
+            &.active {
+                background-color: var(--primary);
+                color: var(--white);
+            }
+
+            .card-body {
+                padding: 10px 5px;
+            }
+
+            .icon {
+                text-align: center;
+                margin-top: 10px;
+                svg {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+
+            .card-title {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .cashContent,
+    .cardContent,
+    .giftCardContent {
+        width: 55%;
+        margin: 20px auto 10px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .input-group {
+            margin-bottom: 10px;
+            * {
+                font-size: 28px;
+            }
+            .input-group-text {
+                width: 70%;
+                justify-content: flex-end;
+            }
+            .form-control:disabled {
+                background-color: var(--white);
+                opacity: 0.5;
+            }
+        }
+
+        button {
+            margin-top: 20px;
+        }
+    }
+
+    .changeDue {
+        font-size: 24px;
+        display: flex;
+        justify-content: center;
+        p {
+            opacity: 0.5;
+        }
+    }
+
+    .transaction-complete-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .customer-info-container {
+            width: 75%;
+            margin-bottom: 20px;
+            .changeDue {
+                justify-content: flex-start;
+                p {
+                    margin-bottom: 5px;
+                }
+            }
+            .form-floating {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .transaction-details {
+        width: 75%;
+        margin: 10px auto;
+        .changeDue {
+            justify-content: flex-start;
+            p {
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+        }
+        .transactions {
+            .alert {
+                padding: 7px 10px;
+            }
+        }
     }
 }

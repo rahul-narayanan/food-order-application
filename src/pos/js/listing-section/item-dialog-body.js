@@ -256,7 +256,7 @@ export const DialogBody = ({ category, item, onAdd = () => {} }) => {
                 items={combos.drinks}
                 onSelect={handleExtraDrinkSelection}
                 onComplete={handleExtraDrinkSelectionComplete}
-                onBack={handleDeSelectDrinkOption}
+                onBack={handleDeSelectComboOption}
                 actionBtnName={t("common.next")}
             />
         );
