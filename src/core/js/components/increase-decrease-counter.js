@@ -6,7 +6,8 @@ export const IncreaseDecreaseCounter = forwardRef(({
     count: _count = 0,
     limit = 100,
     onIncrement = () => {},
-    onDecrement = () => {}
+    onDecrement = () => {},
+    containerCSS = ""
 }, ref) => {
     const [count, _setCount] = useState(_count);
 
@@ -37,7 +38,10 @@ export const IncreaseDecreaseCounter = forwardRef(({
     if (!count) return "";
 
     return (
-        <div className="increment-decrement-counter-container" onClick={handleClick}>
+        <div
+            className={`increment-decrement-counter-container ${containerCSS}`}
+            onClick={handleClick}
+        >
             <h3 className="d-flex align-items-center">
                 <i
                     className="mtpi mtpi-minus"

@@ -53,45 +53,65 @@ export const PlaceOrderDialog = () => {
 
     const handlePaymentSubmit = useCallback((type) => {
         const value = Number(cashInputRef.current.value.trim());
+        let transactionAmount = value;
+
         if (value < amountDue) {
             setAmountDue(amountDue - value);
             setSelectedPaymentOption(null);
         } else {
-            setAmountDue(0);
             if (value >= amountDue) {
+                transactionAmount = amountDue;
                 setChangeDue(value - amountDue);
             }
+            setAmountDue(0);
         }
+
         setTransactions([
             ...transactions,
             {
                 id: type,
                 name: getPaymentName(type),
-                amount: value
+                amount: value.toFixed(2)
             }
         ]);
     }, [amountDue, transactions]);
 
+    const validateCustomerName = useCallback(() => {
+        const value = customerNameRef.current.getValue();
+        customerNameRef.current.setError(value ? null : t("error.nameRequired"));
+        return Boolean(value);
+    }, []);
+
+    const validateCustomerPhone = useCallback(() => {
+        const value = customerPhoneRef.current.getValue();
+        customerPhoneRef.current.setError(value ? null : t("error.phoneRequired"));
+        return Boolean(value);
+    }, []);
+
     const handlePlaceOrderClick = useCallback(async () => {
-        setLoading(true);
-        try {
-            const { selectedType, selectedSubType } = ListingStore.getState();
-            await placeOrder({
-                orderType: selectedType.id,
-                orderSubType: selectedSubType.id,
-                selectedItems,
-                subtotal,
-                tax,
-                total,
-                customerName: customerNameRef.current?.value.trim(),
-                customerPhone: customerPhoneRef.current?.value.trim(),
-                transactions
-            });
-            showSuccessMessage(t("common.order_success_message"));
-            handlePlaceOrderSuccess();
-        } catch (err) {
-            showErrorMessage(err);
-            setLoading(false);
+        const isNameValid = validateCustomerName();
+        const isPhoneValid = validateCustomerPhone();
+
+        if (isNameValid && isPhoneValid) {
+            setLoading(true);
+            try {
+                const { selectedType, selectedSubType } = ListingStore.getState();
+                await placeOrder({
+                    orderType: selectedType.id,
+                    orderSubType: selectedSubType.id,
+                    items: selectedItems,
+                    subtotal,
+                    tax,
+                    total,
+                    customerName: customerNameRef.current?.getValue(),
+                    customerPhone: customerPhoneRef.current?.getValue(),
+                    transactions
+                });
+                showSuccessMessage(t("common.order_success_message"));
+                handlePlaceOrderSuccess();
+            } catch (err) {
+                showErrorMessage(err);
+            }
         }
     }, [amountDue]);
 
@@ -230,7 +250,7 @@ export const PlaceOrderDialog = () => {
                 </div>
                 <div className="transactions">
                     {transactions.map((transaction, index) => (
-                        <Alert key={`${transaction.id}_${index}`} variant="success">
+                        <Alert key={`${transaction.id}_${index}`} variant="secondary">
                             {`${transaction.name} - $${transaction.amount}`}
                         </Alert>
                     ))}
@@ -244,26 +264,33 @@ export const PlaceOrderDialog = () => {
         return (
             <>
                 <div className="transaction-complete-container">
-                    <div className="changeDue">
-                        <p>
-                            {t("common.change_due")}
-                            :
-                        </p>
+                    {changeDue ? (
+                        <div className="changeDue">
+                            <p>
+                                {t("common.change_due")}
+                                :
+                            </p>
                         &nbsp;
-                        {`$${String(changeDue)}`}
-                    </div>
+                            {`$${changeDue.toFixed(2)}`}
+                        </div>
+                    ) : ""}
                     {renderTransactions(true, t("common.transaction_details"))}
                     <div className="customer-info-container">
                         <div className="changeDue">
-                            <p>{`${t("common.customer_info")} ${`(${t("common.optional")})`}`}</p>
+                            <p>{t("common.customer_info")}</p>
                         </div>
                         <TextBox
                             label={t("common.customer_name")}
                             ref={customerNameRef}
+                            onBlur={validateCustomerName}
+                            required
+
                         />
                         <TextBox
                             label={t("common.customer_phone")}
                             ref={customerPhoneRef}
+                            onBlur={validateCustomerPhone}
+                            required
                         />
                     </div>
                 </div>
@@ -280,6 +307,7 @@ export const PlaceOrderDialog = () => {
                                 size="sm"
                                 role="status"
                                 aria-hidden="true"
+                                style={{ marginRight: "10px" }}
                             />
                         ) : <span className="tick" style={{ marginRight: "10px" }} />}
                         {t("common.place_order")}
@@ -293,7 +321,7 @@ export const PlaceOrderDialog = () => {
         if (amountDue) {
             return (
                 <Modal.Header closeButton closeLabel={t("common.cancel")}>
-                    <Modal.Title>
+                    <Modal.Title className="amountDue">
                         <p style={{ fontSize: "20px", display: "inline-block", marginRight: "5px" }}>
                             {`${t("common.amount_due")}:`}
                         </p>

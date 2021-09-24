@@ -3,9 +3,11 @@ import { readAllItemsFromTable } from "src/core/js/api-utils";
 import Skeleton from "react-loading-skeleton";
 import { getOrderSubTypeName, getOrderTypeName } from "src/pos/js/constants";
 import { useTranslation } from "react-i18next";
-import { getStatusText, ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
+import { ORDER_TABLE_NAME, sortByKey } from "src/core/js/utils";
 import { Table } from "react-bootstrap";
 import i18n from "src/i18n";
+import { OrderPreview } from "src/orders/js/preview";
+import { getStatusText } from "src/core/js/status-utils";
 
 const headerTexts = [
     i18n.t("orders.id"),
@@ -21,6 +23,8 @@ const headerTexts = [
 
 export const OrderListing = () => {
     const [orders, setOrders] = useState(null);
+    const [previewOrder, setPreviewOrder] = useState(null);
+
     const { t } = useTranslation();
 
     const fetchOrders = useCallback(async () => {
@@ -39,13 +43,17 @@ export const OrderListing = () => {
         fetchOrders();
     }, []);
 
+    const handleRowClick = useCallback((obj) => {
+        setPreviewOrder(obj);
+    }, []);
+
     const renderOrders = () => {
         if (orders === null) {
             const result = [];
 
             for (let i = 0; i < 5; i++) {
                 result.push(
-                    <tr>
+                    <tr key={`loadingHeaderSkeleton_${i}`}>
                         {headerTexts.map((header, index) => (
                             <td
                                 key={`loadingHeaderSkeleton_${i}_${index}`}
@@ -62,28 +70,26 @@ export const OrderListing = () => {
 
         if (!orders.length) {
             return (
-                <tr>
+                <tr key="noOrdersFound">
                     <td
+                        className="noData"
                         colSpan={headerTexts.length}
-                        key="noOrdersFound"
                     >
-                        <h3 className="text-center" style={{ width: "100%" }}>
-                            {t("common.no_orders_found")}
-                        </h3>
+                        {t("common.no_orders_found")}
                     </td>
                 </tr>
             );
         }
 
         return orders.map((order) => (
-            <tr key={`order_${order.OrderId}`}>
+            <tr key={`order_${order.OrderId}`} onClick={() => handleRowClick(order)}>
                 <td>{order.OrderId}</td>
                 <td>{new Date(Number(order.OrderTime)).toLocaleString()}</td>
                 <td>{order.customerPhone}</td>
                 <td>{order.customerName}</td>
                 <td>{getOrderTypeName(order.orderType) || ""}</td>
                 <td>{getOrderSubTypeName(order.orderSubType) || ""}</td>
-                <td>{order.selectedItems.length}</td>
+                <td>{order.items?.length || ""}</td>
                 <td>{`$${order.total}`}</td>
                 <td>{getStatusText(order.status)}</td>
             </tr>
@@ -93,7 +99,7 @@ export const OrderListing = () => {
     function renderHeaders() {
         return (
             <thead>
-                <tr>
+                <tr key="headerRow">
                     {headerTexts.map((header, index) => <th key={`header_${index}`}>{header}</th>)}
                 </tr>
             </thead>
@@ -104,15 +110,15 @@ export const OrderListing = () => {
         <div className="table-container">
             <Table
                 responsive
-                striped={orders !== null}
                 borderless
-                hover
+                hover={orders && orders.length}
             >
                 {renderHeaders()}
                 <tbody>
                     {renderOrders()}
                 </tbody>
             </Table>
+            <OrderPreview order={previewOrder} />
         </div>
     );
 };

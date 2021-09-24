@@ -5,6 +5,7 @@
             "no": "No",
             "add" : "Add",
             "item": "Item",
+            "items": "Items",
             "price" : "Price",
             "quantity": "Qnt.",
             "total": "Total",
@@ -237,7 +238,14 @@
             "orderedAt": "Ordered At"
         },
         "status": {
-            "placed": "Order Placed"
+            "placed": "Order Placed",
+            "inprogress": "In Progress",
+            "ready": "Order Ready",
+            "completed": "Completed"
+        },
+        "error": {
+            "nameRequired": "Customer name is required",
+            "phoneRequired": "Customer Phone is required"
         }
     }
 }

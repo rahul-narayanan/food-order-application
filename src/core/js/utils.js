@@ -47,8 +47,11 @@ export const sortByKey = (array, key) => array.sort((a, b) => {
 
 export const normalizeI18NText = (text = "") => text.replace(/[${}]/g, "").replace(/[{}]/g, "");
 
-export const getStatusText = (value) => {
-    switch (value) {
-        default: return i18n.t("status.placed");
-    }
-};
+export const DotLoader = () => (
+    <div className="dot-loader">
+        <div />
+        <div />
+        <div />
+        <div />
+    </div>
+);

@@ -4,8 +4,68 @@
     height: 100%;
 
     .table-container {
-        padding-left: 50px;
+        padding-left: 30px;
         padding-right: 30px;
         padding-bottom: 20px;
+    }
+}
+
+.order-preview-dialog-container {
+    width: 500px;
+    .offcanvas-header {
+        position: relative;
+        padding-bottom: 10px;
+
+        .offcanvas-title {
+            p {
+                font-size: 16px;
+                opacity: 0.5;
+            }
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+    }
+
+    .offcanvas-body {
+        padding: 2px 4px;
+        table {
+            font-size: 18px;
+            thead {
+                th:last-child {
+                    text-align: right;
+                }
+            }
+            tbody {
+                tr {
+                    border-bottom: 1px solid var(--bg-color);
+                    background: none !important;
+                    td {
+                        .name {
+                            font-size: 20px;
+                        }
+                        p {
+                            margin: 0;
+                            &.title {
+                                opacity: 0.5;
+                                margin-top: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .order_footer {
+        .amount_details,
+        .amount_payable {
+            h2 span.text {
+                max-width: none;
+            }
+        }
     }
 }

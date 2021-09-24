@@ -210,6 +210,7 @@ export const ExtraDrinkSelect = ({
                                             count={isItemSelected.quantity}
                                             onIncrement={(count) => handleIncrement(item, count)}
                                             onDecrement={(count) => handleDecrement(item, count)}
+                                            containerCSS="alternate"
                                         />
                                     ) : ""}
                                 </div>

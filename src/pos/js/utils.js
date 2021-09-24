@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { putItemIntoTable, readLastItemFromTable } from "src/core/js/api-utils";
+import { getPlacedStatus } from "src/core/js/status-utils";
 import { ORDER_TABLE_NAME } from "src/core/js/utils";
 
 export const POSContext = createContext();
@@ -17,7 +18,7 @@ export const placeOrder = async (params) => {
             OrderId: `G${newId}`,
             OrderTime: String(Date.now()),
             ...params,
-            status: "ORDER_PLACED"
+            status: getPlacedStatus()
         }
     });
 };

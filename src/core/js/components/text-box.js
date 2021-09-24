@@ -1,8 +1,20 @@
-import { forwardRef } from "react";
-import { FloatingLabel, Form } from "react-bootstrap";
+import {
+    forwardRef, useImperativeHandle, useRef, useState
+} from "react";
+import { FloatingLabel, Form, InputGroup } from "react-bootstrap";
 
 export const TextBox = forwardRef((props, ref) => {
-    const time = Date.now();
+    const [errMsg, setErrMsg] = useState("");
+    const inputRef = useRef(null);
+
+    const getValue = () => inputRef.current?.value.trim() || "";
+
+    useImperativeHandle(ref, () => ({
+        getValue,
+        isValid: () => getValue() && !errMsg,
+        focus: () => inputRef.current?.focus(),
+        setError: (err) => setErrMsg(err)
+    }));
 
     const prop = { placeholder: "placeholder" };
     if (props.type === "textarea") {
@@ -13,14 +25,21 @@ export const TextBox = forwardRef((props, ref) => {
     }
 
     return (
-        <FloatingLabel
-            controlId={`floatingInput_${time}`}
-            label={props.label}
-        >
-            <Form.Control
-                ref={ref}
-                {...prop}
-            />
-        </FloatingLabel>
+        <InputGroup hasValidation>
+            <FloatingLabel
+                controlId={`floatingInput_${Date.now()}`}
+                label={props.label}
+            >
+                <Form.Control
+                    ref={inputRef}
+                    {...props}
+                    {...prop}
+                    isInvalid={Boolean(errMsg)}
+                />
+                <Form.Control.Feedback type="invalid">
+                    {errMsg}
+                </Form.Control.Feedback>
+            </FloatingLabel>
+        </InputGroup>
     );
 });

@@ -27,7 +27,7 @@ export const Header = ({ menus, selectedIndex, onMenuChange }) => (
                             onClick={() => onMenuChange(index)}
                         >
                             <div className={`nav-link ${menu.id}`}>
-                                {menu.img ? <img src={menu.img} /> : <i className="mtpi mtpi-assignment" />}
+                                {menu.img ? <img src={menu.img} /> : (menu.icon || "")}
                                 {menu.name}
                             </div>
                         </li>
