@@ -9,7 +9,7 @@ const Status = {
 
 export const getPlacedStatus = () => 0;
 
-export const getInProgressStatus = () => 0;
+export const getInProgressStatus = () => 1;
 
 export const getReadyStatus = () => 2;
 

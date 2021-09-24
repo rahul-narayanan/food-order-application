@@ -3,6 +3,28 @@
     width: 100%;
     height: 100%;
 
+    .page_title {
+        padding: 0;
+        display: flex;
+        width: 100%;
+        .title_inner {
+            flex: 0 0 79%;
+        }
+        .search-container {
+            flex: 0 0 21%;
+
+            .search-icon {
+                position: relative;
+                width: 55px;
+                svg {
+                    position: absolute;
+                    top: 13px;
+                    left: 20px;
+                }
+            }
+        }
+    }
+
     .table-container {
         padding-left: 30px;
         padding-right: 30px;

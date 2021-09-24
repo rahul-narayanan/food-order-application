@@ -561,13 +561,18 @@ table {
     }
 }
 
-.status {
-    &.completed {
-        color: green;
+.completed {
+    color: green;
+    margin-right: 5px;
+    svg {
+        path {
+            fill: green;
+        }
     }
-    &.inprogress,
-    &.placed,
-    &.ready {
-        color: #fbaf03 !important;
-    }
+}
+
+.inprogress,
+.placed,
+.ready {
+    color: #fbaf03 !important;
 }

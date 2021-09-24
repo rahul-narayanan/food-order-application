@@ -5,8 +5,8 @@ import { Offcanvas, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import i18n from "src/i18n";
 import { normalizeItemName } from "src/pos/js/listing-section/listing-utils";
-import { InfoCircleFill } from "react-bootstrap-icons";
-import { getInProgressStatus, getStatusText } from "src/core/js/status-utils";
+import { InfoCircleFill, Check2Circle } from "react-bootstrap-icons";
+import { getCompletedStatus, getInProgressStatus, getStatusText } from "src/core/js/status-utils";
 import { DotLoader } from "src/core/js/utils";
 
 const Headers = () => (
@@ -19,7 +19,7 @@ const Headers = () => (
     </thead>
 );
 
-export const OrderPreview = ({ order }) => {
+export const OrderPreview = ({ order, onClose }) => {
     const [show, setShow] = useState(Boolean(order));
 
     useEffect(() => {
@@ -28,6 +28,7 @@ export const OrderPreview = ({ order }) => {
 
     const handleClose = useCallback(() => {
         setShow(false);
+        onClose();
     });
 
     function renderItems() {
@@ -120,6 +121,7 @@ export const OrderPreview = ({ order }) => {
                                 {`${order.customerName || ""}, ${order.customerPhone || ""}`}
                             </div>
                             <p style={{ marginBottom: "5px" }}>{`${order.OrderId} | ${new Date(Number(order.OrderTime)).toLocaleString()}`}</p>
+                            {order.status === getCompletedStatus() ? <span className="completed"><Check2Circle /></span> : ""}
                             {getStatusText(order.status)}
                             {order.status === getInProgressStatus() ? <DotLoader /> : ""}
                         </Offcanvas.Title>
@@ -134,6 +136,8 @@ export const OrderPreview = ({ order }) => {
 
         return "";
     }
+
+    if (!show) return "";
 
     return (
         <Offcanvas

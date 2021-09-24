@@ -47,6 +47,10 @@ export const OrderListing = () => {
         setPreviewOrder(obj);
     }, []);
 
+    const handlePreviewClose = useCallback(() => {
+        setPreviewOrder(null);
+    }, []);
+
     const renderOrders = () => {
         if (orders === null) {
             const result = [];
@@ -118,7 +122,7 @@ export const OrderListing = () => {
                     {renderOrders()}
                 </tbody>
             </Table>
-            <OrderPreview order={previewOrder} />
+            <OrderPreview order={previewOrder} onClose={handlePreviewClose} />
         </div>
     );
 };
