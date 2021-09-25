@@ -1,23 +1,15 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-foodorderapplication-dev-105628-authRole",
-      "UnauthRoleArn": "arn:aws:iam::420336235850:role/amplify-foodorderapplication-dev-105628-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::420336235850:role/amplify-foodorderapplication-dev-105628-authRole",
+      "AuthRoleName": "amplify-foodorderapplication-dev-131632-authRole",
+      "UnauthRoleArn": "arn:aws:iam::420336235850:role/amplify-foodorderapplication-dev-131632-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::420336235850:role/amplify-foodorderapplication-dev-131632-authRole",
       "Region": "us-west-2",
-      "DeploymentBucketName": "amplify-foodorderapplication-dev-105628-deployment",
-      "UnauthRoleName": "amplify-foodorderapplication-dev-105628-unauthRole",
-      "StackName": "amplify-foodorderapplication-dev-105628",
-      "StackId": "arn:aws:cloudformation:us-west-2:420336235850:stack/amplify-foodorderapplication-dev-105628/7363d650-1310-11ec-bfa0-02e2a2d82d0d",
-      "AmplifyAppId": "d5huaxr0fa1od"
-    },
-    "categories": {
-      "function": {
-        "orders": {
-          "deploymentBucketName": "amplify-foodorderapplication-dev-105628-deployment",
-          "s3Key": "amplify-builds/orders-6f594663477954323872-build.zip"
-        }
-      }
+      "DeploymentBucketName": "amplify-foodorderapplication-dev-131632-deployment",
+      "UnauthRoleName": "amplify-foodorderapplication-dev-131632-unauthRole",
+      "StackName": "amplify-foodorderapplication-dev-131632",
+      "StackId": "arn:aws:cloudformation:us-west-2:420336235850:stack/amplify-foodorderapplication-dev-131632/56958c20-1e24-11ec-85f0-0a0140e54105",
+      "AmplifyAppId": "d2rqu2sdljzki4"
     }
   }
 }
