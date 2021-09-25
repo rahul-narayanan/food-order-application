@@ -2,7 +2,6 @@ import {
     useCallback, useEffect, useState
 } from "react";
 import { Offcanvas, Table } from "react-bootstrap";
-import { useTranslation } from "react-i18next";
 import i18n from "src/i18n";
 import { normalizeItemName } from "src/pos/js/listing-section/listing-utils";
 import { InfoCircleFill, Check2Circle } from "react-bootstrap-icons";

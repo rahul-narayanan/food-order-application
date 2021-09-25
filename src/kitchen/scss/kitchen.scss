@@ -1,0 +1,122 @@
+.kitchen-wrapper {
+    padding: 15px 11px;
+    column-count: 5;
+    column-gap: 10px;
+
+    .order {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 35px;
+
+        .order_inner {
+            background: var(--white);
+            position: relative;
+            width: 100%;
+            padding-bottom: 10px;
+
+            .order_header {
+                background: var(--primary);
+                color: var(--white);
+                padding: 16px 15px;
+                margin-bottom: 15px;
+
+                h2 {
+                    margin: 0;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+
+                    span {
+                        display: block;
+                        font-weight: 400;
+                        font-size: 0.7rem;
+                        padding-top: 2px;
+                        opacity: 0.8;
+                    }
+                }
+
+                h3 {
+                    font-size: 1.4rem;
+                    min-width: fit-content;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+            }
+
+            .item {
+                display: flex;
+                align-items: flex-start;
+                padding: 5px 13px;
+                width: 100%;
+
+                h3 {
+                    margin: 0;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    min-width: 20px;
+                    line-height: 15px;
+                    color: var(--text-dark);
+                    position: relative;
+                    top: 2px;
+                }
+
+                h4 {
+                    margin: 0;
+                    font-size: 1rem;
+                    font-weight: 5 00;
+                    color: var(--text-dark);
+
+                    span {
+                        display: block;
+                        font-weight: 400;
+                        padding-top: 7px;
+                        font-size: 0.75rem;
+                        color: var(--white);
+                    }
+
+                    p {
+                        margin-bottom: 5px;
+                        &.title {
+                            opacity: 0.5;
+                        }
+                    }
+                }
+
+                &.order_done {
+                    h4 span,
+                    h3,
+                    h4 {
+                        text-decoration: line-through;
+                        color: var(--text-light);
+                    }
+                }
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: -14px;
+                left: 0;
+                width: 100%;
+                height: 14px;
+                background: url("../../core/img/card_zigzag.png");
+                background-size: 209px;
+                background-repeat: no-repeat;
+                background-repeat: repeat-x;
+            }
+        }
+
+        &.active2 .order_inner .order_header {
+            background: var(--green_color);
+        }
+
+        &.active1 .order_inner .order_header {
+            background: var(--red_color);
+        }
+
+        &.loading {
+            .item {
+                display: block;
+            }
+        }
+    }
+}

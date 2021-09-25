@@ -80,7 +80,8 @@
             "transaction_details": "Transaction details",
             "amount_paid": "Amount Paid",
             "remaining_balance": "Remaining Balance",
-            "status": "Status"
+            "status": "Status",
+            "loading_orders": "Loading the orders"
         },
         "menus" : {
             "pos": "POS",

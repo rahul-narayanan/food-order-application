@@ -33,34 +33,6 @@
                     line-height: 30px;
                 }
             }
-            .btn_box {
-                padding-top: 50px;
-                .btn {
-                    height: 50px;
-                    border-radius: 50px;
-                    font-size: 1.1rem !important;
-                }
-                .btn.order-status {
-                    background: none;
-                    color: var(--primary) !important;
-                    overflow: hidden;
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: var(--primary);
-                        opacity: 0.4;
-                    }
-                    a {
-                        color: var(--primary) !important;
-                        font-weight: 600;
-                        z-index: 99;
-                    }
-                }
-            }
             .row {
                 margin: 0 -5px;
                 .col-12 {
@@ -132,7 +104,9 @@
                     flex-direction: row;
                     justify-content: space-between;
                     .btn {
-                        flex: 0 0 49%;
+                        flex: 1 1 45%;
+                        margin: 0 5px;
+                        font-size: 24px;
                     }
                 }
             }

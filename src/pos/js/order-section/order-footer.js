@@ -43,12 +43,14 @@ export const OrderFooter = () => {
                 <Button
                     variant="secondary"
                     onClick={handleCancelClick}
+                    size="lg"
                 >
                     {t("common.cancel")}
                 </Button>
                 <Button
                     onClick={handlePlaceOrderClick}
                     className="themeBtn"
+                    size="lg"
                 >
                     {t("common.place_order")}
                 </Button>

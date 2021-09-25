@@ -12,12 +12,14 @@ export const Menus = [
         name: i18n.t("menus.pos"),
         view: <POSContainer />,
         containerCSS: "pos-wrapper",
-        img: Grobe
+        img: Grobe,
+        route: "/pos"
     },
     {
         id: "orders",
         name: i18n.t("menus.orders"),
         view: <OrdersContainer />,
-        icon: <Table />
+        icon: <Table />,
+        route: "/orders"
     }
 ];

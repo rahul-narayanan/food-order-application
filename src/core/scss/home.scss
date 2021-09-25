@@ -1,6 +1,7 @@
 @import "./variables";
 @import "./common";
 @import "./animation";
+@import "./responsive";
 
 @font-face {
     font-family: "Product Sans";
@@ -173,6 +174,17 @@ body {
                         &:last-child {
                             padding-right: 0;
                         }
+
+                        &.active {
+                            * {
+                                color: var(--primary);
+                            }
+
+                            .nav-link {
+                                color: var(--text-black) !important;
+                                transition: all 0.3s;
+                            }
+                        }
                     }
                     .nav-item.profile_img {
                         .img_box {
@@ -217,35 +229,6 @@ body {
                         }
                     }
                     flex-direction: unset;
-                    .nav-item.active {
-                        .nav-link {
-                            color: var(--text-black) !important;
-                            transition: all 0.3s;
-                            i {
-                                color: var(--primary);
-                            }
-                        }
-                    }
-                }
-                .dropdown-menu {
-                    border: 0;
-                    box-shadow: 0 10px 17px 1px rgba(0, 0, 0, 0.1);
-                    padding: 9px 0;
-                    overflow: hidden;
-                    border-radius: 8px;
-                    width: fit-content;
-                    min-width: 135px;
-                    .dropdown-item {
-                        color: var(--text-dark);
-                        font-weight: 700;
-                        font-size: 1.1rem;
-                        letter-spacing: 0.2px;
-                        padding: 4px 16px;
-                        &:active {
-                            color: var(--primary);
-                            background: var(--bg-color);
-                        }
-                    }
                 }
             }
         }
@@ -551,28 +534,4 @@ table {
             }
         }
     }
-}
-
-.modifiers-info {
-    color: red;
-    margin-top: 10px;
-    svg {
-        margin-right: 5px;
-    }
-}
-
-.completed {
-    color: green;
-    margin-right: 5px;
-    svg {
-        path {
-            fill: green;
-        }
-    }
-}
-
-.inprogress,
-.placed,
-.ready {
-    color: #fbaf03 !important;
 }

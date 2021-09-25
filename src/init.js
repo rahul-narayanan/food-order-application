@@ -1,33 +1,22 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { withAuthenticator } from "@aws-amplify/ui-react";
-import { Header } from "./core/js/header";
-import { Menus } from "./core/js/constants";
-import { MainContainer } from "./core/js/main-container";
-import { ToastContainer } from "react-toastify";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
+import { POSInit } from "src/pos-init";
+import { KitchenInit } from "src/kitchen-init";
 
-const AppInit = () => {
-    const [selectedMenuIndex, setSelectedMenuIndex] = useState(0);
-
-    const handleMenuChange = useCallback((index) => {
-        setSelectedMenuIndex(index);
-    }, []);
-
-    return (
-        <main className="main-container">
-            <ToastContainer />
-            <div className="main-wrapper">
-                <Header
-                    menus={Menus}
-                    selectedIndex={selectedMenuIndex}
-                    onMenuChange={handleMenuChange}
-                />
-                <MainContainer
-                    view={Menus[selectedMenuIndex].view}
-                    containerCSS={Menus[selectedMenuIndex].containerCSS}
-                />
-            </div>
-        </main>
-    );
-};
+const AppInit = () => (
+    <Router>
+        <Switch>
+            {["/pos", "/orders"].map((path, index) => <Route path={path} component={POSInit} key={index} />)}
+            <Route path="/kitchen"><KitchenInit /></Route>
+            <Route path="/"><Redirect to="/pos" /></Route>
+        </Switch>
+    </Router>
+);
 
 export default withAuthenticator(AppInit);

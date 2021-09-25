@@ -85,9 +85,11 @@ export const POSContainer = () => {
 
     return (
         <POSContext.Provider value={context}>
-            <Orders />
-            <Listing />
-            <PlaceOrderDialog key={`placeOrderDialog_${Date.now()}`} />
+            <div className="pos-wrapper">
+                <Orders />
+                <Listing />
+                <PlaceOrderDialog key={`placeOrderDialog_${Date.now()}`} />
+            </div>
         </POSContext.Provider>
     );
 };
