@@ -90,7 +90,8 @@ export const Modifier = ({
                             onClick={() => handleSelect(ingredient)}
                         >
                             {ingredient}
-                            {tempSelectedIngredients.indexOf(ingredient) > -1 ? <span className="tick" /> : ""}
+                            {tempSelectedIngredients.indexOf(ingredient) > -1
+                                ? <span className="tick" style={{ marginTop: "5px" }} /> : ""}
                         </div>
                     ))}
                 </Accordion.Body>
